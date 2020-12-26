@@ -1,23 +1,6 @@
 # Code-Snippets-Kotlin
 List of Kotlin topics and their code snippets!
 
-## Common Vocabulary
-**Expression:** A function with return value, A variable.  
-**Statement:** Code with an assignment operator.  
-**Pascal Case:** KotlinCodeSnippets  
-**Camel Case:** kotlinCodeSnippets  
-**Snake Case:** KOTLIN_CODE_SNIPPETS  
-**Main Function:** Entry point in our app.  
-**Compiler:** Translates high level language to low level language that machine can understand. Also checks for syntax errors.  
-**Run Kotlin Program:** Converts Kotlin code to Java byte code to run it on JVM. JVM further converts the Java byte code into machine code that the platform like Mac or Windows can understand.  
-**Statically Typed Programming Language:** Type of a variable is known at compile-time. So once variable is declared with a type, it cannot ever be assigned to a variable of different type and doing so will result in a type error at compile-time. So you CANNOT build the app without fixing the bugs. Ex: Kotlin, Java, C, C++, etc.  
-**Dynamically Typed Programming Language:** Type of a variable is known at run-time. You can assign a variable with a different an Integer type even if it was initially assigned String type. So you CAN build the app without fixing the bugs. Ex: JavaScript, Objective-C, PHP, Python, Ruby, Lisp, etc.  
-**Type Checking:** The process of verifying and enforcing the constraints of types.  
-**Static check:** Type check happening at compile-time.
-**Dynamic check:** Type check happening at run-time.
-**Strongly-typed language:** Variables are bound to specific data types, and will result in type errors if types do not match up as expected in the expression - regardless of when type checking occurs. Ex: Java, Python, etc.
-**Weakly-typed language:** Variables are not bound to a specific data type; they still have a type, but type safety constraints are lower compared to strongly-typed languages. Ex: PHP, C, C++, etc.
-
 ## Package definition and imports
 ```Kotlin
 package my.demo
@@ -46,9 +29,9 @@ import kotlin.text.*
 
 ## Constants and Variables
 ```Kotlin
-const val user = "Singularity Coder"; // const val means Immutable
-val user = "Singularity Coder";	// val means Immutable
-var user = "Singularity Coder"; // var means Mutable
+const val user = "Singularity Coder"; // const val means Immutable or unchangeable
+val user = "Singularity Coder";	// val means Immutable or unchangeable
+var user = "Singularity Coder"; // var means Mutable or changable
 ```
 
 ## Print to Console
@@ -74,6 +57,50 @@ val length = value?.length
 ```
 
 ## Data Types
+Unlike Java, there are no primitive types in Kotlin. All of them are reference or Object types. There are total 9 types.
+
+**Number Types**
+* Byte
+* Short
+* Int (inferred by default)
+* Long
+
+**Decimal Types**
+* Float
+* Double (inferred by default)
+
+* String
+* Char
+* Bool
+
+## Strings
+Concatenation of strings
+```Kotlin
+val name: String = "Hithesh";
+    var age: Int = 129;
+    print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7.");
+```
+New line in string
+```Kotlin
+val text = """
+        |First Line
+        |Second Line
+        |Third Line
+        """.trimMargin()
+```
+Substring
+```Kotlin
+var str = "Kotlin Programming Language"
+var substr = ""
+
+// print Kotlin
+substr = str.substring(0..5)
+println("substring $substr")
+
+// print Language
+substr = str.substring(18..26)
+println("substring $substr")
+```
 
 ## Type Casting or Type Conversion
 ```Kotlin
@@ -100,35 +127,6 @@ val xorResult  = a xor b
 val rightShift = a shr 2
 val leftShift  = a shl 2
 val unsignedRightShift = a ushr 2
-```
-
-## Strings
-Concatenation of strings
-```Kotlin
-var firstName = "Hithesh"
-var lastName = "Vurjana"
-val message = "My name is: $firstName $lastName"
-```
-New line in string
-```Kotlin
-val text = """
-        |First Line
-        |Second Line
-        |Third Line
-        """.trimMargin()
-```
-Substring
-```Kotlin
-var str = "Kotlin Programming Language"
-var substr = ""
-
-// print Kotlin
-substr = str.substring(0..5)
-println("substring $substr")
-
-// print Language
-substr = str.substring(18..26)
-println("substring $substr")
 ```
 
 ## Math
@@ -361,8 +359,33 @@ val user2 = user.copy(age = 25)
 
 ## Very Large Numbers
 
+## Common Vocabulary
+* **Expression:** A function with return value or a variable.  
+* **Statement:** Code with an assignment operator.  
+* **Pascal Case:** KotlinCodeSnippets  
+* **Camel Case:** kotlinCodeSnippets  
+* **Snake Case:** KOTLIN_CODE_SNIPPETS  
+* **Main Function:** Entry point in our app.  
+* **Compiler:** Translates high level language to low level language that machine can understand. Also checks for syntax errors.  
+* **Run Kotlin Program:** Converts Kotlin code to Java byte code to run it on JVM. JVM further converts the Java byte code into machine code that the platform like Mac or Windows can understand.  
+* **Statically Typed Programming Language:** Type of a variable is known at compile-time. So once variable is declared with a type, it cannot ever be assigned to a variable of different type and doing so will result in a type error at compile-time. So you CANNOT build the app without fixing the bugs. Fast & Efficient. Ex: Kotlin, Java, C, C++, etc.  
+* **Dynamically Typed Programming Language:** Type of a variable is known at run-time. Variables are bound to objects at run-time. You can assign a variable with a different an Integer type even if it was initially assigned String type. So you CAN build the app without fixing the bugs. Slow & less optimized but has its own advantages like dynamic dispatch, late binding, down-casting, reflection. Ex: JavaScript, Objective-C, PHP, Python, Ruby, Lisp, etc.  
+* **Type Checking:** The process of verifying and enforcing the constraints of types.  
+* **Static check:** Type check happening at compile-time.  
+* **Dynamic check:** Type check happening at run-time.  
+* **Strongly-typed language:** Variables are bound to specific data types, and will result in type errors if types do not match up as expected in the expression - regardless of when type checking occurs. Ex: Java, Python, etc.  
+* **Weakly-typed language:** Variables are not bound to a specific data type; they still have a type, but type safety constraints are lower compared to strongly-typed languages. Ex: PHP, C, C++, etc.  
+* **Top-Level function:** A function that is not enclosed in a class.  
+* **Double Type:** Double-precision floating-point. More exact than Float numbers.
+
+## Keyboard Shortcuts
+* Check Type of a variable: Ctrl + Shift + P
+* Format Code: Cmd + Alt + L
+
 ## References
-1. https://github.com/MindorksOpenSource/from-java-to-kotlin
-2. https://www.youtube.com/playlist?list=PL6nth5sRD25iv8jZrQWD-5dXgu56ae5m8
-3. https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2
+1. https://kotlinlang.org/docs/reference/
+2. https://github.com/MindorksOpenSource/from-java-to-kotlin
+3. https://www.youtube.com/playlist?list=PL6nth5sRD25iv8jZrQWD-5dXgu56ae5m8
+4. https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2
+5. https://android.jlelse.eu/magic-lies-here-statically-typed-vs-dynamically-typed-languages-d151c7f95e2b#:~:text=A%20language%20is%20dynamically%2Dtyped,Ruby%2C%20Lisp%2C%20and%20Tcl.
 
