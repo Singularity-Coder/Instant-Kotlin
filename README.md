@@ -2,8 +2,21 @@
 List of Kotlin topics and their code snippets!
 
 ## Common Vocabulary
-Expression
-Statement
+<h6>Expression:</h6> A function with return value, A variable.  
+<h6>Statement:</h6> Code with an assignment operator.  
+<h6>Pascal Case:</h6> KotlinCodeSnippets  
+<h6>Camel Case:</h6> kotlinCodeSnippets  
+<h6>Snake Case:</h6> KOTLIN_CODE_SNIPPETS  
+<h6>Main Function:</h6> Entry point in our app.  
+<h6>Compiler:</h6> Translates high level language to low level language that machine can understand. Also checks for syntax errors.  
+<h6>Run Kotlin Program:</h6> Converts Kotlin code to Java byte code to run it on JVM. JVM further converts the Java byte code into machine code that the platform like Mac or Windows can understand.  
+
+## Package definition and imports
+```Kotlin
+package my.demo
+
+import kotlin.text.*
+```
 
 ## Comments
 ```Kotlin
@@ -57,7 +70,7 @@ val length = value?.length
 ## Type Casting or Type Conversion
 ```Kotlin
 if (object is Car) { 
-	var car = object as Car
+   var car = object as Car
 }
 
 // if object is null
