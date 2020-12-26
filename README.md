@@ -2,14 +2,21 @@
 List of Kotlin topics and their code snippets!
 
 ## Common Vocabulary
-<h6>Expression:</h6> A function with return value, A variable.  
-<h6>Statement:</h6> Code with an assignment operator.  
-<h6>Pascal Case:</h6> KotlinCodeSnippets  
-<h6>Camel Case:</h6> kotlinCodeSnippets  
-<h6>Snake Case:</h6> KOTLIN_CODE_SNIPPETS  
-<h6>Main Function:</h6> Entry point in our app.  
-<h6>Compiler:</h6> Translates high level language to low level language that machine can understand. Also checks for syntax errors.  
-<h6>Run Kotlin Program:</h6> Converts Kotlin code to Java byte code to run it on JVM. JVM further converts the Java byte code into machine code that the platform like Mac or Windows can understand.  
+**Expression:** A function with return value, A variable.  
+**Statement:** Code with an assignment operator.  
+**Pascal Case:** KotlinCodeSnippets  
+**Camel Case:** kotlinCodeSnippets  
+**Snake Case:** KOTLIN_CODE_SNIPPETS  
+**Main Function:** Entry point in our app.  
+**Compiler:** Translates high level language to low level language that machine can understand. Also checks for syntax errors.  
+**Run Kotlin Program:** Converts Kotlin code to Java byte code to run it on JVM. JVM further converts the Java byte code into machine code that the platform like Mac or Windows can understand.  
+**Statically Typed Programming Language:** Type of a variable is known at compile-time. So once variable is declared with a type, it cannot ever be assigned to a variable of different type and doing so will result in a type error at compile-time. So you CANNOT build the app without fixing the bugs. Ex: Kotlin, Java, C, C++, etc.  
+**Dynamically Typed Programming Language:** Type of a variable is known at run-time. You can assign a variable with a different an Integer type even if it was initially assigned String type. So you CAN build the app without fixing the bugs. Ex: JavaScript, Objective-C, PHP, Python, Ruby, Lisp, etc.  
+**Type Checking:** The process of verifying and enforcing the constraints of types.  
+**Static check:** Type check happening at compile-time.
+**Dynamic check:** Type check happening at run-time.
+**Strongly-typed language:** Variables are bound to specific data types, and will result in type errors if types do not match up as expected in the expression - regardless of when type checking occurs. Ex: Java, Python, etc.
+**Weakly-typed language:** Variables are not bound to a specific data type; they still have a type, but type safety constraints are lower compared to strongly-typed languages. Ex: PHP, C, C++, etc.
 
 ## Package definition and imports
 ```Kotlin
@@ -37,17 +44,18 @@ import kotlin.text.*
 **/
 ```
 
-## Print to Console
-```Kotlin
-print("Hello World!") // prints in a single line
-println("Hello World!") // adds new line after printing
-```
-
 ## Constants and Variables
 ```Kotlin
-const val user = "Singularity Coder"
-val user = "Singularity Coder"
-var user = "Singularity Coder"
+const val user = "Singularity Coder"; // const val means Immutable
+val user = "Singularity Coder";	// val means Immutable
+var user = "Singularity Coder"; // var means Mutable
+```
+
+## Print to Console
+```Kotlin
+println("Printing this and adding a line break!");
+print("Just printing this! ");
+print("So i am next to the previous line.");
 ```
 
 ## Nullable
@@ -188,8 +196,6 @@ cars.parallelStream().filter { it.speed > 100 }.forEach { println(it.speed)}
 #### Break
 #### Continue
 
-## Functions
-
 ## Data Structures
 #### Arrays
 Splitting Arrays
@@ -217,6 +223,8 @@ val keyValue = mapOf(1 to "Air",
 
 ## Functions and Methods
 #### Function
+Functions in Kotlin are not methods when they do not belong to a class. However they look and behave the same way. Its just the way they are accessed is different.
+
 Defining Function
 ```Kotlin
 fun doSomething() {
@@ -250,6 +258,7 @@ fun getScore(value: Int): Int {
 fun getScore(value: Int): Int = 2 * value
 ```
 #### Method
+Methods in Kotlin are functions that are called on objects. So they have to be inside a class.
 ```Kotlin
 fun Int.triple(): Int {
   return this * 3
