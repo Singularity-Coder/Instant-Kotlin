@@ -57,21 +57,73 @@ val length = value?.length
 ```
 
 ## Data Types
-Unlike Java, there are no primitive types in Kotlin. All of them are reference or Object types. There are total 9 types.
+Unlike Java, there are no primitive types in Kotlin. All of them are reference or Object types. So by-default they are null. There are total 9 types.
 
 **Number Types**
 * Byte
+```Kotlin
+val myByte: Byte = 0;
+val maxByte: Byte = Byte.MAX_VALUE; // 127
+val minByte: Byte = Byte.MIN_VALUE; // -128
+val byteSizeInBits: Int = Byte.SIZE_BITS; // 8 bits
+val byteSizeInBytes: Int = Byte.SIZE_BYTES; // 1 byte
+```
 * Short
+```Kotlin
+val myShort: Short = 0;
+val maxShort: Short = Short.MAX_VALUE; // 32767
+val minShort: Short = Short.MIN_VALUE; // -32767
+val shortSizeInBits: Int = Short.SIZE_BITS; // 16 bits
+val shortSizeInBytes: Int = Short.SIZE_BYTES; // 2 bytes
+```
 * Int (inferred by default)
+```Kotlin
+val myInt: Int = 0;
+val maxInt: Int = Int.MAX_VALUE; // 2147483647 (~ 2.14 billion)
+val minInt: Int = Int.MIN_VALUE; // -2147483648 (~ -2.14 billion)
+val intSizeInBits: Int = Int.SIZE_BITS; // 32
+val intSizeInBytes: Int = Int.SIZE_BYTES; // 4
+```
 * Long
+```Kotlin
+val myLong: Long = 0L;
+val maxLong: Long = Long.MAX_VALUE; // 9223372036854775807 (~ 9.2 * 10^18) or (~ -9.2E18)
+val minLong: Long = Long.MIN_VALUE; // -9223372036854775807 (~ -9.2 * 10^18) or (~ -9.2E18)
+val longSizeInBits: Int = Long.SIZE_BITS; // 64
+val longSizeInBytes: Int = Long.SIZE_BYTES; // 8
+```
 
 **Decimal Types**
 * Float
+```Kotlin
+val myFloat: Float = 0F;
+val maxFloat: Float = Float.MAX_VALUE; // 3.4028235E38 (~ 3.4 * 10^38)
+val minFloat: Float = Float.MIN_VALUE; // 1.4E-45 (1.4 * 10^-45)
+val floatSizeInBits: Int = Float.SIZE_BITS; // 32
+val floatSizeInBytes: Int = Float.SIZE_BYTES; // 4
+```
 * Double (inferred by default)
+```Kotlin
+val myDouble: Double = 0.0;
+val maxDouble: Double = Double.MAX_VALUE; // 1.7976931348623157E308 (~ 1.7 * 10^308)
+val minDouble: Double = Double.MIN_VALUE; // 4.9E-324 (4.9 * 10^-324)
+val doubleSizeInBits: Int = Double.SIZE_BITS; // 64
+val doubleSizeInBytes: Int = Double.SIZE_BYTES; // 8
+```
 
+**Others**
 * String
+```Kotlin
+val myString: String = "I am a string!";
+```
 * Char
+```Kotlin
+val myChar: Char = 'C';
+```
 * Bool
+```Kotlin
+val myBoolean: Boolean = false;
+```
 
 ## Strings
 Concatenation of strings
