@@ -132,9 +132,10 @@ val myBoolean: Boolean = false;
 ```Kotlin
 val myAnyType: Any = 77; // Any Type can hold any of the above mentioned data types.
 ```
-* BigInteger
-BigInteger must support values in the range -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive) and may support values outside of that range.  
-Implementation note: BigInteger constructors and operations throw ArithmeticException when the result is out of the supported range of -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive).
+* BigInteger  
+> BigInteger must support values in the range -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive) and may support values outside of that range.  
+> 
+> Implementation note: BigInteger constructors and operations throw ArithmeticException when the result is out of the supported range of -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive).
 ```Kotlin
 val bigInt0: BigInteger = BigInteger.ZERO; // 0
 val bigInt1: BigInteger = BigInteger.ONE; // 1
