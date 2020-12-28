@@ -10,9 +10,11 @@ import kotlin.text.*
 
 ## Comments
 ```Kotlin
-// End-of-line comment
+// Single line comment or End-of-line comment
 
-/* Inline comment or a block comment */
+/* Multi-line comment
+or Inline comment 
+or Block comment */
 
 /**
 * 
@@ -41,7 +43,7 @@ print("Just printing this! ");
 print("So i am next to the previous line.");
 ```
 
-## Nullable
+## Null Stuff
 Assigning the null value
 ```Kotlin
 var value: String?
@@ -57,7 +59,7 @@ val length = value?.length
 ```
 
 ## Data Types
-Unlike Java, there are no primitive types in Kotlin. All of them are reference or Object types. So by-default they are null. There are total 9 types.
+Unlike Java, there are no primitive types in Kotlin. All of them are reference or Object types. So by-default they are null and do not contain any defaults like primitives. There are total 9 types.
 
 **Number Types**
 * Byte
@@ -76,7 +78,7 @@ val minShort: Short = Short.MIN_VALUE; // -32767
 val shortSizeInBits: Int = Short.SIZE_BITS; // 16 bits
 val shortSizeInBytes: Int = Short.SIZE_BYTES; // 2 bytes
 ```
-* Int (inferred by default)
+* Int (Inferred by default)
 ```Kotlin
 val myInt: Int = 0;
 val maxInt: Int = Int.MAX_VALUE; // 2147483647 (~ 2.14 billion)
@@ -87,8 +89,8 @@ val intSizeInBytes: Int = Int.SIZE_BYTES; // 4
 * Long
 ```Kotlin
 val myLong: Long = 0L;
-val maxLong: Long = Long.MAX_VALUE; // 9223372036854775807 (~ 9.2 * 10^18) or (~ -9.2E18)
-val minLong: Long = Long.MIN_VALUE; // -9223372036854775807 (~ -9.2 * 10^18) or (~ -9.2E18)
+val maxLong: Long = Long.MAX_VALUE; // 9223372036854775807 (~ 9.22 * 10^18) or (~ -9.2E18)
+val minLong: Long = Long.MIN_VALUE; // -9223372036854775807 (~ -9.22 * 10^18) or (~ -9.2E18)
 val longSizeInBits: Int = Long.SIZE_BITS; // 64
 val longSizeInBytes: Int = Long.SIZE_BYTES; // 8
 ```
@@ -97,15 +99,15 @@ val longSizeInBytes: Int = Long.SIZE_BYTES; // 8
 * Float
 ```Kotlin
 val myFloat: Float = 0F;
-val maxFloat: Float = Float.MAX_VALUE; // 3.4028235E38 (~ 3.4 * 10^38)
+val maxFloat: Float = Float.MAX_VALUE; // 3.4028235E38 (~ 3.40 * 10^38)
 val minFloat: Float = Float.MIN_VALUE; // 1.4E-45 (1.4 * 10^-45)
 val floatSizeInBits: Int = Float.SIZE_BITS; // 32
 val floatSizeInBytes: Int = Float.SIZE_BYTES; // 4
 ```
-* Double (inferred by default)
+* Double (Inferred by default)
 ```Kotlin
 val myDouble: Double = 0.0;
-val maxDouble: Double = Double.MAX_VALUE; // 1.7976931348623157E308 (~ 1.7 * 10^308)
+val maxDouble: Double = Double.MAX_VALUE; // 1.7976931348623157E308 (~ 1.79 * 10^308)
 val minDouble: Double = Double.MIN_VALUE; // 4.9E-324 (4.9 * 10^-324)
 val doubleSizeInBits: Int = Double.SIZE_BITS; // 64
 val doubleSizeInBytes: Int = Double.SIZE_BYTES; // 8
@@ -125,12 +127,33 @@ val myChar: Char = 'C';
 val myBoolean: Boolean = false;
 ```
 
+**More**
+* Any
+```Kotlin
+val myAnyType: Any = 77; // Any Type can hold any of the above mentioned data types.
+```
+* BigInteger
+BigInteger must support values in the range -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive) and may support values outside of that range.  
+Implementation note: BigInteger constructors and operations throw ArithmeticException when the result is out of the supported range of -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive).
+```Kotlin
+val bigInt0: BigInteger = BigInteger.ZERO; // 0
+val bigInt1: BigInteger = BigInteger.ONE; // 1
+val bigInt2: BigInteger = BigInteger.TWO; // 2
+val bigInt10: BigInteger = BigInteger.TEN; // 10
+```
+* BigDecimal
+```Kotlin
+val bigDec0: BigDecimal = BigDecimal.ZERO; // 0
+val bigDec1: BigDecimal = BigDecimal.ONE; // 1
+val bigDec10: BigDecimal = BigDecimal.TEN; // 10
+```
+
 ## Strings
 Concatenation of strings
 ```Kotlin
 val name: String = "Hithesh";
-    var age: Int = 129;
-    print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7.");
+var age: Int = 129;
+print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7.");
 ```
 New line in string
 ```Kotlin
@@ -409,8 +432,6 @@ val user2 = user.copy(age = 25)
 
 ## JvmStatic, JvmOverloads, and JvmField
 
-## Very Large Numbers
-
 ## Common Vocabulary
 * **Expression:** A function with return value or a variable.  
 * **Statement:** Code with an assignment operator.  
@@ -419,7 +440,7 @@ val user2 = user.copy(age = 25)
 * **Snake Case:** KOTLIN_CODE_SNIPPETS  
 * **Main Function:** Entry point in our app.  
 * **Compiler:** Translates high level language to low level language that machine can understand. Also checks for syntax errors.  
-* **Run Kotlin Program:** Converts Kotlin code to Java byte code to run it on JVM. JVM further converts the Java byte code into machine code that the platform like Mac or Windows can understand.  
+* **Run Kotlin Program:** Converts Kotlin code to Java byte code to run it on JVM. JVM further converts the Java byte code into machine code that <a href=""></a> platform like Mac or Windows can understand.  
 * **Statically Typed Programming Language:** Type of a variable is known at compile-time. So once variable is declared with a type, it cannot ever be assigned to a variable of different type and doing so will result in a type error at compile-time. So you CANNOT build the app without fixing the bugs. Fast & Efficient. Ex: Kotlin, Java, C, C++, etc.  
 * **Dynamically Typed Programming Language:** Type of a variable is known at run-time. Variables are bound to objects at run-time. You can assign a variable with a different an Integer type even if it was initially assigned String type. So you CAN build the app without fixing the bugs. Slow & less optimized but has its own advantages like dynamic dispatch, late binding, down-casting, reflection. Ex: JavaScript, Objective-C, PHP, Python, Ruby, Lisp, etc.  
 * **Type Checking:** The process of verifying and enforcing the constraints of types.  
@@ -429,6 +450,18 @@ val user2 = user.copy(age = 25)
 * **Weakly-typed language:** Variables are not bound to a specific data type; they still have a type, but type safety constraints are lower compared to strongly-typed languages. Ex: PHP, C, C++, etc.  
 * **Top-Level function:** A function that is not enclosed in a class.  
 * **Double Type:** Double-precision floating-point. More exact than Float numbers.
+* **Number System:** A way of representing numbers. The value of any digit in a number can be known if we know:
+	1. The Digit 
+	2. Its position in the number
+	3. The base/radix of the number system
+* **Radix/Base:** Available numbers in a number system (or) numbers used in a system (or) number of digits used in a positional number system. Ex: base-10 numbering system or decimal numbers (0,1,2,3,4,5,6,7,8, and 9) is most common. So the radix/base for Decimal numbers is 10. Computers deal with base-2 or binary which only deals with numbers 0 and 1. So for binary numbers the radix/base is 2.
+* **Types of base or Types of Number Systems:** 
+	1. Base-2 (Binary): Uses only 0, 1
+	2. Base-8 (Octal): Uses only 0, 1, 2, 3, 4, 5, 6, 7
+	3. Base-10 (Decimal): Uses only 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+	4. Base-16 (Hexadecimal): Uses only 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F
+* **Signed Integer:** Whole range of integers negative, zero and positive integers. Ex: ...-3, -2, -1, 0, 1, 2, 3...
+* **Unsigned Integer:** Non-negative integers including 0. Ex: 0, 1, 2, 3...
 
 ## Keyboard Shortcuts
 * Check Type of a variable: Ctrl + Shift + P
@@ -440,4 +473,7 @@ val user2 = user.copy(age = 25)
 3. https://www.youtube.com/playlist?list=PL6nth5sRD25iv8jZrQWD-5dXgu56ae5m8
 4. https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2
 5. https://android.jlelse.eu/magic-lies-here-statically-typed-vs-dynamically-typed-languages-d151c7f95e2b#:~:text=A%20language%20is%20dynamically%2Dtyped,Ruby%2C%20Lisp%2C%20and%20Tcl.
+6. https://byjus.com/maths/number-system/
+7. https://www.geeksforgeeks.org/biginteger-class-in-java/
+8. https://stackoverflow.com/questions/12693273/is-there-an-upper-bound-to-biginteger#:~:text=BigInteger%20has%20no%20cap%20on,on%20the%20computer%20can%20hold).
 
