@@ -173,6 +173,22 @@ val bigInt10: BigInteger = BigInteger.TEN; // 10
 val myBigDecimalNum1: BigDecimal = BigDecimal.valueOf(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.7976931348623157E-2147483339
 val myBigDecimalNum2: BigDecimal = BigDecimal(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.79769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368E-2147483339
 
+// Rounding Precision
+val myDecimalNum1: BigDecimal = BigDecimal("1.1234567");
+myDecimalNum1.setScale(3, RoundingMode.UP); // 1.124
+myDecimalNum1.setScale(3, RoundingMode.DOWN); // 1.123
+myDecimalNum1.setScale(3, RoundingMode.HALF_UP); // 1.123
+myDecimalNum1.setScale(3, RoundingMode.HALF_DOWN); // 1.123
+myDecimalNum1.setScale(3, RoundingMode.HALF_EVEN); // 1.123
+myDecimalNum1.setScale(3, RoundingMode.FLOOR); // 1.123
+myDecimalNum1.setScale(3, RoundingMode.CEILING); // 1.124
+
+val myDecimalNum2: BigDecimal = BigDecimal("1.0");
+myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY); // 1.000
+
+myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointRight(1); // From 1.000 to 10.00
+myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointLeft(1); // From 1.000 to 0.1000
+
 // Commonly used BigDecimal Numbers 
 val bigDec0: BigDecimal = BigDecimal.ZERO; // 0
 val bigDec1: BigDecimal = BigDecimal.ONE; // 1
