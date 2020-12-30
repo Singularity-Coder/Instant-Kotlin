@@ -121,6 +121,15 @@ val myString: String = "I am a string!";
 * Char
 ```Kotlin
 val myChar: Char = 'C';
+val myCharAsciiValue: Int = myChar.toInt(); // 67
+
+// List all lowercase chars
+val lowCaseCharArray: Array<Char> = Array(26) { 'a' }; // 'a' is the starting value at 0th position
+for (i in 0..25) lowCaseCharArray.set(i, ('a'.toInt() + i).toChar());
+
+// List all uppercase chars
+val upCaseCharArray: Array<Char> = Array(26) { 'A' }; // 'A' is the starting value at 0th position
+for (i in 0..25) upCaseCharArray.set(i, ('A'.toInt() + i).toChar());
 ```
 * Bool
 ```Kotlin
@@ -272,6 +281,18 @@ cars.parallelStream().filter { it.speed > 100 }.forEach { println(it.speed)}
 
 ## Data Structures
 #### Arrays
+Declaring Array
+```Kotlin
+val lowCaseCharArray: Array<Char>;
+```
+Initializing Array with a fixed size or Allocating memory
+```Kotlin
+val lowCaseCharArray: Array<Char> = Array(26) { 'a' }; // where 'a' is the starting value at 0th position
+```
+Printing Arrays
+```Kotlin
+print(Arrays.toString(lowCaseCharArray));
+```
 Splitting Arrays
 ```Kotlin
 val (param, value) = "param=car".split("=")
