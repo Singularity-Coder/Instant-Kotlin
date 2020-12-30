@@ -103,6 +103,7 @@ val maxFloat: Float = Float.MAX_VALUE; // 3.4028235E38 (~ 3.40 * 10^38)
 val minFloat: Float = Float.MIN_VALUE; // 1.4E-45 (1.4 * 10^-45)
 val floatSizeInBits: Int = Float.SIZE_BITS; // 32
 val floatSizeInBytes: Int = Float.SIZE_BYTES; // 4
+val floatMax: Float = 1E38F; // 1.0E38, beyond this number Kotlin returns "Infinity" string. 
 ```
 * Double (Inferred by default)
 ```Kotlin
@@ -111,6 +112,7 @@ val maxDouble: Double = Double.MAX_VALUE; // 1.7976931348623157E308 (~ 1.79 * 10
 val minDouble: Double = Double.MIN_VALUE; // 4.9E-324 (4.9 * 10^-324)
 val doubleSizeInBits: Int = Double.SIZE_BITS; // 64
 val doubleSizeInBytes: Int = Double.SIZE_BYTES; // 8
+val doubleMax: Double = 1.0E308; // 1.0E308, beyond this number Kotlin returns "Infinity" string.
 ```
 
 **Others**
@@ -125,11 +127,11 @@ val myCharAsciiValue: Int = myChar.toInt(); // 67
 
 // List all lowercase chars
 val lowCaseCharArray: Array<Char> = Array(26) { 'a' }; // 'a' is the starting value at 0th position
-for (i in 0..25) lowCaseCharArray.set(i, ('a'.toInt() + i).toChar());
+for (i in 0..25) lowCaseCharArray.set(i, ('a'.toInt() + i).toChar()); // [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
 
 // List all uppercase chars
 val upCaseCharArray: Array<Char> = Array(26) { 'A' }; // 'A' is the starting value at 0th position
-for (i in 0..25) upCaseCharArray.set(i, ('A'.toInt() + i).toChar());
+for (i in 0..25) upCaseCharArray.set(i, ('A'.toInt() + i).toChar()); // [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
 ```
 * Bool
 ```Kotlin
@@ -138,14 +140,29 @@ val myBoolean: Boolean = false;
 
 **More**
 * Any
+> This Type can hold any of the above mentioned data types. It cannot hold BigInteger and BigDecimal Types.
 ```Kotlin
-val myAnyType: Any = 77; // Any Type can hold any of the above mentioned data types.
+val myAnyTypeByte: Any = 72;
+val myAnyTypeShort: Any = 32425;
+val myAnyTypeInt: Any = 1123456789345;
+val myAnyTypeLong: Any = 71234567823456734;
+val myAnyTypeFloat: Any = 0F;
+val myAnyTypeDouble: Any = 1.1;
+val myAnyTypeString: Any = "Singularity Coder";
+val myAnyTypeChar: Any = 'C';
+val myAnyTypeBool: Any = true;
 ```
 * BigInteger  
+> If you are working with ridiculously large numbers, use BigInteger & BigDecimal.
+
 > BigInteger must support values in the range -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive) and may support values outside of that range.  
 > 
 > Implementation note: BigInteger constructors and operations throw ArithmeticException when the result is out of the supported range of -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive).
 ```Kotlin
+val myBigIntegerNum1: BigInteger = BigInteger.valueOf(Long.MAX_VALUE).pow(10); // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
+val myBigIntegerNum2: BigInteger = BigInteger(Long.MAX_VALUE.toString()).pow(10); // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
+
+// Commonly used BigInteger Numbers 
 val bigInt0: BigInteger = BigInteger.ZERO; // 0
 val bigInt1: BigInteger = BigInteger.ONE; // 1
 val bigInt2: BigInteger = BigInteger.TWO; // 2
@@ -153,6 +170,10 @@ val bigInt10: BigInteger = BigInteger.TEN; // 10
 ```
 * BigDecimal
 ```Kotlin
+val myBigDecimalNum1: BigDecimal = BigDecimal.valueOf(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.7976931348623157E-2147483339
+val myBigDecimalNum2: BigDecimal = BigDecimal(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.79769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368E-2147483339
+
+// Commonly used BigDecimal Numbers 
 val bigDec0: BigDecimal = BigDecimal.ZERO; // 0
 val bigDec1: BigDecimal = BigDecimal.ONE; // 1
 val bigDec10: BigDecimal = BigDecimal.TEN; // 10
@@ -283,7 +304,7 @@ cars.parallelStream().filter { it.speed > 100 }.forEach { println(it.speed)}
 #### Arrays
 Declaring Array
 ```Kotlin
-val lowCaseCharArray: Array<Char>;
+lateinit var lowCaseCharArray: Array<Char>;
 ```
 Initializing Array with a fixed size or Allocating memory
 ```Kotlin
@@ -453,6 +474,8 @@ val user2 = user.copy(age = 25)
 ## Lambda
 
 ## JvmStatic, JvmOverloads, and JvmField
+
+## Visibility Modifiers
 
 ## Common Vocabulary
 * **Expression:** A function with return value or a variable.  
