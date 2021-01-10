@@ -260,16 +260,11 @@ val unsignedRightShift = a ushr 2
 
 ## Flow Control
 #### Conditional Statements
-```Kotlin
-if (price in 30..50) { 
-    println("Cheap") // Cheap
-}
-```
 Block Statement
 ```Kotlin
 if (price < 50) {
     println("Cheap")
-} else if (price < 60) {
+} else if (price in 50..70) {
     println("Average")
 } else {
     println("Expensive")
@@ -279,7 +274,7 @@ When Statement (Switch-Case)
 ```Kotlin
 when(price) {
     30, 31, 32, 33, 34, 35 -> print("Cheap")
-    in 31..50 -> print("Average")
+    in 36..50 -> print("Average")
     else -> {
         println("Too much!")
         print("Expensive as hell!")
@@ -311,7 +306,9 @@ val priceReaction3: String = when {
 ```
 #### For Loop
 ```Kotlin
-for (i in 1..10) { }
+for (i in 1..10) {
+    print("$i ")  // 1 2 3 4 5 6 7 8 9 10
+}
 
 for (i in 1 until 10) { }
 
@@ -325,20 +322,34 @@ for (item in collection) { }
 
 for ((key, value) in map) { }
 ```
-#### ForEach
+#### ForEach (Enhanced For loop)
 ```Kotlin
 cars.forEach {
     println(it.speed)
 }
 
-cars.filter { it.speed > 100 }
-      .forEach { println(it.speed)}
+cars.filter { it.speed > 100 }.forEach { println(it.speed)}
 
 // kotlin 1.1+
 cars.stream().filter { it.speed > 100 }.forEach { println(it.speed)}
 cars.parallelStream().filter { it.speed > 100 }.forEach { println(it.speed)}
 ```
 #### While Loop
+```Kotlin
+var x = 1
+while (x <= 10) {
+    print("$x ")  // 1 2 3 4 5 6 7 8 9 10 
+    x++
+}
+```
+#### Do-While Loop
+```Kotlin
+var y = 1
+    do {
+        print("$y ")  // 1 2 3 4 5 6 7 8 9 10
+        y++
+    } while (y <= 10)
+```
 #### Break
 #### Continue
 
