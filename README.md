@@ -48,6 +48,8 @@ Assigning the null value
 ```Kotlin
 var value: String?
 value = Nullable
+val message: String? = null
+log(message ?: "")
 ```
 Verify if value is null
 ```Kotlin
@@ -171,7 +173,8 @@ val bigInt10: BigInteger = BigInteger.TEN; // 10
 * BigDecimal
 ```Kotlin
 val myBigDecimalNum1: BigDecimal = BigDecimal.valueOf(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.7976931348623157E-2147483339
-val myBigDecimalNum2: BigDecimal = BigDecimal(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.79769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368E-2147483339
+val myBigDecimalNum2: BigDecimal = BigDecimal(Double.MAX_VALUE.toString()).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.7976931348623157E-2147483339
+val myBigDecimalNum3: BigDecimal = BigDecimal(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.79769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368E-2147483339
 
 // Rounding Precision
 val myDecimalNum1: BigDecimal = BigDecimal("1.1234567");
@@ -198,9 +201,9 @@ val bigDec10: BigDecimal = BigDecimal.TEN; // 10
 ## Strings
 Concatenation of strings
 ```Kotlin
-val name: String = "Hithesh";
-var age: Int = 129;
-print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7.");
+val name: String = "Singularity Coder";
+    var age: Int = 129;
+    print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7."); // Hello World, My name is Singularity Coder, and I am 129 years old. In 3 years, I will be 132. My bank balance is currently $7.
 ```
 New line in string
 ```Kotlin
@@ -258,30 +261,53 @@ val unsignedRightShift = a ushr 2
 ## Flow Control
 #### Conditional Statements
 ```Kotlin
-if (score in 0..300) { }
+if (price in 30..50) { 
+    println("Cheap") // Cheap
+}
+```
+Block Statement
+```Kotlin
+if (price < 50) {
+    println("Cheap")
+} else if (price < 60) {
+    println("Average")
+} else {
+    println("Expensive")
+} // Average
+```
+When Statement (Switch-Case)
+```Kotlin
+when(price) {
+    30, 31, 32, 33, 34, 35 -> print("Cheap")
+    in 31..50 -> print("Average")
+    else -> {
+        println("Too much!")
+        print("Expensive as hell!")
+    }
+} // Too much! Expensive as hell!
 ```
 #### Conditional Expressions
-Ternary Operations
+Single Line Expression or Ternary Operations
 ```Kotlin
-val text = if (x > 5) {
-    "x > 5"
-} else {
-    "x <= 5"
-}
-
-val message: String? = null
-log(message ?: "")
+val price: Int = 59
+val priceReaction: String = if (price < 100) "Cheap" else "Expensive" // Cheap
 ```
-Multiple Conditions (Switch case)
+Block Expression
 ```Kotlin
-var score = 10
-var grade = when (score) {
-	9, 10 -> "Excellent"
-	in 6..8 -> "Good"
-	4, 5 -> "OK"
-	in 1..3 -> "Fail"
-	else -> "Fail"
-}
+val priceReaction2: String = if (price < 50) {
+    "Cheap"
+} else {
+    "Expensive"
+} // Expensive
+```
+When Expression (Switch-Case)
+```Kotlin
+val priceReaction3: String = when {
+    price <= 30 -> "Cheap"
+    price in 30..50 -> "Average"
+    price in 50 until 70 -> "Expensive"
+    else -> "Too much"
+} // Expensive
 ```
 #### For Loop
 ```Kotlin
@@ -523,10 +549,6 @@ val user2 = user.copy(age = 25)
 	4. Base-16 (Hexadecimal): Uses only 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F
 * **Signed Integer:** Whole range of integers negative, zero and positive integers. Ex: ...-3, -2, -1, 0, 1, 2, 3...
 * **Unsigned Integer:** Non-negative integers including 0. Ex: 0, 1, 2, 3...
-
-## Keyboard Shortcuts
-* Check Type of a variable: Ctrl + Shift + P
-* Format Code: Cmd + Alt + L
 
 ## References
 1. https://kotlinlang.org/docs/reference/
