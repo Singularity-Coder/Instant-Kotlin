@@ -636,7 +636,7 @@ val randomNumber = Math.random()    // 0.15076138593048494
 ```
 * Random number in a given range. You can access all the Array properties on this random array.
 ```Kotlin
-val randomArray = (1..10).shuffled()    				// [8, 9, 1, 2, 3, 5, 7, 10, 6, 4]
+val randomArray = (1..10).shuffled()					// [8, 9, 1, 2, 3, 5, 7, 10, 6, 4]
 val randomArrayFirstElem = (1..10).shuffled().first()   // 10
 val randomArrayLastElem = (1..10).shuffled().last()     // 5
 ```
