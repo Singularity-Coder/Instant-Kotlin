@@ -454,7 +454,7 @@ var result = 3.triple()
 #### Creating Instance
 ```Kotlin
 class Address1 {
-    private val CUSTOM_HASH_CODE = 1
+    private val CUSTOM_HASH_CODE = SecureRandom().nextInt()
 
     var city: String = ""
     var country: String = ""
@@ -481,17 +481,17 @@ address1.city = "Tesla"
 address1.country = "Mars Colony @#$%123"
 address1.zip = 123456
 
-println(address1.toString())    // Address(City: Tesla, Country: Mars Colony @#$%123, Zip: 123456)
-println(address1.hashCode())    // 1
+println(address1.toString())    	  // Address(City: Tesla, Country: Mars Colony @#$%123, Zip: 123456)
+println(address1.hashCode())    	  // 654287787
 println(address1.equals(address2))    // false
 ```
 #### Inheritance
 #### Constructors
 Primary Constructor
 ```Kotlin
-class User0(val name: String = "", val age: Int = 0) val user0: User0 = User0(name = "Hithesh", age = 199)
+class User0(val name: String = "", val age: Int = 0) 
 
-val user0: User0 = User0("Hithesh", 199)
+val user0: User0 = User0(name = "Hithesh", age = 199)
 println("Name: ${user0.name}")  // Name: Hithesh
 println("Age: ${user0.age}")    // Age: 199
 ```
@@ -540,9 +540,10 @@ class User2(private val dob: String = "", private val profession: String = "") {
 }
 
 val user2: User2 = User2(dob = "12/07/0001", profession = "Magic Caster")
-user2.printDob()  // Date Of Birth: 12/07/0001
+user2.printDob()  		   // Date Of Birth: 12/07/0001
 user2.printProfession()    // Profession: Magic Caster
 ```
+Private Constructor
 ```Kotlin
 class Utils private constructor() {
 }
@@ -624,6 +625,37 @@ val user2 = user.copy(age = 25)
 
 ## Visibility Modifiers
 
+## Random Numbers
+* Generate Secure Random Number. Cryptographically strong random values using a cryptographically strong pseudo-random number generator.
+```Kotling
+val secureRandom = SecureRandom().nextInt(100)  // 14
+```
+* Generate Pseudo Random Number
+```Kotlin
+val randomNumber = Math.random()    // 0.15076138593048494
+```
+* Random number in a given range. You can access all the Array properties on this random array.
+```Kotlin
+val randomArray = (1..10).shuffled()    				// [8, 9, 1, 2, 3, 5, 7, 10, 6, 4]
+val randomArrayFirstElem = (1..10).shuffled().first()   // 10
+val randomArrayLastElem = (1..10).shuffled().last()     // 5
+```
+* Thread-safe Random Number that can have positive and negative values
+```Kotlin
+val randomfloat1 = ThreadLocalRandom.current().nextFloat()          // 0.23447311
+val randomDouble1 = ThreadLocalRandom.current().nextDouble()        // 0.3792768572850779
+val randomInteger1 = ThreadLocalRandom.current().nextInt()          // -1424838063
+val randomLong1 = ThreadLocalRandom.current().nextLong()            // 6186415735628776307
+val randomGaussian1 = ThreadLocalRandom.current().nextGaussian()    // 1.7022158793655815
+val randomBoolean1 = ThreadLocalRandom.current().nextBoolean()      // false
+```
+* Thread-safe Random Number in a given range
+```Kotlin
+val randomDouble2 = ThreadLocalRandom.current().nextDouble(1.0, 10.0)   // 4.842464268215246
+val randomInteger2 = ThreadLocalRandom.current().nextInt(1, 10)         // 2
+val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
+```
+
 ## Common Vocabulary
 * **Expression:** A function with return value or a variable.  
 * **Statement:** Code with an assignment operator.  
@@ -664,4 +696,5 @@ val user2 = user.copy(age = 25)
 6. https://byjus.com/maths/number-system/
 7. https://www.geeksforgeeks.org/biginteger-class-in-java/
 8. https://stackoverflow.com/questions/12693273/is-there-an-upper-bound-to-biginteger#:~:text=BigInteger%20has%20no%20cap%20on,on%20the%20computer%20can%20hold).
+9. https://www.baeldung.com/kotlin/kotlin-random-number
 
