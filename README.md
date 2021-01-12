@@ -202,8 +202,8 @@ val bigDec10: BigDecimal = BigDecimal.TEN; // 10
 Concatenation of strings
 ```Kotlin
 val name: String = "Singularity Coder";
-    var age: Int = 129;
-    print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7."); // Hello World, My name is Singularity Coder, and I am 129 years old. In 3 years, I will be 132. My bank balance is currently $7.
+var age: Int = 129;
+print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7."); // Hello World, My name is Singularity Coder, and I am 129 years old. In 3 years, I will be 132. My bank balance is currently $7.
 ```
 New line in string
 ```Kotlin
@@ -262,6 +262,7 @@ val unsignedRightShift = a ushr 2
 #### Conditional Statements
 Block Statement
 ```Kotlin
+val price: Int = 59
 if (price < 50) {
     println("Cheap")
 } else if (price in 50..70) {
@@ -272,6 +273,7 @@ if (price < 50) {
 ```
 When Statement (Switch-Case)
 ```Kotlin
+val price: Int = 59
 when(price) {
     30, 31, 32, 33, 34, 35 -> print("Cheap")
     in 36..50 -> print("Average")
@@ -282,13 +284,14 @@ when(price) {
 } // Too much! Expensive as hell!
 ```
 #### Conditional Expressions
-Single Line Expression or Ternary Operations
+Single Line Expression (Ternary Operations)
 ```Kotlin
 val price: Int = 59
 val priceReaction: String = if (price < 100) "Cheap" else "Expensive" // Cheap
 ```
 Block Expression
 ```Kotlin
+val price: Int = 59
 val priceReaction2: String = if (price < 50) {
     "Cheap"
 } else {
@@ -297,6 +300,7 @@ val priceReaction2: String = if (price < 50) {
 ```
 When Expression (Switch-Case)
 ```Kotlin
+val price: Int = 59
 val priceReaction3: String = when {
     price <= 30 -> "Cheap"
     price in 30..50 -> "Average"
@@ -345,10 +349,10 @@ while (x <= 10) {
 #### Do-While Loop
 ```Kotlin
 var y = 1
-    do {
-        print("$y ")  // 1 2 3 4 5 6 7 8 9 10
-        y++
-    } while (y <= 10)
+do {
+    print("$y ")  // 1 2 3 4 5 6 7 8 9 10
+    y++
+} while (y <= 10)
 ```
 #### Break
 #### Continue
@@ -448,8 +452,97 @@ var result = 3.triple()
 
 ## Classes and Objects
 #### Creating Instance
+```Kotlin
+class Address1 {
+    private val CUSTOM_HASH_CODE = 1
+
+    var city: String = ""
+    var country: String = ""
+    var zip: Int = 0
+
+    override fun toString(): String {
+        return "Address(City: $city, Country: $country, Zip: $zip)"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (null === other) return false
+        return false
+    }
+
+    override fun hashCode(): Int {
+        return CUSTOM_HASH_CODE
+    }
+}
+
+val address1 = Address1()
+val address2 = Address1()
+address1.city = "Tesla"
+address1.country = "Mars Colony @#$%123"
+address1.zip = 123456
+
+println(address1.toString())    // Address(City: Tesla, Country: Mars Colony @#$%123, Zip: 123456)
+println(address1.hashCode())    // 1
+println(address1.equals(address2))    // false
+```
 #### Inheritance
 #### Constructors
+Primary Constructor
+```Kotlin
+class User0(val name: String = "", val age: Int = 0) val user0: User0 = User0(name = "Hithesh", age = 199)
+
+val user0: User0 = User0("Hithesh", 199)
+println("Name: ${user0.name}")  // Name: Hithesh
+println("Age: ${user0.age}")    // Age: 199
+```
+Secondary Constructors
+```Kotlin
+class User1 {
+    var name: String? = null
+    var age: Int? = null
+
+    constructor(name: String = "Singularity Coder") {
+        this.name = name
+    }
+
+    constructor(name: String = "Singularity Coder", age: Int = 77) {
+        this.name = name
+        this.age = age
+    }
+
+    constructor()
+}
+
+val user1: User1 = User1(name = "Singularity Coder", age = 6543)
+println("Name: ${user1.name}")  // Name: Singularity Coder
+println("Age: ${user1.age}")    // Age: 6543
+```
+Primary and Secondary Constructors
+```Kotlin
+class User2(private val dob: String = "", private val profession: String = "") {
+    var name: String? = null
+    var age: Int? = null
+
+    constructor(name: String = "Hithesh") : this(dob = "", profession = "") {
+        this.name = name
+    }
+
+    constructor(name: String = "Singularity Coder", age: Int = 77) : this(dob = "", profession = "") {
+        this.name = name
+        this.age = age
+    }
+
+    constructor() : this(dob = "", profession = "")
+
+    fun printDob() = println("Date Of Birth: $dob")
+
+    fun printProfession() = println("Profession: $profession")
+}
+
+val user2: User2 = User2(dob = "12/07/0001", profession = "Magic Caster")
+user2.printDob()  // Date Of Birth: 12/07/0001
+user2.printProfession()    // Profession: Magic Caster
+```
 ```Kotlin
 class Utils private constructor() {
 }
@@ -459,9 +552,7 @@ object Utils {
 }
 ```
 #### Getters and Setters
-```Kotlin
-data class User(var name: String, var age: Int)
-```
+
 #### Defining uninitialized objects
 ```Kotlin
 internal lateinit var person: Person
@@ -478,6 +569,9 @@ class User {
 #### Companion Object
 #### Singleton
 #### Data Class
+```Kotlin
+data class User(var name: String, var age: Int)
+```
 #### Abstract Class
 #### Interface
 #### Sealed Classes
