@@ -310,33 +310,44 @@ val priceReaction3: String = when {
 ```
 #### For Loop
 ```Kotlin
-for (i in 1..10) {
-    print("$i ")  // 1 2 3 4 5 6 7 8 9 10
-}
+for (i in 1..10) print("$i ")  // 1 2 3 4 5 6 7 8 9 10
 
-for (i in 1 until 10) { }
+for (i in 1 until 10) print("$i ")    // 1 2 3 4 5 6 7 8 9
 
-for (i in 10 downTo 0) { }
+for (i in 10 downTo 0) print("$i ")    // 10 9 8 7 6 5 4 3 2 1 0
 
-for (i in 1..10 step 2) { }
+for (i in 1..10 step 2) print("$i ")    // 1 3 5 7 9
 
-for (i in 10 downTo 0 step 2) { }
+for (i in 10 downTo 0 step 2) print("$i ")    // 10 8 6 4 2 0
 
-for (item in collection) { }
+val list: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+for (item in list) print("$item ")  // 1 2 3 4 5 6 7 8 9 10
 
-for ((key, value) in map) { }
+val map: Map<Int, String> = mapOf(1 to "Air", 2 to "Bed", 3 to "Breakfast")
+for ((key, value) in map) println("Key: $key and Value: $value")
+// Key: 1 and Value: Air
+// Key: 2 and Value: Bed
+// Key: 3 and Value: Breakfast
 ```
 #### ForEach (Enhanced For loop)
 ```Kotlin
-cars.forEach {
-    println(it.speed)
+val list: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+list.forEach { it: Int ->
+    print("$it ")   // 1 2 3 4 5 6 7 8 9 10
 }
 
-cars.filter { it.speed > 100 }.forEach { println(it.speed)}
+list.filter { it > 5 }.forEach {
+    print("$it ")   // 6 7 8 9 10
+}
 
-// kotlin 1.1+
-cars.stream().filter { it.speed > 100 }.forEach { println(it.speed)}
-cars.parallelStream().filter { it.speed > 100 }.forEach { println(it.speed)}
+list.stream().filter { it > 5 }.forEach {
+    print("$it ")   // 6 7 8 9 10
+}
+
+
+list.parallelStream().filter { it > 5 }.forEach {
+    print("$it ")   // 7 9 10 8 6
+}
 ```
 #### While Loop
 ```Kotlin
@@ -355,7 +366,21 @@ do {
 } while (y <= 10)
 ```
 #### Break
+```Kotlin
+for (i in 1..10) {
+    print("$i ")  // 1 2 3 4 5 6 
+    if (i == 6) break
+}
+```
 #### Continue
+```Kotlin
+for (i in 1..10) {
+    if (i == 2) continue
+    if (i == 5) continue
+    if (i == 8) continue
+    print("$i ")  // 1 3 4 6 7 9 10 
+}
+```
 
 ## Data Structures
 #### Arrays
@@ -655,6 +680,8 @@ val randomDouble2 = ThreadLocalRandom.current().nextDouble(1.0, 10.0)   // 4.842
 val randomInteger2 = ThreadLocalRandom.current().nextInt(1, 10)         // 2
 val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 ```
+
+## Collections
 
 ## Common Vocabulary
 * **Expression:** A function with return value or a variable.  
