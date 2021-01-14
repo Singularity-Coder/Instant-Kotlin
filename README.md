@@ -506,7 +506,7 @@ fun highOrderFuncWithParams(unitFunc: (() -> Unit)? = null, imgSize: Int) {
     else println("Using image with default resolution!")
 }
 
-fun highOrderFuncWithParams2(dummyApiCallback: ((dummyApiResult: String) -> Unit)? = null) {
+fun highOrderFuncWithParams2(dummyApiCallback: ((dummyApiResponse: String) -> Unit)? = null) {
     val movieList: List<String> = listOf(
         "Grave of the Fireflies",
         "My Neighbor Totoro",
@@ -546,8 +546,8 @@ highOrderFuncWithParams(
     imgSize = 11
 )   // Reducing Image Resolution! Compressing Image!
 
-highOrderFuncWithParams2(dummyApiCallback = { movie: String ->
-    println(movie)
+highOrderFuncWithParams2(dummyApiCallback = { dummyApiResponse: String ->
+    println(dummyApiResponse)
 })
 // Grave of the Fireflies
 // My Neighbor Totoro
