@@ -127,11 +127,17 @@ val myString: String = "I am a string!";
 val myChar: Char = 'C';
 val myCharAsciiValue: Int = myChar.toInt(); // 67
 
-// List all lowercase chars
+// ASCII Characters
+
+// Extended ASCII Characters
+
+// Unicode Characters
+
+// List all lowercase Characters
 val lowCaseCharArray: Array<Char> = Array(26) { 'a' }; // 'a' is the starting value at 0th position
 for (i in 0..25) lowCaseCharArray.set(i, ('a'.toInt() + i).toChar()); // [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
 
-// List all uppercase chars
+// List all uppercase Characters
 val upCaseCharArray: Array<Char> = Array(26) { 'A' }; // 'A' is the starting value at 0th position
 for (i in 0..25) upCaseCharArray.set(i, ('A'.toInt() + i).toChar()); // [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
 ```
@@ -284,12 +290,12 @@ when(price) {
 } // Too much! Expensive as hell!
 ```
 #### Conditional Expressions
-Single Line Expression (Ternary Operations)
+* Single Line Expression (Ternary Operations)
 ```Kotlin
 val price: Int = 59
 val priceReaction: String = if (price < 100) "Cheap" else "Expensive" // Cheap
 ```
-Block Expression
+* Block Expression
 ```Kotlin
 val price: Int = 59
 val priceReaction2: String = if (price < 50) {
@@ -298,7 +304,7 @@ val priceReaction2: String = if (price < 50) {
     "Expensive"
 } // Expensive
 ```
-When Expression (Switch-Case)
+* When Expression (Switch-Case)
 ```Kotlin
 val price: Int = 59
 val priceReaction3: String = when {
@@ -323,7 +329,10 @@ for (i in 10 downTo 0 step 2) print("$i ")    // 10 8 6 4 2 0
 val list: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 for (item in list) print("$item ")  // 1 2 3 4 5 6 7 8 9 10
 
-val map: Map<Int, String> = mapOf(1 to "Air", 2 to "Bed", 3 to "Breakfast")
+val map: Map<Int, String> = mapOf(
+        1 to "Air", 
+        2 to "Bed", 
+        3 to "Breakfast")
 for ((key, value) in map) println("Key: $key and Value: $value")
 // Key: 1 and Value: Air
 // Key: 2 and Value: Bed
@@ -384,24 +393,24 @@ for (i in 1..10) {
 
 ## Data Structures
 #### Arrays
-Declaring Array
+* Declaring Array
 ```Kotlin
 lateinit var lowCaseCharArray: Array<Char>;
 ```
-Initializing Array with a fixed size or Allocating memory
+* Initializing Array with a fixed size or Allocating memory
 ```Kotlin
 val lowCaseCharArray: Array<Char> = Array(26) { 'a' }; // where 'a' is the starting value at 0th position
 ```
-Printing Arrays
+* Printing Arrays
 ```Kotlin
 print(Arrays.toString(lowCaseCharArray));
 ```
-Splitting Arrays
+* Splitting Arrays
 ```Kotlin
 val (param, value) = "param=car".split("=")
 ```
 #### Lists
-Sorting List
+* Sorting List
 ```Kotlin
 val profile = loadProfiles(context)
 profile.sortedWith(Comparator({ profile1, profile2 ->
@@ -423,19 +432,19 @@ val keyValue = mapOf(1 to "Air",
 #### Function
 Functions in Kotlin are not methods when they do not belong to a class. However they look and behave the same way. Its just the way they are accessed is different.
 
-Defining Function
+* Defining Function
 ```Kotlin
 fun doSomething() {
    // logic here
 }
 ```
-Variable number of arguments
+* Variable number of arguments
 ```Kotlin
 fun doSomething(vararg numbers: Int) {
    // logic here
 }
 ```
-Defining function with return 
+* Defining function with return 
 ```Kotlin
 fun getScore(): Int {
    // logic here
@@ -445,7 +454,7 @@ fun getScore(): Int {
 // as a single-expression function
 fun getScore(): Int = score
 ```
-Returning result of an operation
+* Returning result of an operation
 ```Kotlin
 fun getScore(value: Int): Int {
    // logic here
@@ -472,6 +481,40 @@ var result = 3.triple()
 #### Tail Recursion
 #### Scope Functions
 #### Higher Order Functions
+```Kotlin
+fun highOrderFuncNoParams(unitFunc: (() -> Unit)? = null) {
+    unitFunc?.invoke()
+}
+
+fun highOrderFuncWithParams(unitFunc: (() -> Unit)? = null, imgSize: Int) {
+    if (imgSize > 5) unitFunc?.invoke()
+    else println("Using image with default resolution!")
+}
+
+fun voidOrUnitFunc(num1: Int = 0, num2: Int = 0) {
+    println("Void or Unit function result is ${num1 + num2}")
+}
+
+fun voidOrUnitFunc2() {
+    println("Reducing Image Resolution!")
+    println("Compressing Image!")
+}
+
+highOrderFuncNoParams(unitFunc = { voidOrUnitFunc(num1 = 6, num2 = 9) })
+
+highOrderFuncWithParams(
+    unitFunc = {
+        println("Reducing Image Resolution!")
+        println("Compressing Image!")
+    },
+    imgSize = 4
+)
+
+highOrderFuncWithParams(
+    unitFunc = { voidOrUnitFunc2() },
+    imgSize = 4
+)
+```
 #### Extension Functions
 #### Infix Function Call
 
@@ -526,10 +569,6 @@ class User1 {
     var name: String? = null
     var age: Int? = null
 
-    constructor(name: String = "Singularity Coder") {
-        this.name = name
-    }
-
     constructor(name: String = "Singularity Coder", age: Int = 77) {
         this.name = name
         this.age = age
@@ -547,10 +586,6 @@ Primary and Secondary Constructors
 class User2(private val dob: String = "", private val profession: String = "") {
     var name: String? = null
     var age: Int? = null
-
-    constructor(name: String = "Hithesh") : this(dob = "", profession = "") {
-        this.name = name
-    }
 
     constructor(name: String = "Singularity Coder", age: Int = 77) : this(dob = "", profession = "") {
         this.name = name
@@ -681,7 +716,18 @@ val randomInteger2 = ThreadLocalRandom.current().nextInt(1, 10)         // 2
 val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 ```
 
+## Multi-Tasking
+#### Coroutines
+#### RxJava
+#### Executors and Handlers
+#### Thread
+#### AsyncTask
+
 ## Collections
+
+## Generate Morse Code
+
+## Meta-Programming
 
 ## Common Vocabulary
 * **Expression:** A function with return value or a variable.  
