@@ -481,6 +481,21 @@ var result = 3.triple()
 #### Tail Recursion
 #### Scope Functions
 #### Higher Order Functions
+* Functions can be stored in a variable.
+```Kotlin
+val operation1 = returnValue(num1 = 8, num2 = 12) // 20
+val operation2 = printComment() // Hello World!
+
+fun returnValue(num1: Int, num2: Int): Int = num1 + num2
+fun printComment(): Unit = print("Hello World!")
+```
+* Functions can be returned from a function.
+```Kotlin
+fun returnFunc(): Unit = printComment() // Hello World!
+
+fun printComment(): Unit = print("Hello World!")
+```
+* Functions can be passed to other functions as an argument.
 ```Kotlin
 fun highOrderFuncNoParams(unitFunc: (() -> Unit)? = null) {
     unitFunc?.invoke()
@@ -491,7 +506,23 @@ fun highOrderFuncWithParams(unitFunc: (() -> Unit)? = null, imgSize: Int) {
     else println("Using image with default resolution!")
 }
 
-fun voidOrUnitFunc(num1: Int = 0, num2: Int = 0) {
+fun highOrderFuncWithParams2(dummyApiCallback: ((dummyApiResult: String) -> Unit)? = null) {
+    val movieList: List<String> = listOf(
+        "Grave of the Fireflies",
+        "My Neighbor Totoro",
+        "Kiki's Delivery Service",
+        "Princess Mononoke",
+        "Spirited Away",
+        "Howl's Moving Castle",
+    )
+
+    for (movie in movieList) {
+        Thread.sleep(3000)
+        dummyApiCallback?.invoke(movie)
+    }
+}
+
+fun voidOrUnitFunc1(num1: Int = 0, num2: Int = 0) {
     println("Void or Unit function result is ${num1 + num2}")
 }
 
@@ -500,7 +531,7 @@ fun voidOrUnitFunc2() {
     println("Compressing Image!")
 }
 
-highOrderFuncNoParams(unitFunc = { voidOrUnitFunc(num1 = 6, num2 = 9) })
+highOrderFuncNoParams(unitFunc = { voidOrUnitFunc1(num1 = 6, num2 = 9) })    // Void or Unit function result is 15
 
 highOrderFuncWithParams(
     unitFunc = {
@@ -508,12 +539,22 @@ highOrderFuncWithParams(
         println("Compressing Image!")
     },
     imgSize = 4
-)
+)   // Using image with default resolution! 
 
 highOrderFuncWithParams(
     unitFunc = { voidOrUnitFunc2() },
-    imgSize = 4
-)
+    imgSize = 11
+)   // Reducing Image Resolution! Compressing Image!
+
+highOrderFuncWithParams2(dummyApiCallback = { movie: String ->
+    println(movie)
+})
+// Grave of the Fireflies
+// My Neighbor Totoro
+// Kiki's Delivery Service
+// Princess Mononoke
+// Spirited Away
+// Howl's Moving Castle
 ```
 #### Extension Functions
 #### Infix Function Call
