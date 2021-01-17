@@ -557,6 +557,47 @@ highOrderFuncWithParams2(dummyApiCallback = { dummyApiResponse: String ->
 // Howl's Moving Castle
 ```
 #### Extension Functions
+```Kotlin
+fun Int.factorial(): BigInteger {
+    var fact = BigInteger.ONE
+    for (i in 2..this) fact = fact.multiply(BigInteger.valueOf(this.toLong()))
+    return fact
+}
+
+fun Double.squared(): Double = this * this
+
+fun Char.asciiValue(): Int = this.toInt()
+
+fun String.analyzeString() {
+    when {
+        this == "Singularity Coder" -> println("Definitely Neo!")
+        this.length > 3 -> println("Not Neo!")
+        else -> println("Could be Neo!")
+    }
+    println("String Length: ${this.length}")
+    println("String starts with the letter: ${this[0]}")
+    println("String mid value: ${if (this.length % 2 == 0) "No mid value!" else this[this.length / 2]}")
+}
+
+fun User.canWork(age: Int): Boolean = age > 18
+
+val myInt: Int = 55
+val myDouble: Double = 12.5
+val myChar: Char = 'C'
+val myString: String = "Singularity Coder"
+val myUser: User = User(name = "Hithesh", age = 67)
+data class User(val name: String, val age: Int)
+
+myInt.factorial()   // 9540809681250034973565866501770328168700249765255186764678629884883775957860052585601806640625
+myDouble.squared()  // 156.25
+myChar.asciiValue() // 67
+myUser.canWork(myUser.age)  // true
+myString.analyzeString()
+// Definitely Neo!
+// String Length: 17
+// String starts with the letter: S
+// String mid value: i
+```
 #### Infix Function Call
 
 ## Classes and Objects
@@ -590,9 +631,9 @@ address1.city = "Tesla"
 address1.country = "Mars Colony @#$%123"
 address1.zip = 123456
 
-println(address1.toString())    	  // Address(City: Tesla, Country: Mars Colony @#$%123, Zip: 123456)
-println(address1.hashCode())    	  // 654287787
-println(address1.equals(address2))    // false
+println(address1.toString())	// Address(City: Tesla, Country: Mars Colony @#$%123, Zip: 123456)
+println(address1.hashCode())	// 654287787
+println(address1.equals(address2))	// false
 ```
 #### Inheritance
 #### Constructors
@@ -641,8 +682,8 @@ class User2(private val dob: String = "", private val profession: String = "") {
 }
 
 val user2: User2 = User2(dob = "12/07/0001", profession = "Magic Caster")
-user2.printDob()  		   // Date Of Birth: 12/07/0001
-user2.printProfession()    // Profession: Magic Caster
+user2.printDob()	// Date Of Birth: 12/07/0001
+user2.printProfession()	// Profession: Magic Caster
 ```
 Private Constructor
 ```Kotlin
@@ -737,7 +778,7 @@ val randomNumber = Math.random()    // 0.15076138593048494
 ```
 * Random number in a given range. You can access all the Array properties on this random array.
 ```Kotlin
-val randomArray = (1..10).shuffled()					// [8, 9, 1, 2, 3, 5, 7, 10, 6, 4]
+val randomArray = (1..10).shuffled()	// [8, 9, 1, 2, 3, 5, 7, 10, 6, 4]
 val randomArrayFirstElem = (1..10).shuffled().first()   // 10
 val randomArrayLastElem = (1..10).shuffled().last()     // 5
 ```
@@ -806,9 +847,9 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 2. https://github.com/MindorksOpenSource/from-java-to-kotlin
 3. https://www.youtube.com/playlist?list=PL6nth5sRD25iv8jZrQWD-5dXgu56ae5m8
 4. https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2
-5. https://android.jlelse.eu/magic-lies-here-statically-typed-vs-dynamically-typed-languages-d151c7f95e2b#:~:text=A%20language%20is%20dynamically%2Dtyped,Ruby%2C%20Lisp%2C%20and%20Tcl.
+5. https://android.jlelse.eu/magic-lies-here-statically-typed-vs-dynamically-typed-languages-d151c7f95e2b
 6. https://byjus.com/maths/number-system/
 7. https://www.geeksforgeeks.org/biginteger-class-in-java/
-8. https://stackoverflow.com/questions/12693273/is-there-an-upper-bound-to-biginteger#:~:text=BigInteger%20has%20no%20cap%20on,on%20the%20computer%20can%20hold).
+8. https://stackoverflow.com/questions/12693273/is-there-an-upper-bound-to-biginteger
 9. https://www.baeldung.com/kotlin/kotlin-random-number
 
