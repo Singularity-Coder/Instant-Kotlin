@@ -128,17 +128,17 @@ val myChar: Char = 'C'
 val myCharAsciiValue: Int = myChar.toInt() // 67
 
 // Valid ASCII Characters
-ASCII characters start from 0 to 127. Careful running the below snippet as this messed up my Kotlin project in IntelliJ.
+// ASCII characters start from 0 to 127. Careful running the below snippet as this messed up my Kotlin project in IntelliJ.
 val firstValidAsciiChar: Char = ' '  // 32
 val lastValidAsciiChar: Char = '~'   // 126
 val validAsciiCharsArray: Array<Char> = Array(95) { ' ' }
 for (i in 0..94) validAsciiCharsArray[i] = (firstValidAsciiChar.toInt() + i).toChar()	// [ , !, ", #, $, %, &, ', (, ), *, +, ,, -, ., /, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, :, ;, <, =, >, ?, @, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, [, \, ], ^, _, `, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, {, |, }, ~]
 
 // Extended ASCII Characters
-Strangely I could not print any extended ASCII characters other than the Euro symbol at 128. Extended ASCII characters start from 128 to 256.
+// Strangely I could not print any extended ASCII characters other than the Euro symbol at 128. Extended ASCII characters start from 128 to 256.
 
 // Unicode Characters
-There are a total of 143,859 characters today and growing. From spoken language characters to math symbols. So I won't list them here.
+// There are a total of 143,859 characters today and growing. From spoken language characters to math symbols. So I won't list them here.
 
 // List all lowercase Characters
 val lowCaseCharArray: Array<Char> = Array(26) { 'a' } // 'a' is the starting value at 0th position
