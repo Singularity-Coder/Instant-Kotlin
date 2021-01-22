@@ -120,45 +120,52 @@ val doubleMax: Double = 1.0E308; // 1.0E308, beyond this number Kotlin returns "
 **Others**
 * String
 ```Kotlin
-val myString: String = "I am a string!";
+val myString: String = "I am a string!"
 ```
 * Char
 ```Kotlin
-val myChar: Char = 'C';
-val myCharAsciiValue: Int = myChar.toInt(); // 67
+val myChar: Char = 'C'
+val myCharAsciiValue: Int = myChar.toInt() // 67
 
-// ASCII Characters
+// Valid ASCII Characters
+ASCII characters start from 0 to 127. Careful running the below snippet as this messed up my Kotlin project in IntelliJ.
+val firstValidAsciiChar: Char = ' '  // 32
+val lastValidAsciiChar: Char = '~'   // 126
+val validAsciiCharsArray: Array<Char> = Array(95) { ' ' }
+for (i in 0..94) validAsciiCharsArray[i] = (firstValidAsciiChar.toInt() + i).toChar()	// [ , !, ", #, $, %, &, ', (, ), *, +, ,, -, ., /, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, :, ;, <, =, >, ?, @, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, [, \, ], ^, _, `, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, {, |, }, ~]
 
 // Extended ASCII Characters
+Strangely I could not print any extended ASCII characters other than the Euro symbol at 128. Extended ASCII characters start from 128 to 256.
 
 // Unicode Characters
+There are a total of 143,859 characters today and growing. From spoken language characters to math symbols. So I won't list them here.
 
 // List all lowercase Characters
-val lowCaseCharArray: Array<Char> = Array(26) { 'a' }; // 'a' is the starting value at 0th position
-for (i in 0..25) lowCaseCharArray.set(i, ('a'.toInt() + i).toChar()); // [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+val lowCaseCharArray: Array<Char> = Array(26) { 'a' } // 'a' is the starting value at 0th position
+for (i in 0..25) lowCaseCharArray[i] = ('a'.toInt() + i).toChar() // [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
 
 // List all uppercase Characters
-val upCaseCharArray: Array<Char> = Array(26) { 'A' }; // 'A' is the starting value at 0th position
-for (i in 0..25) upCaseCharArray.set(i, ('A'.toInt() + i).toChar()); // [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
+val upCaseCharArray: Array<Char> = Array(26) { 'A' } // 'A' is the starting value at 0th position
+for (i in 0..25) upCaseCharArray[i] = ('A'.toInt() + i).toChar() // [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
 ```
 * Bool
 ```Kotlin
-val myBoolean: Boolean = false;
+val myBoolean: Boolean = false
 ```
 
 **More**
 * Any
 > This Type can hold any of the above mentioned data types. It cannot hold BigInteger and BigDecimal Types.
 ```Kotlin
-val myAnyTypeByte: Any = 72;
-val myAnyTypeShort: Any = 32425;
-val myAnyTypeInt: Any = 1123456789345;
-val myAnyTypeLong: Any = 71234567823456734;
-val myAnyTypeFloat: Any = 0F;
-val myAnyTypeDouble: Any = 1.1;
-val myAnyTypeString: Any = "Singularity Coder";
-val myAnyTypeChar: Any = 'C';
-val myAnyTypeBool: Any = true;
+val myAnyTypeByte: Any = 72
+val myAnyTypeShort: Any = 32425
+val myAnyTypeInt: Any = 1123456789345
+val myAnyTypeLong: Any = 71234567823456734
+val myAnyTypeFloat: Any = 0F
+val myAnyTypeDouble: Any = 1.1
+val myAnyTypeString: Any = "Singularity Coder"
+val myAnyTypeChar: Any = 'C'
+val myAnyTypeBool: Any = true
 ```
 * BigInteger  
 > If you are working with ridiculously large numbers, use BigInteger & BigDecimal.
@@ -167,14 +174,14 @@ val myAnyTypeBool: Any = true;
 > 
 > Implementation note: BigInteger constructors and operations throw ArithmeticException when the result is out of the supported range of -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive).
 ```Kotlin
-val myBigIntegerNum1: BigInteger = BigInteger.valueOf(Long.MAX_VALUE).pow(10); // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
-val myBigIntegerNum2: BigInteger = BigInteger(Long.MAX_VALUE.toString()).pow(10); // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
+val myBigIntegerNum1: BigInteger = BigInteger.valueOf(Long.MAX_VALUE).pow(10) // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
+val myBigIntegerNum2: BigInteger = BigInteger(Long.MAX_VALUE.toString()).pow(10) // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
 
 // Commonly used BigInteger Numbers 
-val bigInt0: BigInteger = BigInteger.ZERO; // 0
-val bigInt1: BigInteger = BigInteger.ONE; // 1
-val bigInt2: BigInteger = BigInteger.TWO; // 2
-val bigInt10: BigInteger = BigInteger.TEN; // 10
+val bigInt0: BigInteger = BigInteger.ZERO // 0
+val bigInt1: BigInteger = BigInteger.ONE // 1
+val bigInt2: BigInteger = BigInteger.TWO // 2
+val bigInt10: BigInteger = BigInteger.TEN // 10
 ```
 * BigDecimal
 ```Kotlin
@@ -353,7 +360,6 @@ list.stream().filter { it > 5 }.forEach {
     print("$it ")   // 6 7 8 9 10
 }
 
-
 list.parallelStream().filter { it > 5 }.forEach {
     print("$it ")   // 7 9 10 8 6
 }
@@ -483,15 +489,15 @@ var result = 3.triple()
 #### Higher Order Functions
 * Functions can be stored in a variable.
 ```Kotlin
-val operation1 = returnValue(num1 = 8, num2 = 12) // 20
-val operation2 = printComment() // Hello World!
+val operation1 = highOrderFuncReturnValue(num1 = 8, num2 = 12) // 20
+val operation2 = highOrderFuncPrintComment() // Hello World!
 
-fun returnValue(num1: Int, num2: Int): Int = num1 + num2
-fun printComment(): Unit = print("Hello World!")
+fun highOrderFuncReturnValue(num1: Int, num2: Int): Int = num1 + num2
+fun highOrderFuncPrintComment(): Unit = print("Hello World!")
 ```
 * Functions can be returned from a function.
 ```Kotlin
-fun returnFunc(): Unit = printComment() // Hello World!
+fun highOrderFuncReturnFunc(): Unit = printComment() // Hello World!
 
 fun printComment(): Unit = print("Hello World!")
 ```
@@ -843,13 +849,14 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 * **Unsigned Integer:** Non-negative integers including 0. Ex: 0, 1, 2, 3...
 
 ## References
-1. https://kotlinlang.org/docs/reference/
+1. https://kotlinlang.org/docs/reference
 2. https://github.com/MindorksOpenSource/from-java-to-kotlin
 3. https://www.youtube.com/playlist?list=PL6nth5sRD25iv8jZrQWD-5dXgu56ae5m8
 4. https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2
 5. https://android.jlelse.eu/magic-lies-here-statically-typed-vs-dynamically-typed-languages-d151c7f95e2b
-6. https://byjus.com/maths/number-system/
-7. https://www.geeksforgeeks.org/biginteger-class-in-java/
+6. https://byjus.com/maths/number-system
+7. https://www.geeksforgeeks.org/biginteger-class-in-java
 8. https://stackoverflow.com/questions/12693273/is-there-an-upper-bound-to-biginteger
 9. https://www.baeldung.com/kotlin/kotlin-random-number
+10. http://www.asciitable.com
 
