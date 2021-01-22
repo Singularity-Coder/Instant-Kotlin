@@ -138,7 +138,7 @@ for (i in 0..94) validAsciiCharsArray[i] = (firstValidAsciiChar.toInt() + i).toC
 // Strangely I could not print any extended ASCII characters other than the Euro symbol at 128. Extended ASCII characters start from 128 to 256.
 
 // Unicode Characters
-// There are a total of 143,859 characters today and growing. From spoken language characters to math symbols. So I won't list them here.
+// There are a total of 143,859 characters today and growing. From spoken language characters, math symbols, etc to emojis. So I won't list them here.
 
 // List all lowercase Characters
 val lowCaseCharArray: Array<Char> = Array(26) { 'a' } // 'a' is the starting value at 0th position
@@ -185,38 +185,38 @@ val bigInt10: BigInteger = BigInteger.TEN // 10
 ```
 * BigDecimal
 ```Kotlin
-val myBigDecimalNum1: BigDecimal = BigDecimal.valueOf(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.7976931348623157E-2147483339
-val myBigDecimalNum2: BigDecimal = BigDecimal(Double.MAX_VALUE.toString()).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.7976931348623157E-2147483339
-val myBigDecimalNum3: BigDecimal = BigDecimal(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE); // 1.79769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368E-2147483339
+val myBigDecimalNum1: BigDecimal = BigDecimal.valueOf(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE) // 1.7976931348623157E-2147483339
+val myBigDecimalNum2: BigDecimal = BigDecimal(Double.MAX_VALUE.toString()).scaleByPowerOfTen(-Int.MAX_VALUE) // 1.7976931348623157E-2147483339
+val myBigDecimalNum3: BigDecimal = BigDecimal(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE) // 1.79769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368E-2147483339
 
 // Rounding Precision
-val myDecimalNum1: BigDecimal = BigDecimal("1.1234567");
-myDecimalNum1.setScale(3, RoundingMode.UP); // 1.124
-myDecimalNum1.setScale(3, RoundingMode.DOWN); // 1.123
-myDecimalNum1.setScale(3, RoundingMode.HALF_UP); // 1.123
-myDecimalNum1.setScale(3, RoundingMode.HALF_DOWN); // 1.123
-myDecimalNum1.setScale(3, RoundingMode.HALF_EVEN); // 1.123
-myDecimalNum1.setScale(3, RoundingMode.FLOOR); // 1.123
-myDecimalNum1.setScale(3, RoundingMode.CEILING); // 1.124
+val myDecimalNum1: BigDecimal = BigDecimal("1.1234567")
+myDecimalNum1.setScale(3, RoundingMode.UP) // 1.124
+myDecimalNum1.setScale(3, RoundingMode.DOWN) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.HALF_UP) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.HALF_DOWN) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.HALF_EVEN) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.FLOOR) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.CEILING) // 1.124
 
-val myDecimalNum2: BigDecimal = BigDecimal("1.0");
-myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY); // 1.000
+val myDecimalNum2: BigDecimal = BigDecimal("1.0")
+myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY) // 1.000
 
-myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointRight(1); // From 1.000 to 10.00
-myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointLeft(1); // From 1.000 to 0.1000
+myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointRight(1) // From 1.000 to 10.00
+myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointLeft(1) // From 1.000 to 0.1000
 
 // Commonly used BigDecimal Numbers 
-val bigDec0: BigDecimal = BigDecimal.ZERO; // 0
-val bigDec1: BigDecimal = BigDecimal.ONE; // 1
-val bigDec10: BigDecimal = BigDecimal.TEN; // 10
+val bigDec0: BigDecimal = BigDecimal.ZERO // 0
+val bigDec1: BigDecimal = BigDecimal.ONE // 1
+val bigDec10: BigDecimal = BigDecimal.TEN // 10
 ```
 
 ## Strings
 Concatenation of strings
 ```Kotlin
-val name: String = "Singularity Coder";
-var age: Int = 129;
-print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7."); // Hello World, My name is Singularity Coder, and I am 129 years old. In 3 years, I will be 132. My bank balance is currently $7.
+val name: String = "Singularity Coder"
+var age: Int = 129
+print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7.") // Hello World, My name is Singularity Coder, and I am 129 years old. In 3 years, I will be 132. My bank balance is currently $7.
 ```
 New line in string
 ```Kotlin
@@ -273,7 +273,7 @@ val unsignedRightShift = a ushr 2
 
 ## Flow Control
 #### Conditional Statements
-Block Statement
+* Block Statement
 ```Kotlin
 val price: Int = 59
 if (price < 50) {
@@ -284,7 +284,7 @@ if (price < 50) {
     println("Expensive")
 } // Average
 ```
-When Statement (Switch-Case)
+* When Statement (Switch-Case)
 ```Kotlin
 val price: Int = 59
 when(price) {
@@ -760,7 +760,41 @@ val user2 = user.copy(age = 25)
 ```
 
 ## Pair and Triple
+* Pair: Collection of 2 variables
+```Kotlin
+val pair = Pair<String, Int>(first = "Singularity Coder", second = 179)
+pair.first 	// Singularity Coder
+pair.second 	// 179
 
+// Destructured Pair
+val (name: String, age: Int) = Pair(first = "Singularity Coder", second = 179)
+name 	// Singularity Coder
+age 	// 179
+
+// Converting Pair to List
+val pairList: List<Any> = pair.toList()
+pairList[0]	// Singularity Coder
+pairList[1]	// 179
+```
+* Triple: Collection of 3 variables
+```Kotlin
+val triple = Triple<String, String, String>(first = "Singularity", second = "Coder", third = "Android Developer")
+triple.first 	// Singularity
+triple.second 	// Coder
+triple.third 	// Android Developer
+
+// Destructured Triple
+val (firstName: String, lastName: String, profession: String) = Triple(first = "Singularity", second = "Coder", third = "Android Developer")
+firstName 	// Singularity
+lastName 	// Coder
+profession 	// Android Developer
+
+// Converting Triple to List
+val tripleList = triple.toList()
+tripleList[1]	// Singularity
+tripleList[2]	// Coder
+tripleList[3]	// Android Developer
+```
 ## Lateinit and Lazy
 
 ## Exceptions
