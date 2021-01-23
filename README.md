@@ -44,14 +44,17 @@ print("So i am next to the previous line.");
 ```
 
 ## Null Stuff
-Assigning the null value
+? means the var can be nullable or null
+!! means u r forcibly saying the comiler that this var is not null even if it is actually null
+?. means safe call operator. If var not null then execute this code
+* Assigning the null value
 ```Kotlin
 var value: String?
 value = Nullable
 val message: String? = null
 log(message ?: "")
 ```
-Verify if value is null
+* Verify if value is null
 ```Kotlin
 value?.let {
     val length = value.length
@@ -212,13 +215,13 @@ val bigDec10: BigDecimal = BigDecimal.TEN // 10
 ```
 
 ## Strings
-Concatenation of strings
+* Concatenation of strings
 ```Kotlin
 val name: String = "Singularity Coder"
 var age: Int = 129
 print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7.") // Hello World, My name is Singularity Coder, and I am 129 years old. In 3 years, I will be 132. My bank balance is currently $7.
 ```
-New line in string
+* New line in string
 ```Kotlin
 val text = """
         |First Line
@@ -226,7 +229,7 @@ val text = """
         |Third Line
         """.trimMargin()
 ```
-Substring
+* Substring
 ```Kotlin
 var str = "Kotlin Programming Language"
 var substr = ""
@@ -643,7 +646,7 @@ println(address1.equals(address2))	// false
 ```
 #### Inheritance
 #### Constructors
-Primary Constructor
+* Primary Constructor
 ```Kotlin
 class User0(val name: String = "", val age: Int = 0) 
 
@@ -651,7 +654,7 @@ val user0: User0 = User0(name = "Hithesh", age = 199)
 println("Name: ${user0.name}")  // Name: Hithesh
 println("Age: ${user0.age}")    // Age: 199
 ```
-Secondary Constructors
+* Secondary Constructors
 ```Kotlin
 class User1 {
     var name: String? = null
@@ -669,7 +672,7 @@ val user1: User1 = User1(name = "Singularity Coder", age = 6543)
 println("Name: ${user1.name}")  // Name: Singularity Coder
 println("Age: ${user1.age}")    // Age: 6543
 ```
-Primary and Secondary Constructors
+* Primary and Secondary Constructors
 ```Kotlin
 class User2(private val dob: String = "", private val profession: String = "") {
     var name: String? = null
@@ -693,12 +696,15 @@ user2.printProfession()	// Profession: Magic Caster
 ```
 Private Constructor
 ```Kotlin
-class Utils private constructor() {
+class User3 private constructor() {
+    companion object {
+        val NAME: String = "Singularity Coder"
+        fun age15YearsFromNow(age: Int): Int = age + 15
+    }
 }
 
-// another way
-object Utils {
-}
+val name: String = User3.NAME   // Singularity Coder
+val age: Int = User3.age15YearsFromNow(age = 15)    // 30
 ```
 #### Getters and Setters
 
@@ -760,6 +766,7 @@ val user2 = user.copy(age = 25)
 ```
 
 ## Pair and Triple
+In my opinion these are highly unnecessary syntactical constructs that provide very little use. So I do not recommend using or remembering them.
 * Pair: Collection of 2 variables
 ```Kotlin
 val pair = Pair<String, Int>(first = "Singularity Coder", second = 179)
