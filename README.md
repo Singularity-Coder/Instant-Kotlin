@@ -491,7 +491,7 @@ var result = 3.triple()
 #### Infix Function Call
 
 ## Scope Functions
-These allow us to write idiomatic, functional style code and allow us to operate on immutable fields. So they promote immutability.
+These allow us to write idiomatic, functional style code and allow us to operate on immutable fields. So they promote immutability. However use them only to promote immutability and not for writing less code as they introduce code nesting. 
 ```Kotlin
 data class Person(var name: String? = null, var age: Int? = null)
 
@@ -500,14 +500,14 @@ val person = Person()
 person.name = "Hithesh"
 person.age = 93
 ```
-* apply: If you want to initialise or configure an object. Returns context obj itself.
+* **apply:** If you want to initialise or configure an object. Returns context obj itself.
 ```Kotlin
 val person = Person().apply { ->
     this.name = "Hithesh"
     age = 93
 }
 ```
-* with: If you want to operate on a non-null object. Returns last line value.
+* **with:** If you want to operate on a non-null object. Returns last line value.
 ```Kotlin
 val myIntro: String = with(person) { ->
     println(name)
@@ -515,14 +515,14 @@ val myIntro: String = with(person) { ->
     "My name is $name and I am $age years old!" // return value
 }
 ```
-* also: If you want to do some additional object configuration or operations. Returns context obj itself.
+* **also:** If you want to do some additional object configuration or operations. Returns context obj itself.
 ```Kotlin
 val person = Person().also { it: Person ->
     it.name = "Singularity Coder"
     it.age = 1E4.toInt()
 }
 ```
-* let: If you want to just execute lambda expression on a nullable object and avoid NullPointerException. Returns last line value.
+* **let:** If you want to just execute lambda expression on a nullable object and avoid NullPointerException. Returns last line value.
 ```Kotlin
 var reverseString: String? = null
 if (null != person.name) {
@@ -535,7 +535,7 @@ val reverseString: String? = person.name?.let { it: String ->
     it.reversed()    // return value
 }
 ```
-* run: If you want to operate on a nullable object, execute lambda expression and avoid NullPointerException. Returns last line value.
+* **run:** If you want to operate on a nullable object, execute lambda expression and avoid NullPointerException. Returns last line value.
 ```Kotlin
 val myIntro = person?.run { ->
     println(this.name)
