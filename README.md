@@ -45,7 +45,7 @@ print("So i am next to the previous line.");
 
 ## Null Stuff
 ? means the var can be nullable or null
-!! means u r forcibly saying the comiler that this var is not null even if it is actually null
+!! means you are forcibly telling the compiler that this var is not null even if it actually is or can be null
 ?. means safe call operator. If var not null then execute this code
 * Assigning the null value
 ```Kotlin
@@ -489,6 +489,58 @@ var result = 3.triple()
 #### Recursion
 #### Tail Recursion
 #### Scope Functions
+These allow us to write idiomatic, functional style code and allow us to operate on immutable fields. So they promote immutability.
+```Kotlin
+data class Person(var name: String? = null, var age: Int? = null)
+
+// Without Scope functions
+val person = Person()
+person.name = "Hithesh"
+person.age = 93
+```
+* apply: If you want to initialise or configure an object. Returns context obj itself.
+```Kotlin
+val person = Person().apply { ->
+    this.name = "Hithesh"
+    age = 93
+}
+```
+* with: If you want to operate on a non-null object. Returns last line value.
+```Kotlin
+val myIntro: String = with(person) { ->
+    println(name)
+    println(this.age)
+    "My name is $name and I am $age years old!" 	// return value
+}
+```
+* also: If you want to do some additional object configuration or operations. Returns context obj itself.
+```Kotlin
+val person = Person().also { it: Person ->
+    it.name = "Singularity Coder"
+    it.age = 1E4.toInt()
+}
+```
+* let: If you want to just execute lambda expression on a nullable object and avoid NullPointerException. Returns last line value.
+```Kotlin
+var reverseString: String? = null
+if (null != person.name) {
+    println(person.name?.reversed())
+    reverseString = person.name?.reversed()
+}
+
+val reverseString: String? = person.name?.let { it: String ->
+    println(it.reversed())
+    it.reversed()    // return value
+}
+```
+* run: If you want to operate on a nullable object, execute lambda expression and avoid NullPointerException. Returns last line value.
+```Kotlin
+val myIntro = person?.run { ->
+    println(this.name)
+    println(age)
+    "My name is $name and I am $age years old!" // return value
+}
+```
 #### Higher Order Functions
 * Functions can be stored in a variable.
 ```Kotlin
@@ -694,11 +746,12 @@ val user2: User2 = User2(dob = "12/07/0001", profession = "Magic Caster")
 user2.printDob()	// Date Of Birth: 12/07/0001
 user2.printProfession()	// Profession: Magic Caster
 ```
-Private Constructor
+* Private Constructor
+These classes cannot be instantiated or you cannot create objects with these classes.
 ```Kotlin
 class User3 private constructor() {
     companion object {
-        val NAME: String = "Singularity Coder"
+        const val NAME: String = "Singularity Coder"
         fun age15YearsFromNow(age: Int): Int = age + 15
     }
 }
@@ -766,7 +819,7 @@ val user2 = user.copy(age = 25)
 ```
 
 ## Pair and Triple
-In my opinion these are highly unnecessary syntactical constructs that provide very little use. So I do not recommend using or remembering them.
+In my opinion these are highly unnecessary syntactical constructs that provide very little value. So I do not recommend using or remembering them.
 * Pair: Collection of 2 variables
 ```Kotlin
 val pair = Pair<String, Int>(first = "Singularity Coder", second = 179)
@@ -900,4 +953,5 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 8. https://stackoverflow.com/questions/12693273/is-there-an-upper-bound-to-biginteger
 9. https://www.baeldung.com/kotlin/kotlin-random-number
 10. http://www.asciitable.com
+11. https://www.youtube.com/watch?v=MHxGv4K6BsM
 
