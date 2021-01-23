@@ -488,7 +488,9 @@ var result = 3.triple()
 #### Scope
 #### Recursion
 #### Tail Recursion
-#### Scope Functions
+#### Infix Function Call
+
+## Scope Functions
 These allow us to write idiomatic, functional style code and allow us to operate on immutable fields. So they promote immutability.
 ```Kotlin
 data class Person(var name: String? = null, var age: Int? = null)
@@ -510,7 +512,7 @@ val person = Person().apply { ->
 val myIntro: String = with(person) { ->
     println(name)
     println(this.age)
-    "My name is $name and I am $age years old!" 	// return value
+    "My name is $name and I am $age years old!" // return value
 }
 ```
 * also: If you want to do some additional object configuration or operations. Returns context obj itself.
@@ -541,7 +543,8 @@ val myIntro = person?.run { ->
     "My name is $name and I am $age years old!" // return value
 }
 ```
-#### Higher Order Functions
+
+## Higher Order Functions
 * Functions can be stored in a variable.
 ```Kotlin
 val operation1 = highOrderFuncReturnValue(num1 = 8, num2 = 12) // 20
@@ -617,7 +620,8 @@ highOrderFuncWithParams2(dummyApiCallback = { dummyApiResponse: String ->
 // Spirited Away
 // Howl's Moving Castle
 ```
-#### Extension Functions
+
+## Extension Functions
 ```Kotlin
 fun Int.factorial(): BigInteger {
     var fact = BigInteger.ONE
@@ -659,7 +663,6 @@ myString.analyzeString()
 // String starts with the letter: S
 // String mid value: i
 ```
-#### Infix Function Call
 
 ## Classes and Objects
 #### Creating Instance
