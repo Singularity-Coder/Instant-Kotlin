@@ -113,47 +113,49 @@ val floatMax: Float = 1E38F; // 1.0E38, beyond this number Kotlin returns "Infin
 * Double (Inferred by default)
 ```Kotlin
 val myDouble: Double = 0.0;
-val maxDouble: Double = Double.MAX_VALUE; // 1.7976931348623157E308 (~ 1.79 * 10^308)
-val minDouble: Double = Double.MIN_VALUE; // 4.9E-324 (4.9 * 10^-324)
-val doubleSizeInBits: Int = Double.SIZE_BITS; // 64
-val doubleSizeInBytes: Int = Double.SIZE_BYTES; // 8
-val doubleMax: Double = 1.0E308; // 1.0E308, beyond this number Kotlin returns "Infinity" string.
+val maxDouble: Double = Double.MAX_VALUE // 1.7976931348623157E308 (~ 1.79 * 10^308)
+val minDouble: Double = Double.MIN_VALUE // 4.9E-324 (4.9 * 10^-324)
+val doubleSizeInBits: Int = Double.SIZE_BITS // 64
+val doubleSizeInBytes: Int = Double.SIZE_BYTES // 8
+val doubleMax: Double = 1.0E308 // 1.0E308, beyond this number Kotlin returns "Infinity" string.
 ```
 
 **Others**
-* String
-```Kotlin
-val myString: String = "I am a string!"
-```
 * Char
 ```Kotlin
 val myChar: Char = 'C'
+val charSizeInBits: Int = Char.SIZE_BITS // 16
+val charSizeInBytes: Int = Char.SIZE_BYTES // 2
 val myCharAsciiValue: Int = myChar.toInt() // 67
 
 // Valid ASCII Characters
 // ASCII characters start from 0 to 127. Careful running the below snippet as this messed up my Kotlin project in IntelliJ.
 val firstValidAsciiChar: Char = ' '  // 32
 val lastValidAsciiChar: Char = '~'   // 126
-val validAsciiCharsArray: Array<Char> = Array(95) { ' ' }
+val validAsciiCharsArray: Array<Char> = Array(95) { ' ' } // ' ' is the initializer
 for (i in 0..94) validAsciiCharsArray[i] = (firstValidAsciiChar.toInt() + i).toChar()	// [ , !, ", #, $, %, &, ', (, ), *, +, ,, -, ., /, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, :, ;, <, =, >, ?, @, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, [, \, ], ^, _, `, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, {, |, }, ~]
 
 // Extended ASCII Characters
-// Strangely I could not print any extended ASCII characters other than the Euro symbol at 128. Extended ASCII characters start from 128 to 256.
+// I could not print any extended ASCII characters as a character caps at 127. Extended ASCII characters start from 128 to 256.
 
 // Unicode Characters
 // There are a total of 143,859 characters today and growing. From spoken language characters, math symbols, etc to emojis. So I won't list them here.
 
 // List all lowercase Characters
-val lowCaseCharArray: Array<Char> = Array(26) { 'a' } // 'a' is the starting value at 0th position
+val lowCaseCharArray: Array<Char> = Array(26) { 'a' } // 'a' is the initializer
 for (i in 0..25) lowCaseCharArray[i] = ('a'.toInt() + i).toChar() // [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
 
 // List all uppercase Characters
-val upCaseCharArray: Array<Char> = Array(26) { 'A' } // 'A' is the starting value at 0th position
+val upCaseCharArray: Array<Char> = Array(26) { 'A' } // 'A' is the initializer
 for (i in 0..25) upCaseCharArray[i] = ('A'.toInt() + i).toChar() // [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
 ```
 * Bool
 ```Kotlin
 val myBoolean: Boolean = false
+```
+* String
+```Kotlin
+val myString: String = "I am a string!"
 ```
 
 **More**
@@ -402,21 +404,40 @@ for (i in 1..10) {
 
 ## Data Structures
 #### Arrays
-* Declaring Array
 ```Kotlin
-lateinit var lowCaseCharArray: Array<Char>;
-```
-* Initializing Array with a fixed size or Allocating memory
-```Kotlin
-val lowCaseCharArray: Array<Char> = Array(26) { 'a' }; // where 'a' is the starting value at 0th position
-```
-* Printing Arrays
-```Kotlin
-print(Arrays.toString(lowCaseCharArray));
-```
-* Splitting Arrays
-```Kotlin
-val (param, value) = "param=car".split("=")
+// Create
+val anyArray: Array<Any> = arrayOf(1, true, 3.0, 'c', "Hithesh") // [1, true, 3.0, c, Hithesh]
+val arraySizeFive: Array<Any> = Array(5) { 1 } // [1, 1, 1, 1, 1] where 1 is the initializer
+val emptyArray: Array<Any> = emptyArray()   // [] Placeholder Array
+
+// Creating arrays with Primitive values
+val byteArr: ByteArray = byteArrayOf(1, 2, 3)
+val shortArr: ShortArray = shortArrayOf(1, 2, 3)
+val intArr: IntArray = intArrayOf(1, 2, 3)
+val longArr: LongArray = longArrayOf(1, 2, 3)
+val floatArr: FloatArray = floatArrayOf(1F, 2F, 3F)
+val doubleArr: DoubleArray = doubleArrayOf(1.0, 2.0, 3.0)
+val charArr: CharArray = charArrayOf('a', 'b', 'c')
+val boolArr: BooleanArray = booleanArrayOf(true, false, true)
+
+// Read
+anyArray[3]    // c
+anyArray.first()    // 1
+anyArray.last()    // Hithesh
+anyArray.indexOf("Hithesh") // 4
+anyArray.size   // 5
+anyArray.count()    // 5
+
+// Update
+anyArray[0] = 10    // [10, true, 3.0, c, Hithesh]
+anyArray.set(index = 1, value = false)  // [10, false, 3.0, c, Hithesh]
+arraySizeFive[0] = "Dragon Warrior"
+
+// Print to console
+println(Arrays.toString(anyArray)) // [10, false, 3.0, c, Hithesh]
+println(anyArray.contentToString())    // [10, false, 3.0, c, Hithesh]
+println(arraySizeFive.contentToString())   // [Dragon Warrior, 1, 1, 1, 1]
+println(emptyArray.contentToString())   // []
 ```
 #### Lists
 * Sorting List
@@ -524,12 +545,14 @@ val person = Person().also { it: Person ->
 ```
 * **let:** If you want to just execute lambda expression on a nullable object and avoid NullPointerException. Returns last line value.
 ```Kotlin
+// Usual way
 var reverseString: String? = null
 if (null != person.name) {
     println(person.name?.reversed())
     reverseString = person.name?.reversed()
 }
 
+// Idiomatic way
 val reverseString: String? = person.name?.let { it: String ->
     println(it.reversed())
     it.reversed()    // return value
@@ -910,6 +933,8 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 
 ## Collections
 
+## Regular Expressions
+
 ## Generate Morse Code
 
 ## Meta-Programming
@@ -944,6 +969,45 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 	4. Base-16 (Hexadecimal): Uses only 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F
 * **Signed Integer:** Whole range of integers negative, zero and positive integers. Ex: ...-3, -2, -1, 0, 1, 2, 3...
 * **Unsigned Integer:** Non-negative integers including 0. Ex: 0, 1, 2, 3...
+* **ASCII:** American Standard Code for Information Interchange.
+* **ASCII Characters:** Start from 0 to 127. Consist of commonly used characters like upper and lower case english letters, numbers, etc. Each character is exactly 8 bits or 1 byte.
+* **Extended ASCII Characters:** Start from 128 to 256. Extended set of ASCII characters that include famous currency symbols, etc.
+* **Unicode Characters:** Emojis, Math symbols, Spoken Language characters, etc.
+* **1 bit:** A bit is a binary digit. It can hold either a 0 value or 1 value.
+* **1 byte:** 8 bits form a byte. It can store a single ASCII character like 'C'. Since each bit can hold either a 0 or 1, the character 'C' will have 01000011 values where each bit out of the 8 holds a 0 or 1.
+* **1 kilobyte (KB):** 1024 bytes form a kilobyte.
+* **1 megabyte (MB):** 1024 kilobytes form a megabyte.
+* **1 gigabyte (GB):** 1024 megabytes form a gigabyte.
+* **1 terabyte (TB):** 1024 gigabytes form a terabyte.
+* **1 petabyte (PB):** 1024 terabytes form a petabyte.
+* **1 exabyte (EB):** 1024 petabytes form a exabyte.
+* **1 zettabyte (ZB):** 1024 exabytes form a zettabyte.
+* **1 yottabyte (YB):** 1024 zettabytes form a yottabyte.
+* **1 Mbps:** Lowercase 'b' means 1 megabits per second. Broadband connection terminology.
+* **1 MBps:** Uppercase 'B' means 1 megabytes per second. Broadband connection terminology.
+* **Operator:** A symbol that tells the compiler or interpreter to perform specific mathematical, relational or logical operation and produce a result. Ex: +, -, &&, ||, etc.
+* **Operand:** The element(s) we are operating on.
+* **Unary Operator:** Operate on a single operand or element. Ex: a++
+* **Binary Operator:** Operate on 2 operands or elements. Ex: a + b
+* **Ternary Operator:** Operate on 3 operands or elements. Ex: a ? b : c
+* **Infix Operator:** Operator is inbetween 2 operands. Like the + in a + b
+* **Prefix Operator:** Operator to the left of an operand. Like ++a
+* **Postfix Operator:** Operator to the right of an operand. Like a++
+* **Operator Overloading or ad hoc polymorphism:** A specific case of polymorphism, where different operators have different implementations depending on their arguments. Ex: + can behave like -, etc.
+* **Module:** A module encapsulates complex functionality away from user, provides a well defined interface for a user and it should have a plug-and-play setup.
+* **Abstract Data Type:** A set of rules on how something should behave and operate. Ex: A linked list can implement the stack abstract data type (ADT).
+* **Data Structure:** A particular way of organizing data. Its a concrete implementation of an Abstract Data Type.
+* **Abstract in Programming:** Set of rules that must be followed. Like an interface. No implementation. Like an idea that is not tangible until implemented.
+* **Client/Server Model:** Client makes a request. Server responds to that request.
+* **Proxy:** Software that makes a request on behalf of Client.
+* **Application Programming Interface (API):** Mediator software that allows 2 apps to communicate. (OR) A set of publicly exposed methods that allow access to the data layer.
+* **Software Development Kit (SDK):** Collection of APIs. Ex: To build Android Apps, you need an Android SDK.
+* **Cache:** A quicker way of accessing something. Ex: Kitchen Pantry is a cache for the grocery store. Programs currently running on a computer are cache for all the big files saved in the hard drive. Files saved on hard drive of a computer is a cache for all the things saved on the cloud.
+* **Compilation:** Converting human readable code like Java, Kotlin, Python into machine readable code.
+* **Open Device:** MacBook Pro. General purpose. Its the system.
+* **Embedded Device:** iPod. Specific purpose. Its a subset of the system.
+* **Deeply Embedded Device:** Nest thermostat. Super specific purpose. Its a subset of another subset.
+* **Middleware:** Software that acts as a bridge between an operating system or database and applications, especially on a network.
 
 ## References
 1. https://kotlinlang.org/docs/reference
@@ -957,4 +1021,8 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 9. https://www.baeldung.com/kotlin/kotlin-random-number
 10. http://www.asciitable.com
 11. https://www.youtube.com/watch?v=MHxGv4K6BsM
+12. https://kb.iu.edu/d/ackw
+13. https://www.eso.org/~ndelmott/ascii.html
+14. https://www.youtube.com/watch?v=es4DYTFdqlg
+15. https://www.youtube.com/watch?v=HtEzuAqWmoE
 
