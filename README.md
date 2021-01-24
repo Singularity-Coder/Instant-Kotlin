@@ -44,9 +44,9 @@ print("So i am next to the previous line.");
 ```
 
 ## Null Stuff
-? means the var can be nullable or null
-!! means you are forcibly telling the compiler that this var is not null even if it actually is or can be null
-?. means safe call operator. If var not null then execute this code
+? means the var can be nullable or null  
+!! means you are forcibly telling the compiler that this var is not null even if it actually is or can be null  
+?. means safe call operator. If var not null then execute this code  
 * Assigning the null value
 ```Kotlin
 var value: String?
@@ -350,7 +350,7 @@ for ((key, value) in map) println("Key: $key and Value: $value")
 // Key: 2 and Value: Bed
 // Key: 3 and Value: Breakfast
 ```
-#### ForEach (Enhanced For loop)
+#### ForEach Loop (Enhanced For loop)
 ```Kotlin
 val list: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 list.forEach { it: Int ->
@@ -433,6 +433,10 @@ anyArray[0] = 10    // [10, true, 3.0, c, Hithesh]
 anyArray.set(index = 1, value = false)  // [10, false, 3.0, c, Hithesh]
 arraySizeFive[0] = "Dragon Warrior"
 
+// Sorting
+intArr.sort()   // [1, 2, 3]
+intArr.sortDescending() // [3, 2, 1]
+
 // Print to console
 println(Arrays.toString(anyArray)) // [10, false, 3.0, c, Hithesh]
 println(anyArray.contentToString())    // [10, false, 3.0, c, Hithesh]
@@ -440,14 +444,38 @@ println(arraySizeFive.contentToString())   // [Dragon Warrior, 1, 1, 1, 1]
 println(emptyArray.contentToString())   // []
 ```
 #### Lists
-* Sorting List
 ```Kotlin
-val profile = loadProfiles(context)
-profile.sortedWith(Comparator({ profile1, profile2 ->
-    if (profile1.age > profile2.age) return@Comparator 1
-    if (profile1.age < profile2.age) return@Comparator -1
-    return@Comparator 0
-}))
+val immutableList: List<String> = listOf("Delta", "Theta", "Alpha", "Gamma", "Beta")    // [Delta, Theta, Alpha, Gamma, Beta]
+val mutableList: MutableList<Int> = mutableListOf(1, 2, 3, 4, 5, 6)    // [1, 2, 3, 4, 5, 6]
+val emptyList = emptyList<Int>()    // []
+
+// Create
+mutableList.add(3)  // [1, 2, 3, 4, 5, 6, 3]
+
+// Read
+immutableList.get(2)    // Alpha
+immutableList[2]    // Alpha
+immutableList.first()   // Delta
+immutableList.last()    // Beta
+immutableList.elementAtOrNull(index = 21) // returns null without throwing the IndexOutOfBoundsException
+immutableList.elementAtOrElse(index = 15, defaultValue = { 99 })    // 99
+
+// Update
+mutableList.set(index = 0, element = 50)    // [50, 2, 3, 4, 5, 6, 3]
+mutableList[0] = 50    // [50, 2, 3, 4, 5, 6, 3]
+
+// Delete
+mutableList.remove(element = 2)    // [50, 3, 4, 5, 6, 3]
+mutableList.removeAt(index = 0)    // [3, 4, 5, 6, 3]
+
+// Sorting
+mutableList.sort()  // [3, 3, 4, 5, 6]
+mutableList.sortDescending()    // [6, 5, 4, 3, 3]
+
+// Print to console
+println(immutableList)  // [Delta, Theta, Alpha, Gamma, Beta]
+println(mutableList)    // [6, 5, 4, 3, 3]
+println(emptyList)  // []
 ```
 #### Maps
 ```Kotlin
