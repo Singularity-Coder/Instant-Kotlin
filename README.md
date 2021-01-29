@@ -1,5 +1,8 @@
 # Code-Snippets-Kotlin
-List of Kotlin topics and their code snippets!
+List of Kotlin topics and their code snippets! 
+
+## Why Kotlin
+A lot of Kotlin is about promoting immutability. Scope functions, conditional expressions, etc. So if you want to write functional style code in an Object Oriented Language then this is it.
 
 ## Package definition and imports
 ```Kotlin
@@ -433,7 +436,7 @@ anyArray[0] = 10    // [10, true, 3.0, c, Hithesh]
 anyArray.set(index = 1, value = false)  // [10, false, 3.0, c, Hithesh]
 arraySizeFive[0] = "Dragon Warrior"
 
-// Sorting
+// Sort
 intArr.sort()   // [1, 2, 3]
 intArr.sortDescending() // [3, 2, 1]
 
@@ -445,7 +448,7 @@ println(emptyArray.contentToString())   // []
 ```
 #### Lists
 ```Kotlin
-val immutableList: List<String> = listOf("Delta", "Theta", "Alpha", "Gamma", "Beta")    // [Delta, Theta, Alpha, Gamma, Beta]
+val immutableList: List<String> = listOf("Delta", "Theta", "Alpha", "Gamma", "Beta")    // [Delta, Theta, Alpha, Gamma, Beta] Cannot bed modified but can be accessed.
 val mutableList: MutableList<Int> = mutableListOf(1, 2, 3, 4, 5, 6)    // [1, 2, 3, 4, 5, 6]
 val emptyList = emptyList<Int>()    // []
 
@@ -468,7 +471,7 @@ mutableList[0] = 50    // [50, 2, 3, 4, 5, 6, 3]
 mutableList.remove(element = 2)    // [50, 3, 4, 5, 6, 3]
 mutableList.removeAt(index = 0)    // [3, 4, 5, 6, 3]
 
-// Sorting
+// Sort
 mutableList.sort()  // [3, 3, 4, 5, 6]
 mutableList.sortDescending()    // [6, 5, 4, 3, 3]
 
@@ -561,7 +564,7 @@ val person = Person().apply { ->
 val myIntro: String = with(person) { ->
     println(name)
     println(this.age)
-    "My name is $name and I am $age years old!" // return value
+    "My name is $name and I am $age years old!" // Optional return value
 }
 ```
 * **also:** If you want to do some additional object configuration or operations. Returns context obj itself.
@@ -583,7 +586,7 @@ if (null != person.name) {
 // Idiomatic way
 val reverseString: String? = person.name?.let { it: String ->
     println(it.reversed())
-    it.reversed()    // return value
+    it.reversed()    // Optional return value
 }
 ```
 * **run:** If you want to operate on a nullable object, execute lambda expression and avoid NullPointerException. Returns last line value.
@@ -591,7 +594,7 @@ val reverseString: String? = person.name?.let { it: String ->
 val myIntro = person?.run { ->
     println(this.name)
     println(age)
-    "My name is $name and I am $age years old!" // return value
+    "My name is $name and I am $age years old!" // Optional return value
 }
 ```
 
@@ -838,14 +841,34 @@ data class User(var name: String, var age: Int)
 #### Interface
 #### Sealed Classes
 #### Enum Class
+* Create Enum class
 ```Kotlin
-enum class Direction(val direction: Int) {
-    NORTH(1),
-    SOUTH(2),
-    WEST(3),
-    EAST(4);
+enum class Direction {
+    EAST,
+    WEST,
+    NORTH,
+    SOUTH
 }
 ```
+* Create Enum class with constructor
+```Kotlin
+enum class MathConstants(val value: Double) {
+    ZERO(0.0),
+    ONE(1.0),
+    IMAGINARY_UNIT(Math.sqrt(-1.0)),
+    PI(3.14),
+    EULER_NUMBER(2.71),
+    GOLDEN_RATIO(1.61)
+}
+```
+* Access constants
+```Kotlin
+val direction: Direction = Direction.EAST   // EAST
+val myConstantValue: Double = MathConstants.PI.value    // 3.14
+val myConstant: String = MathConstants.PI.name    // PI
+val myConstantPosition: Int = MathConstants.PI.ordinal    // 3
+```
+
 #### Anonymous Class
 ```Kotlin
 val task = object : AsyncTask<Void, Void, Profile>() {
@@ -909,6 +932,7 @@ tripleList[1]	// Singularity
 tripleList[2]	// Coder
 tripleList[3]	// Android Developer
 ```
+
 ## Lateinit and Lazy
 
 ## Exceptions
@@ -1001,6 +1025,7 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 * **ASCII Characters:** Start from 0 to 127. Consist of commonly used characters like upper and lower case english letters, numbers, etc. Each character is exactly 8 bits or 1 byte.
 * **Extended ASCII Characters:** Start from 128 to 256. Extended set of ASCII characters that include famous currency symbols, etc.
 * **Unicode Characters:** Emojis, Math symbols, Spoken Language characters, etc.
+* **ISO:** International Standards Organization.
 * **1 bit:** A bit is a binary digit. It can hold either a 0 value or 1 value.
 * **1 byte:** 8 bits form a byte. It can store a single ASCII character like 'C'. Since each bit can hold either a 0 or 1, the character 'C' will have 01000011 values where each bit out of the 8 holds a 0 or 1.
 * **1 kilobyte (KB):** 1024 bytes form a kilobyte.
@@ -1036,6 +1061,32 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 * **Embedded Device:** iPod. Specific purpose. Its a subset of the system.
 * **Deeply Embedded Device:** Nest thermostat. Super specific purpose. Its a subset of another subset.
 * **Middleware:** Software that acts as a bridge between an operating system or database and applications, especially on a network.
+* **Serialization:**
+* **Traversal:** Visiting each element in a data structure exactly once. From first element to last element.
+* **Fibonacci Series:** 
+* **Palindrome:** 
+* **Factorial:**
+* **Armstrong Number:**
+* **Natural Numbers (N):** 
+* **Integers (Z):**
+* **Rational Numbers (Q):**
+* **Real Numbers (R):**
+* **Complex Numbers (C):**
+* **Prime Numbers:**
+* **Composite Numbers:**
+* **Dynamic Memory Allocation:**
+* **Preprocessor:**
+* **Matrix:**
+* **2D Matrix:**
+* **3D Matrix:**
+* **Numeric Characters:** Just numbers.
+* **Alphanumeric Characters:** Alphabets, Numbers and few Special characters. ASCII characters. 0 to 9, A to Z(both uppercase and lowercase), @ # * and &.
+* **Enumeration:**
+
+
+## Next
+* List of Datastructues, their definitions and possible use cases.
+* Divisibility rules for 12345678910.
 
 ## References
 1. https://kotlinlang.org/docs/reference
@@ -1053,4 +1104,4 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 13. https://www.eso.org/~ndelmott/ascii.html
 14. https://www.youtube.com/watch?v=es4DYTFdqlg
 15. https://www.youtube.com/watch?v=HtEzuAqWmoE
-
+16. https://www.sciencedirect.com/topics/computer-science/alphanumeric-character
