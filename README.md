@@ -1061,12 +1061,14 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 * **Embedded Device:** iPod. Specific purpose. Its a subset of the system.
 * **Deeply Embedded Device:** Nest thermostat. Super specific purpose. Its a subset of another subset.
 * **Middleware:** Software that acts as a bridge between an operating system or database and applications, especially on a network.
-* **Serialization:**
+* **Serialization:** Converting object to byte stream.
+* **Deserialization:** Converting byte stream to object.
+* **Parse:** Process of findng the meaning of a sentence by breaking it into parts that are syntactically and grammatically correct.
 * **Traversal:** Visiting each element in a data structure exactly once. From first element to last element.
-* **Fibonacci Series:** 
-* **Palindrome:** 
-* **Factorial:**
-* **Armstrong Number:**
+* **Fibonacci Numbers:** Each number is the sum of the 2 preceding ones, starting from 0 and 1. Ex: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144... where 8 is a sum of 5 and 3, its preceding 2 numbers.
+* **Palindrome:** A word, number, phrase, or other sequence of characters which reads the same backward as forward, such as madam or racecar. There are also numeric palindromes, including date/time stamps using short digits 11/11/11 11:11 and long digits 02/02/2020. Refer Wikipedia.
+* **Factorial:** A function that multiplies a number by every number below it. Ex: 5!= 5 * 4 * 3 * 2 * 1 = 120. The function is used, among other things, to find the number of ways “n” objects can be arranged.
+* **Armstrong Number:** A number that is equal to the sum of cubes of its digits. Ex: 0, 1, 153, 370, 371, 407, etc. If we take 153 -> 1^3 = 1, 5^3 = 125, 3^3 = 27. So 1 + 125 + 27 = 153. 
 * **Natural Numbers (N):** 
 * **Integers (Z):**
 * **Rational Numbers (Q):**
