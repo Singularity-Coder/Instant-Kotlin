@@ -1064,15 +1064,19 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 * **Serialization:** Converting object to byte stream.
 * **Deserialization:** Converting byte stream to object.
 * **Parse:** Process of findng the meaning of a sentence by breaking it into parts that are syntactically and grammatically correct.
-* **Traversal:** Visiting each element in a data structure exactly once. From first element to last element.
+* **Traversal:** Visiting each element in a data structure exactly once.
 * **Fibonacci Numbers:** Each number is the sum of the 2 preceding ones, starting from 0 and 1. Ex: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144... where 8 is a sum of 5 and 3, its preceding 2 numbers.
 * **Palindrome:** A word, number, phrase, or other sequence of characters which reads the same backward as forward, such as madam or racecar. There are also numeric palindromes, including date/time stamps using short digits 11/11/11 11:11 and long digits 02/02/2020. Refer Wikipedia.
 * **Factorial:** A function that multiplies a number by every number below it. Ex: 5!= 5 * 4 * 3 * 2 * 1 = 120. The function is used, among other things, to find the number of ways “n” objects can be arranged.
 * **Armstrong Number:** A number that is equal to the sum of cubes of its digits. Ex: 0, 1, 153, 370, 371, 407, etc. If we take 153 -> 1^3 = 1, 5^3 = 125, 3^3 = 27. So 1 + 125 + 27 = 153. 
-* **Natural Numbers (N):** 
-* **Integers (Z):**
-* **Rational Numbers (Q):**
-* **Real Numbers (R):**
+* **Natural Numbers (N):** Also called as Positive Integers, Counting Numbers. 1, 2, 3...∞
+* **Whole Numbers (W) or Non-Negative Integers (Z* ):** Set of Natural Numbers, plus Zero. 0, 1, 2, 3...∞
+* **Integers (Z):** Set of Negative numbers and Whole Numbers or a fraction. -∞...-3, -2, -1, 0, 1, 2, 3...∞   
+* **Rational Numbers (Q):** Can be expressed as ratio of two integers. All the fractions where the top and bottom numbers are integers. The denominator cannot be 0, but the numerator can be. 1/2, 3/4, 7/2, ⁻4/3, 4/1.
+* **Unit Fractions:** If numerator of a fraction is one. 1/2, 1/3, 1/4, 1/5.
+* **Decimal Fractions:** Decimal numbers (such as 0.3,  0.32, ⁻2.7) can be called decimal fractions, because they can be written in a fractional form (e.g., 3/10, 32/100, ⁻27/10).
+* **Irrational Numbers (Q' or Q Prime):**
+* **Real Numbers (R):** 
 * **Complex Numbers (C):**
 * **Prime Numbers:**
 * **Composite Numbers:**
@@ -1081,9 +1085,13 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 * **Matrix:**
 * **2D Matrix:**
 * **3D Matrix:**
-* **Numeric Characters:** Just numbers.
-* **Alphanumeric Characters:** Alphabets, Numbers and few Special characters. ASCII characters. 0 to 9, A to Z(both uppercase and lowercase), @ # * and &.
-* **Enumeration:**
+* **Numeric Characters:** 
+* **Alphanumeric Characters:** Subsets of ASCII characters. Depends on the implementation of the users. Some allow all ASCII characters while others use a subset of them. Generally Alphabets, Numbers and few Special characters. 0 to 9, A to Z(both uppercase and lowercase), @ # * & etc.
+* **Enumeration:** List things one by one. To count. A synonym to the verb list. It emphasizes the fact that things are being specifically identified and listed one at a time. In mathematics and computer science, enumeration is a complete, ordered listing of all the items in a collection. Used to refer to a listing of all of the elements of a set. 
+* **Protobuf:** Protocol buffers are Google's language-neutral(any programming language), platform-neutral(any OS like Mac or Windows), extensible mechanism for serializing structured data.
+* **Encoding:** Converting or Transforming (information or an instruction) into another form.
+* **Decoding:** Converting or Translating (coded or encoded info) into an understandable form.
+* **Cipher:** Secret or disguised way of writing; a code.
 
 
 ## Next
