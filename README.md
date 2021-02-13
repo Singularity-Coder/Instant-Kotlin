@@ -17,6 +17,7 @@ A lot of Kotlin is about promoting immutability. Scope functions, conditional ex
 * Repetition is ugly and error-prone. So use Scope Functions like "with", "let", etc.
 * Use builder functions to construct your Data Structures. Instead of declaring a map and then assigning values, use the mapOf() builder function.
 * Use inline functions for getting cheap lambda abstractions.
+* Can we replace interfaces with higher order functions?
 
 ## Package definition and imports
 ```Kotlin
@@ -61,10 +62,10 @@ print("So i am next to the previous line.");
 ```
 
 ## Null Stuff
-* ? means the var can be nullable or null  
-* !! means you are forcibly telling the compiler that this var is not null even if it actually is or can be null  
-* ?. means safe call operator. If var not null then execute this code  
-* ?: is elvis operator. str ?: "Empty". It means if the left side of the expression is null then evaluate the right side which is the string "Empty" as a default. The right hand side of the expression can even retrun something as well.
+* `?` means the variable can be nullable or null.  
+* `!!` means you are forcibly telling the compiler that this var is not null even if it actually is or can be null.  
+* `?.` means safe call operator. If the variable is not null then execute this code.  
+* `?:` is elvis operator. `str ?: "Empty"`. It means if the left side of the expression is `null` then evaluate the right side which is the string `"Empty"` as a default. The right hand side of the expression can even retrun something as well.
 ```Kotlin
 fun add(num1: Int?, num2: Int?): Int = (num1 ?: 0) + (num2 ?: 0)
 ```
@@ -193,49 +194,6 @@ val myAnyTypeString: Any = "Singularity Coder"
 val myAnyTypeChar: Any = 'C'
 val myAnyTypeBool: Any = true
 ```
-* BigInteger  
-> If you are working with ridiculously large numbers, use BigInteger & BigDecimal.
-
-> BigInteger must support values in the range -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive) and may support values outside of that range.  
-> 
-> Implementation note: BigInteger constructors and operations throw ArithmeticException when the result is out of the supported range of -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive).
-```Kotlin
-val myBigIntegerNum1: BigInteger = BigInteger.valueOf(Long.MAX_VALUE).pow(10) // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
-val myBigIntegerNum2: BigInteger = BigInteger(Long.MAX_VALUE.toString()).pow(10) // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
-
-// Commonly used BigInteger Numbers 
-val bigInt0: BigInteger = BigInteger.ZERO // 0
-val bigInt1: BigInteger = BigInteger.ONE // 1
-val bigInt2: BigInteger = BigInteger.TWO // 2
-val bigInt10: BigInteger = BigInteger.TEN // 10
-```
-* BigDecimal
-```Kotlin
-val myBigDecimalNum1: BigDecimal = BigDecimal.valueOf(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE) // 1.7976931348623157E-2147483339
-val myBigDecimalNum2: BigDecimal = BigDecimal(Double.MAX_VALUE.toString()).scaleByPowerOfTen(-Int.MAX_VALUE) // 1.7976931348623157E-2147483339
-val myBigDecimalNum3: BigDecimal = BigDecimal(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE) // 1.79769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368E-2147483339
-
-// Rounding Precision
-val myDecimalNum1: BigDecimal = BigDecimal("1.1234567")
-myDecimalNum1.setScale(3, RoundingMode.UP) // 1.124
-myDecimalNum1.setScale(3, RoundingMode.DOWN) // 1.123
-myDecimalNum1.setScale(3, RoundingMode.HALF_UP) // 1.123
-myDecimalNum1.setScale(3, RoundingMode.HALF_DOWN) // 1.123
-myDecimalNum1.setScale(3, RoundingMode.HALF_EVEN) // 1.123
-myDecimalNum1.setScale(3, RoundingMode.FLOOR) // 1.123
-myDecimalNum1.setScale(3, RoundingMode.CEILING) // 1.124
-
-val myDecimalNum2: BigDecimal = BigDecimal("1.0")
-myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY) // 1.000
-
-myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointRight(1) // From 1.000 to 10.00
-myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointLeft(1) // From 1.000 to 0.1000
-
-// Commonly used BigDecimal Numbers 
-val bigDec0: BigDecimal = BigDecimal.ZERO // 0
-val bigDec1: BigDecimal = BigDecimal.ONE // 1
-val bigDec10: BigDecimal = BigDecimal.TEN // 10
-```
 
 ## Strings
 * Concatenation of strings
@@ -291,11 +249,6 @@ val xorResult  = a xor b
 val rightShift = a shr 2
 val leftShift  = a shl 2
 val unsignedRightShift = a ushr 2
-```
-
-## Casting
-```Kotlin
-
 ```
 
 ## Math
@@ -520,66 +473,72 @@ val keyValue = mapOf(1 to "Air",
 #### Set
 
 ## Functions and Methods
-#### Function
-Functions in Kotlin are not methods when they do not belong to a class. However they look and behave the same way. Its just the way they are accessed is different. They are also called Top-Level Functions.
-
-* Defining Function
+Functions in Kotlin are not methods when they do not belong to a class. However they look and behave the same way. Its just the way they are accessed is different. They are also called Top-Level Functions. Methods in Kotlin are functions that are called on objects. So they have to be inside a class.
+* **Unit-returning function (Void function)**
 ```Kotlin
-fun doSomething() {
-   // logic here
+fun doSomething(): Unit {
+   
 }
 ```
-* Variable number of arguments
+* **Explicit return type function**
 ```Kotlin
-fun doSomething(vararg numbers: Int) {
-   // logic here
+fun evenNumber(num: Int): Int {
+   return 2 * num
 }
 ```
-* Defining function with return 
+* **Single-expression function**
 ```Kotlin
-fun getScore(): Int {
-   // logic here
-   return score
-}
-
-// as a single-expression function
-fun getScore(): Int = score
+fun evenNumber(num: Int): Int = 2 * num
 ```
-* Returning result of an operation
+* **Local Function:** Part of function scope.
 ```Kotlin
-fun getScore(value: Int): Int {
-   // logic here
-   return 2 * value
+fun myIntro(fullName: String): String {
+    fun splitName(): List<String> = fullName.split(" ").map { it -> it.toUpperCase() }
+    return "My first name is ${splitName()[0]} and my last name is ${splitName()[1]}"
 }
 
-// as a single-expression function
-fun getScore(value: Int): Int = 2 * value
+myIntro("Hithesh Vurjana")  // My first name is HITHESH and my last name is VURJANA
 ```
-* Local Function
+* **Default Parameters/Arguments**
 ```Kotlin
-fun sayHelloAndHi(): String {
-    val hello: String = "Hello"
-    fun sayHi(): String = "Hi"
-    return "$hello & ${sayHi()}"    // Hello & Hi
+fun evenNumber(evenPrefix: Int = 2, num: Int) = evenPrefix * num
+```
+* **Named Parameters/Arguments**
+```Kotlin
+fun evenNumber(evenPrefix: Int = 2, num: Int) = evenPrefix * num
+
+evenNumber(num = 9)    // 18
+```
+* **Function/Method Overloading**
+```Kotlin
+fun printMyName(name: String) {
+    println("My name is $name")
 }
+
+fun printMyName(firstName: String, lastName: String) {
+    println("My name is $firstName $lastName")
+}
+
+printMyName("Hithesh")  // My name is Hithesh
+printMyName("Hithesh", "Vurjana")   // My name is Hithesh Vurjana
+```
+* **Vararg Function:** Variable number of arguments
+```Kotlin
+fun exponentList(vararg numList: Int, exponent: Int) = numList.map { it * exponent }
+
+exponentList(1, 2, 3, 4, 5, exponent = 3)   // [3, 6, 9, 12, 15]
+exponentList(numList = intArrayOf(1, 2, 3, 4, 5,), exponent = 3)    // [3, 6, 9, 12, 15]
+```
+* **Infix Function Call:** Must be extension function, single parameter which cannot be a vararg and cannot have default value.
+```Kotlin
+infix fun Int.times(num: Int): Int = this * num
+
+3 times 5   // 15
 ```
 
-#### Method
-Methods in Kotlin are functions that are called on objects. So they have to be inside a class.
-```Kotlin
-fun Int.triple(): Int {
-  return this * 3
-}
-
-var result = 3.triple()
-```
-#### Default Parameters/Arguments
-#### Named Parameters/Arguments
-#### Function/Method Overloading
-#### Scope
-#### Recursion
-#### Tail Recursion
-#### Infix Function Call
+## Recursion
+## Tail Recursion
+## Inline Functions
 
 ## Scope Functions
 These allow us to write idiomatic, functional style code and allow us to operate on immutable fields. So they promote immutability. However use them only to promote immutability and not for writing less code as they introduce code nesting. 
@@ -794,7 +753,7 @@ println(address1.equals(address2))	// false
 ```
 #### Inheritance
 #### Constructors
-* Primary Constructor
+* **Primary Constructor**
 ```Kotlin
 class User0(val name: String = "", val age: Int = 0) 
 
@@ -802,7 +761,7 @@ val user0: User0 = User0(name = "Hithesh", age = 199)
 println("Name: ${user0.name}")  // Name: Hithesh
 println("Age: ${user0.age}")    // Age: 199
 ```
-* Secondary Constructors
+* **Secondary Constructors**
 ```Kotlin
 class User1 {
     var name: String? = null
@@ -820,7 +779,7 @@ val user1: User1 = User1(name = "Singularity Coder", age = 6543)
 println("Name: ${user1.name}")  // Name: Singularity Coder
 println("Age: ${user1.age}")    // Age: 6543
 ```
-* Primary and Secondary Constructors
+* **Primary and Secondary Constructors**
 ```Kotlin
 class User2(private val dob: String = "", private val profession: String = "") {
     var name: String? = null
@@ -842,7 +801,7 @@ val user2: User2 = User2(dob = "12/07/0001", profession = "Magic Caster")
 user2.printDob()	// Date Of Birth: 12/07/0001
 user2.printProfession()	// Profession: Magic Caster
 ```
-* Private Constructor: These classes cannot be instantiated or you cannot create objects with these classes.
+* **Private Constructor:** These classes cannot be instantiated or you cannot create objects with these classes.
 ```Kotlin
 class User3 private constructor() {
     companion object {
@@ -855,7 +814,6 @@ val name: String = User3.NAME   // Singularity Coder
 val age: Int = User3.age15YearsFromNow(age = 15)    // 30
 ```
 #### Getters and Setters
-
 #### Defining uninitialized objects
 ```Kotlin
 internal lateinit var person: Person
@@ -879,7 +837,7 @@ data class User(var name: String, var age: Int)
 #### Interface
 #### Sealed Classes
 #### Enum Class
-* Create Enum class
+* **Create Enum class**
 ```Kotlin
 enum class Direction {
     EAST,
@@ -888,7 +846,7 @@ enum class Direction {
     SOUTH
 }
 ```
-* Create Enum class with constructor
+* **Create Enum class with constructor**
 ```Kotlin
 enum class MathConstants(val value: Double) {
     ZERO(0.0),
@@ -899,7 +857,7 @@ enum class MathConstants(val value: Double) {
     GOLDEN_RATIO(1.61)
 }
 ```
-* Access constants
+* **Access constants**
 ```Kotlin
 val direction: Direction = Direction.EAST   // EAST
 val myConstantValue: Double = MathConstants.PI.value    // 3.14
@@ -971,34 +929,67 @@ tripleList[2]	// Coder
 tripleList[3]	// Android Developer
 ```
 
-## Lateinit and Lazy
+## Large Numbers
+* **BigInteger**  
+> If you are working with ridiculously large numbers, use BigInteger & BigDecimal.
 
-## Exceptions
+> BigInteger must support values in the range -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive) and may support values outside of that range.  
+> 
+> Implementation note: BigInteger constructors and operations throw ArithmeticException when the result is out of the supported range of -2^Integer.MAX_VALUE (exclusive) to +2^Integer.MAX_VALUE (exclusive).
+```Kotlin
+val myBigIntegerNum1: BigInteger = BigInteger.valueOf(Long.MAX_VALUE).pow(10) // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
+val myBigIntegerNum2: BigInteger = BigInteger(Long.MAX_VALUE.toString()).pow(10) // 4455508415646675013373597242420117818453694838130159772560668808816707086990958982033203334310070688731662890013605553436739351074980172000127431349940128178077122187317837794167991459381249
 
-## Generics
+// Commonly used BigInteger Numbers 
+val bigInt0: BigInteger = BigInteger.ZERO // 0
+val bigInt1: BigInteger = BigInteger.ONE // 1
+val bigInt2: BigInteger = BigInteger.TWO // 2
+val bigInt10: BigInteger = BigInteger.TEN // 10
+```
+* **BigDecimal**
+```Kotlin
+val myBigDecimalNum1: BigDecimal = BigDecimal.valueOf(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE) // 1.7976931348623157E-2147483339
+val myBigDecimalNum2: BigDecimal = BigDecimal(Double.MAX_VALUE.toString()).scaleByPowerOfTen(-Int.MAX_VALUE) // 1.7976931348623157E-2147483339
+val myBigDecimalNum3: BigDecimal = BigDecimal(Double.MAX_VALUE).scaleByPowerOfTen(-Int.MAX_VALUE) // 1.79769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368E-2147483339
 
-## Lambda
+// Rounding Precision
+val myDecimalNum1: BigDecimal = BigDecimal("1.1234567")
+myDecimalNum1.setScale(3, RoundingMode.UP) // 1.124
+myDecimalNum1.setScale(3, RoundingMode.DOWN) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.HALF_UP) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.HALF_DOWN) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.HALF_EVEN) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.FLOOR) // 1.123
+myDecimalNum1.setScale(3, RoundingMode.CEILING) // 1.124
 
-## JvmStatic, JvmOverloads, and JvmField
+val myDecimalNum2: BigDecimal = BigDecimal("1.0")
+myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY) // 1.000
 
-## Visibility Modifiers
+myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointRight(1) // From 1.000 to 10.00
+myDecimalNum2.setScale(3, RoundingMode.UNNECESSARY).movePointLeft(1) // From 1.000 to 0.1000
+
+// Commonly used BigDecimal Numbers 
+val bigDec0: BigDecimal = BigDecimal.ZERO // 0
+val bigDec1: BigDecimal = BigDecimal.ONE // 1
+val bigDec10: BigDecimal = BigDecimal.TEN // 10
+```
 
 ## Random Numbers
-* Generate Secure Random Number. Cryptographically strong random values using a cryptographically strong pseudo-random number generator.
+* **Generate Secure Random Number:** Cryptographically strong random values using a cryptographically strong pseudo-random number generator.
 ```Kotling
 val secureRandom = SecureRandom().nextInt(100)  // 14
 ```
-* Generate Pseudo Random Number
+* **Generate Pseudo Random Number**
 ```Kotlin
 val randomNumber = Math.random()    // 0.15076138593048494
 ```
-* Random number in a given range. You can access all the Array properties on this random array.
+* **Random number in a given range:** You can access all the Array properties on this random array.
 ```Kotlin
 val randomArray = (1..10).shuffled()	// [8, 9, 1, 2, 3, 5, 7, 10, 6, 4]
 val randomArrayFirstElem = (1..10).shuffled().first()   // 10
 val randomArrayLastElem = (1..10).shuffled().last()     // 5
 ```
-* Thread-safe Random Number that can have positive and negative values
+* **Thread-safe Random Number** that can have positive and negative values
 ```Kotlin
 val randomfloat1 = ThreadLocalRandom.current().nextFloat()          // 0.23447311
 val randomDouble1 = ThreadLocalRandom.current().nextDouble()        // 0.3792768572850779
@@ -1007,7 +998,7 @@ val randomLong1 = ThreadLocalRandom.current().nextLong()            // 618641573
 val randomGaussian1 = ThreadLocalRandom.current().nextGaussian()    // 1.7022158793655815
 val randomBoolean1 = ThreadLocalRandom.current().nextBoolean()      // false
 ```
-* Thread-safe Random Number in a given range
+* **Thread-safe Random Number in a given range**
 ```Kotlin
 val randomDouble2 = ThreadLocalRandom.current().nextDouble(1.0, 10.0)   // 4.842464268215246
 val randomInteger2 = ThreadLocalRandom.current().nextInt(1, 10)         // 2
@@ -1015,7 +1006,7 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 ```
 
 ## Multi-Tasking
-#### Coroutines
+#### **Coroutines**
 ```Kotlin
 GlobalScope.launch {    // Launch a coroutine in background
     myDelay(2000L)  // Suspends "coroutine" execution for 2 sec but not the thread.  Its a suspend function.
@@ -1047,11 +1038,12 @@ suspend fun myDelay(duration: Long) {
     delay(duration)
 }
 ```
-#### RxJava
-#### Executors and Handlers
+#### **RxJava**
+#### **Executors and Handlers**
 ```Kotlin
 val executor = Executors.newSingleThreadExecutor()
 val handler = Handler(Looper.getMainLooper())
+
 executor.execute {
     // Stuff to do on background thread. This is like AsyncTask.execute()
 
@@ -1060,7 +1052,7 @@ executor.execute {
     }
 }
 ```
-#### Thread
+#### **Thread**
 ```Kotlin
 thread {    // Launch a thread in background
     Thread.sleep(2000L)  // Suspend thread for 2 sec or 2000 milliseconds
@@ -1068,7 +1060,19 @@ thread {    // Launch a thread in background
 
 Thread.currentThread().name    // Get thread name
 ```
-#### AsyncTask
+#### **AsyncTask**
+
+## Lateinit and Lazy
+
+## Exceptions
+
+## Generics
+
+## Lambda
+
+## JvmStatic, JvmOverloads, and JvmField
+
+## Visibility Modifiers
 
 ## Collections
 
@@ -1192,7 +1196,6 @@ Thread.currentThread().name    // Get thread name
 * selectUnbiased { }
 * whileSelect { }
 * sequence<Unit> { }
-
 
 ## References
 1. https://kotlinlang.org/docs/reference
