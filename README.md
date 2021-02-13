@@ -4,6 +4,20 @@ List of Kotlin topics and their code snippets!
 ## Why Kotlin
 A lot of Kotlin is about promoting immutability. Scope functions, conditional expressions, etc. So if you want to write functional style code in an Object Oriented Language then this is it.
 
+## Kotlin Way
+* Use "Data Class" to avoid creating your own getters, setters, toString, hashcode, etc.
+* Use classes instead of lists for few elements.
+* Field level custom getters and setters instead of creating functions.
+* Named parameters to avoid builders.
+* Default function parameters to avoid method overloading. 
+* Create extension properties and functions to perform custom operations on typed data which you can't control like String, Int, etc. They allow to keep your classes minimal like the Utility classes. Its a good way to design APIs.
+* Create local functions when they are used by any other entity. Might as well not create the function in the first place.
+* Local functions, Extension functions, Top-Level functions, Default parameters make code cleaner.
+* Sealed classes know all its sub-classes. So you can avoid "else" case in "when" statements.
+* Repetition is ugly and error-prone. So use Scope Functions like "with", "let", etc.
+* Use builder functions to construct your Data Structures. Instead of declaring a map and then assigning values, use the mapOf() builder function.
+* Use inline functions for getting cheap lambda abstractions.
+
 ## Package definition and imports
 ```Kotlin
 package my.demo
@@ -47,9 +61,13 @@ print("So i am next to the previous line.");
 ```
 
 ## Null Stuff
-? means the var can be nullable or null  
-!! means you are forcibly telling the compiler that this var is not null even if it actually is or can be null  
-?. means safe call operator. If var not null then execute this code  
+* ? means the var can be nullable or null  
+* !! means you are forcibly telling the compiler that this var is not null even if it actually is or can be null  
+* ?. means safe call operator. If var not null then execute this code  
+* ?: is elvis operator. str ?: "Empty". It means if the left side of the expression is null then evaluate the right side which is the string "Empty" as a default. The right hand side of the expression can even retrun something as well.
+```Kotlin
+fun add(num1: Int?, num2: Int?): Int = (num1 ?: 0) + (num2 ?: 0)
+```
 * Assigning the null value
 ```Kotlin
 var value: String?
@@ -275,6 +293,11 @@ val leftShift  = a shl 2
 val unsignedRightShift = a ushr 2
 ```
 
+## Casting
+```Kotlin
+
+```
+
 ## Math
 
 ## Booleans
@@ -404,6 +427,13 @@ for (i in 1..10) {
     print("$i ")  // 1 3 4 6 7 9 10 
 }
 ```
+#### Repeat
+```Kotlin
+// Repeats the task 100 times
+repeat(10) { it: Int ->
+    print("$it ")  // 0 1 2 3 4 5 6 7 8 9
+}
+```
 
 ## Data Structures
 #### Arrays
@@ -491,7 +521,7 @@ val keyValue = mapOf(1 to "Air",
 
 ## Functions and Methods
 #### Function
-Functions in Kotlin are not methods when they do not belong to a class. However they look and behave the same way. Its just the way they are accessed is different.
+Functions in Kotlin are not methods when they do not belong to a class. However they look and behave the same way. Its just the way they are accessed is different. They are also called Top-Level Functions.
 
 * Defining Function
 ```Kotlin
@@ -525,6 +555,15 @@ fun getScore(value: Int): Int {
 // as a single-expression function
 fun getScore(value: Int): Int = 2 * value
 ```
+* Local Function
+```Kotlin
+fun sayHelloAndHi(): String {
+    val hello: String = "Hello"
+    fun sayHi(): String = "Hi"
+    return "$hello & ${sayHi()}"    // Hello & Hi
+}
+```
+
 #### Method
 Methods in Kotlin are functions that are called on objects. So they have to be inside a class.
 ```Kotlin
@@ -803,8 +842,7 @@ val user2: User2 = User2(dob = "12/07/0001", profession = "Magic Caster")
 user2.printDob()	// Date Of Birth: 12/07/0001
 user2.printProfession()	// Profession: Magic Caster
 ```
-* Private Constructor
-These classes cannot be instantiated or you cannot create objects with these classes.
+* Private Constructor: These classes cannot be instantiated or you cannot create objects with these classes.
 ```Kotlin
 class User3 private constructor() {
     companion object {
@@ -978,9 +1016,58 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 
 ## Multi-Tasking
 #### Coroutines
+```Kotlin
+GlobalScope.launch {    // Launch a coroutine in background
+    myDelay(2000L)  // Suspends "coroutine" execution for 2 sec but not the thread.  Its a suspend function.
+}
+
+runBlocking<Unit> { 
+    myDelay(2000L)  // Suspends "thread" execution for 2 sec until coroutine inside it finishes. This is equivalent to Thread.sleep()
+}
+
+GlobalScope.launch {
+    withTimeout(2000L) {    // Cancels coroutine on timeout which is 2 sec here. Its a suspend function.
+        
+    }
+
+    runInterruptible<Unit> {     // Throws CancellationException if interrupted. Its a suspend function.
+
+    }
+
+    launch { 
+            
+    }
+
+    coroutineScope { 
+        
+    }
+}
+
+suspend fun myDelay(duration: Long) {
+    delay(duration)
+}
+```
 #### RxJava
 #### Executors and Handlers
+```Kotlin
+val executor = Executors.newSingleThreadExecutor()
+val handler = Handler(Looper.getMainLooper())
+executor.execute {
+    // Stuff to do on background thread. This is like AsyncTask.execute()
+
+    handler.post {
+        // Stuff to do on UI thread. This is like runOnUiThread()
+    }
+}
+```
 #### Thread
+```Kotlin
+thread {    // Launch a thread in background
+    Thread.sleep(2000L)  // Suspend thread for 2 sec or 2000 milliseconds
+}  
+
+Thread.currentThread().name    // Get thread name
+```
 #### AsyncTask
 
 ## Collections
@@ -992,8 +1079,8 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 ## Meta-Programming
 
 ## Common Vocabulary
-* **Expression:** A function with return value or a variable.  
-* **Statement:** Code with an assignment operator.  
+* **Expression:** A function with return value or a variable. They are things that have values. You assign expressions to variables.
+* **Statement:** Code with an assignment operator. They are things that have effects. You write statements to assign things to other things.
 * **Pascal Case:** KotlinCodeSnippets  
 * **Camel Case:** kotlinCodeSnippets  
 * **Snake Case:** KOTLIN_CODE_SNIPPETS  
@@ -1070,11 +1157,11 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 * **Factorial:** A function that multiplies a number by every number below it. Ex: 5!= 5 * 4 * 3 * 2 * 1 = 120. The function is used, among other things, to find the number of ways “n” objects can be arranged.
 * **Armstrong Number:** A number that is equal to the sum of cubes of its digits. Ex: 0, 1, 153, 370, 371, 407, etc. If we take 153 -> 1^3 = 1, 5^3 = 125, 3^3 = 27. So 1 + 125 + 27 = 153. 
 * **Natural Numbers (N):** Also called as Positive Integers, Counting Numbers. 1, 2, 3...∞
-* **Whole Numbers (W) or Non-Negative Integers (Z* ):** Set of Natural Numbers, plus Zero. 0, 1, 2, 3...∞
+* **Whole Numbers (W) or Non-Negative Integers (Z Star):** Set of Natural Numbers, plus Zero. 0, 1, 2, 3...∞
 * **Integers (Z):** Set of Negative numbers and Whole Numbers or a fraction. -∞...-3, -2, -1, 0, 1, 2, 3...∞   
 * **Rational Numbers (Q):** Can be expressed as ratio of two integers. All the fractions where the top and bottom numbers are integers. The denominator cannot be 0, but the numerator can be. 1/2, 3/4, 7/2, ⁻4/3, 4/1.
 * **Unit Fractions:** If numerator of a fraction is one. 1/2, 1/3, 1/4, 1/5.
-* **Decimal Fractions:** Decimal numbers (such as 0.3,  0.32, ⁻2.7) can be called decimal fractions, because they can be written in a fractional form (e.g., 3/10, 32/100, ⁻27/10).
+* **Decimal Fractions:** Decimal numbers (such as 0.3,  0.32, -2.7) can be called decimal fractions, because they can be written in a fractional form (e.g., 3/10, 32/100, -27/10).
 * **Irrational Numbers (Q' or Q Prime):**
 * **Real Numbers (R):** 
 * **Complex Numbers (C):**
@@ -1086,17 +1173,26 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 * **2D Matrix:**
 * **3D Matrix:**
 * **Numeric Characters:** 
-* **Alphanumeric Characters:** Subsets of ASCII characters. Depends on the implementation of the users. Some allow all ASCII characters while others use a subset of them. Generally Alphabets, Numbers and few Special characters. 0 to 9, A to Z(both uppercase and lowercase), @ # * & etc.
-* **Enumeration:** List things one by one. To count. A synonym to the verb list. It emphasizes the fact that things are being specifically identified and listed one at a time. In mathematics and computer science, enumeration is a complete, ordered listing of all the items in a collection. Used to refer to a listing of all of the elements of a set. 
+* **Alphanumeric Characters:** Subsets of ASCII characters. Depends on the implementation and requirements. Some allow all ASCII characters while others use a subset of them. Generally Alphabets, Numbers and few Special characters. 0 to 9, A to Z(both uppercase and lowercase), @ # * & etc.
+* **Enumeration:** List things one by one. To count. A synonym to the verb "list". It emphasizes the fact that things are being specifically identified and listed one at a time. In mathematics and computer science, enumeration is a complete, ordered listing of all the items in a collection. Used to refer to a listing of all of the elements of a set. 
 * **Protobuf:** Protocol buffers are Google's language-neutral(any programming language), platform-neutral(any OS like Mac or Windows), extensible mechanism for serializing structured data.
 * **Encoding:** Converting or Transforming (information or an instruction) into another form.
 * **Decoding:** Converting or Translating (coded or encoded info) into an understandable form.
 * **Cipher:** Secret or disguised way of writing; a code.
 
-
 ## Next
 * List of Datastructues, their definitions and possible use cases.
 * Divisibility rules for 12345678910.
+* runCatching { }
+* suspendCancellableCoroutine { }
+* suspend { }
+* suspendCoroutine { }
+* supervisorScope { }
+* select { }
+* selectUnbiased { }
+* whileSelect { }
+* sequence<Unit> { }
+
 
 ## References
 1. https://kotlinlang.org/docs/reference
@@ -1115,3 +1211,4 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 14. https://www.youtube.com/watch?v=es4DYTFdqlg
 15. https://www.youtube.com/watch?v=HtEzuAqWmoE
 16. https://www.sciencedirect.com/topics/computer-science/alphanumeric-character
+17. https://www.youtube.com/watch?v=6P20npkvcb8
