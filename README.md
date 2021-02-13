@@ -18,6 +18,11 @@ A lot of Kotlin is about promoting immutability. Scope functions, conditional ex
 * Use builder functions to construct your Data Structures. Instead of declaring a map and then assigning values, use the mapOf() builder function.
 * Use inline functions for getting cheap lambda abstractions.
 * Can we replace interfaces with higher order functions?
+* Classes are cheap.
+* Functions are top-level or local.
+* Instead of method overloading use default values.
+* Use properties, use delegated properties.
+* Use Coroutines instead of Threads.
 
 ## Package definition and imports
 ```Kotlin
@@ -65,18 +70,18 @@ print("So i am next to the previous line.");
 * `?` means the variable can be nullable or null.  
 * `!!` means you are forcibly telling the compiler that this var is not null even if it actually is or can be null.  
 * `?.` means safe call operator. If the variable is not null then execute this code.  
-* `?:` is elvis operator. `str ?: "Empty"`. It means if the left side of the expression is `null` then evaluate the right side which is the string `"Empty"` as a default. The right hand side of the expression can even retrun something as well.
+* **Elvis operator:** `?:` is Elvis operator. `str ?: "Empty"`. It means if the left side of the expression is `null` then evaluate the right side which is the string `"Empty"` as a default. The right hand side of the expression can even retrun something as well.
 ```Kotlin
 fun add(num1: Int?, num2: Int?): Int = (num1 ?: 0) + (num2 ?: 0)
 ```
-* Assigning the null value
+* **Assigning the null value**
 ```Kotlin
 var value: String?
 value = Nullable
 val message: String? = null
 log(message ?: "")
 ```
-* Verify if value is null
+* **Verify if value is null**
 ```Kotlin
 value?.let {
     val length = value.length
@@ -86,10 +91,9 @@ val length = value?.length
 ```
 
 ## Data Types
-Unlike Java, there are no primitive types in Kotlin. All of them are reference or Object types. So by-default they are null and do not contain any defaults like primitives. There are total 9 types.
-
-**Number Types**
-* Byte
+Unlike Java, there are no primitive types in Kotlin. All of them are reference or Object types. So by-default they are null and do not contain any defaults like primitives. There are total 9 types.  
+> Number Types
+* **Byte**
 ```Kotlin
 val myByte: Byte = 0;
 val maxByte: Byte = Byte.MAX_VALUE; // 127
@@ -97,7 +101,7 @@ val minByte: Byte = Byte.MIN_VALUE; // -128
 val byteSizeInBits: Int = Byte.SIZE_BITS; // 8 bits
 val byteSizeInBytes: Int = Byte.SIZE_BYTES; // 1 byte
 ```
-* Short
+* **Short**
 ```Kotlin
 val myShort: Short = 0;
 val maxShort: Short = Short.MAX_VALUE; // 32767
@@ -105,7 +109,7 @@ val minShort: Short = Short.MIN_VALUE; // -32767
 val shortSizeInBits: Int = Short.SIZE_BITS; // 16 bits
 val shortSizeInBytes: Int = Short.SIZE_BYTES; // 2 bytes
 ```
-* Int (Inferred by default)
+* **Int** (Inferred by default)
 ```Kotlin
 val myInt: Int = 0;
 val maxInt: Int = Int.MAX_VALUE; // 2147483647 (~ 2.14 billion)
@@ -113,7 +117,7 @@ val minInt: Int = Int.MIN_VALUE; // -2147483648 (~ -2.14 billion)
 val intSizeInBits: Int = Int.SIZE_BITS; // 32
 val intSizeInBytes: Int = Int.SIZE_BYTES; // 4
 ```
-* Long
+* **Long**
 ```Kotlin
 val myLong: Long = 0L;
 val maxLong: Long = Long.MAX_VALUE; // 9223372036854775807 (~ 9.22 * 10^18) or (~ -9.2E18)
@@ -121,9 +125,8 @@ val minLong: Long = Long.MIN_VALUE; // -9223372036854775807 (~ -9.22 * 10^18) or
 val longSizeInBits: Int = Long.SIZE_BITS; // 64
 val longSizeInBytes: Int = Long.SIZE_BYTES; // 8
 ```
-
-**Decimal Types**
-* Float
+> Decimal Types
+* **Float**
 ```Kotlin
 val myFloat: Float = 0F;
 val maxFloat: Float = Float.MAX_VALUE; // 3.4028235E38 (~ 3.40 * 10^38)
@@ -132,7 +135,7 @@ val floatSizeInBits: Int = Float.SIZE_BITS; // 32
 val floatSizeInBytes: Int = Float.SIZE_BYTES; // 4
 val floatMax: Float = 1E38F; // 1.0E38, beyond this number Kotlin returns "Infinity" string. 
 ```
-* Double (Inferred by default)
+* **Double** (Inferred by default)
 ```Kotlin
 val myDouble: Double = 0.0;
 val maxDouble: Double = Double.MAX_VALUE // 1.7976931348623157E308 (~ 1.79 * 10^308)
@@ -141,9 +144,8 @@ val doubleSizeInBits: Int = Double.SIZE_BITS // 64
 val doubleSizeInBytes: Int = Double.SIZE_BYTES // 8
 val doubleMax: Double = 1.0E308 // 1.0E308, beyond this number Kotlin returns "Infinity" string.
 ```
-
-**Others**
-* Char
+> Other Types
+* **Char**
 ```Kotlin
 val myChar: Char = 'C'
 val charSizeInBits: Int = Char.SIZE_BITS // 16
@@ -171,18 +173,15 @@ for (i in 0..25) lowCaseCharArray[i] = ('a'.toInt() + i).toChar() // [a, b, c, d
 val upCaseCharArray: Array<Char> = Array(26) { 'A' } // 'A' is the initializer
 for (i in 0..25) upCaseCharArray[i] = ('A'.toInt() + i).toChar() // [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
 ```
-* Bool
+* **Bool**
 ```Kotlin
 val myBoolean: Boolean = false
 ```
-* String
+* **String**
 ```Kotlin
 val myString: String = "I am a string!"
 ```
-
-**More**
-* Any
-> This Type can hold any of the above mentioned data types. It cannot hold BigInteger and BigDecimal Types.
+* **Any** This Type can hold any of the above mentioned data types. It cannot hold BigInteger and BigDecimal Types.
 ```Kotlin
 val myAnyTypeByte: Any = 72
 val myAnyTypeShort: Any = 32425
@@ -382,7 +381,7 @@ for (i in 1..10) {
 ```
 #### Repeat
 ```Kotlin
-// Repeats the task 100 times
+// Repeats the task 10 times
 repeat(10) { it: Int ->
     print("$it ")  // 0 1 2 3 4 5 6 7 8 9
 }
@@ -597,7 +596,7 @@ val myIntro = person?.run { ->
 ```
 
 ## Higher Order Functions
-* Functions can be stored in a variable.
+* **Functions can be stored in a variable.**
 ```Kotlin
 val operation1 = highOrderFuncReturnValue(num1 = 8, num2 = 12) // 20
 val operation2 = highOrderFuncPrintComment() // Hello World!
@@ -605,13 +604,13 @@ val operation2 = highOrderFuncPrintComment() // Hello World!
 fun highOrderFuncReturnValue(num1: Int, num2: Int): Int = num1 + num2
 fun highOrderFuncPrintComment(): Unit = print("Hello World!")
 ```
-* Functions can be returned from a function.
+* **Functions can be returned from a function.**
 ```Kotlin
 fun highOrderFuncReturnFunc(): Unit = printComment() // Hello World!
 
 fun printComment(): Unit = print("Hello World!")
 ```
-* Functions can be passed to other functions as an argument.
+* **Functions can be passed to other functions as an argument.**
 ```Kotlin
 fun highOrderFuncNoParams(unitFunc: (() -> Unit)? = null) {
     unitFunc?.invoke()
@@ -698,22 +697,13 @@ fun String.analyzeString() {
 
 fun User.canWork(age: Int): Boolean = age > 18
 
-val myInt: Int = 55
-val myDouble: Double = 12.5
-val myChar: Char = 'C'
-val myString: String = "Singularity Coder"
-val myUser: User = User(name = "Hithesh", age = 67)
 data class User(val name: String, val age: Int)
 
-myInt.factorial()   // 9540809681250034973565866501770328168700249765255186764678629884883775957860052585601806640625
-myDouble.squared()  // 156.25
-myChar.asciiValue() // 67
-myUser.canWork(myUser.age)  // true
-myString.analyzeString()
-// Definitely Neo!
-// String Length: 17
-// String starts with the letter: S
-// String mid value: i
+55.factorial()   // 9540809681250034973565866501770328168700249765255186764678629884883775957860052585601806640625
+12.5.squared()  // 156.25
+'C'.asciiValue() // 67
+User(name = "Hithesh", age = 67).canWork(myUser.age)  // true
+"Singularity Coder".analyzeString()  // Definitely Neo! | String Length: 17 | String starts with the letter: S | String mid value: i
 ```
 
 ## Classes and Objects
@@ -1032,6 +1022,10 @@ GlobalScope.launch {
     coroutineScope { 
         
     }
+
+    async { 
+            
+    }
 }
 
 suspend fun myDelay(duration: Long) {
@@ -1183,6 +1177,8 @@ Thread.currentThread().name    // Get thread name
 * **Encoding:** Converting or Transforming (information or an instruction) into another form.
 * **Decoding:** Converting or Translating (coded or encoded info) into an understandable form.
 * **Cipher:** Secret or disguised way of writing; a code.
+* **Callback:** You tell it to do something and it will let you know when its done.
+
 
 ## Next
 * List of Datastructues, their definitions and possible use cases.
@@ -1195,6 +1191,9 @@ Thread.currentThread().name    // Get thread name
 * select { }
 * selectUnbiased { }
 * whileSelect { }
+* sequence<Unit> { }
+* yield()
+* Joining coroutines
 * sequence<Unit> { }
 
 ## References
