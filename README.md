@@ -23,6 +23,8 @@ A lot of Kotlin is about promoting immutability. Scope functions, conditional ex
 * Instead of method overloading use default values.
 * Use properties, use delegated properties.
 * Use Coroutines instead of Threads.
+* When you have context, you can use fewer words and be very expressive.
+* Have lambdas as the last parameter to increase fluency.
 
 ## Package definition and imports
 ```Kotlin
@@ -523,10 +525,10 @@ printMyName("Hithesh", "Vurjana")   // My name is Hithesh Vurjana
 ```
 * **Vararg Function:** Variable number of arguments
 ```Kotlin
-fun exponentList(vararg numList: Int, exponent: Int) = numList.map { it * exponent }
+fun exponentList(vararg numList: Int, exponent: Int): List<Int> = numList.map { Math.pow(it.toDouble(), exponent.toDouble()).toInt() }
 
-exponentList(1, 2, 3, 4, 5, exponent = 3)   // [3, 6, 9, 12, 15]
-exponentList(numList = intArrayOf(1, 2, 3, 4, 5,), exponent = 3)    // [3, 6, 9, 12, 15]
+exponentList(1, 2, 3, 4, 5, exponent = 3)   // [1, 8, 27, 64, 125]
+exponentList(numList = intArrayOf(1, 2, 3, 4, 5), exponent = 3)    // [1, 8, 27, 64, 125]
 ```
 * **Infix Function Call:** Must be extension function, single parameter which cannot be a vararg and cannot have default value.
 ```Kotlin
@@ -1006,26 +1008,21 @@ runBlocking<Unit> {
     myDelay(2000L)  // Suspends "thread" execution for 2 sec until coroutine inside it finishes. This is equivalent to Thread.sleep()
 }
 
-GlobalScope.launch {
-    withTimeout(2000L) {    // Cancels coroutine on timeout which is 2 sec here. Its a suspend function.
-        
-    }
+GlobalScope.launch(Dispatchers.IO) {
+    withTimeout(2000L) { }   // Cancels coroutine on timeout which is 2 sec here. Its a suspend function.
+    runInterruptible<Unit> { }    // Throws CancellationException if interrupted. Its a suspend function.
+    coroutineScope { }
 
-    runInterruptible<Unit> {     // Throws CancellationException if interrupted. Its a suspend function.
+    // Operate on background thread
+    launch(Dispatchers.IO) { }
+    launch(Dispatchers.Default) {  }
+    launch(Dispatchers.Main) {  }
+    launch(Dispatchers.Unconfined) {  }
 
-    }
-
-    launch { 
-            
-    }
-
-    coroutineScope { 
-        
-    }
-
-    async { 
-            
-    }
+    // Operate on background thread and return something
+    GlobalScope.async(Dispatchers.IO) { }.await()   // For parallel tasks
+    async(Dispatchers.IO) { }.await()  // For parallel tasks
+    withContext(Dispatchers.IO) { }    // For single task
 }
 
 suspend fun myDelay(duration: Long) {
@@ -1178,7 +1175,7 @@ Thread.currentThread().name    // Get thread name
 * **Decoding:** Converting or Translating (coded or encoded info) into an understandable form.
 * **Cipher:** Secret or disguised way of writing; a code.
 * **Callback:** You tell it to do something and it will let you know when its done.
-
+* **DSL:** Domain Specific Language.
 
 ## Next
 * List of Datastructues, their definitions and possible use cases.
@@ -1195,6 +1192,10 @@ Thread.currentThread().name    // Get thread name
 * yield()
 * Joining coroutines
 * sequence<Unit> { }
+* Stream Library
+* Promise Library
+* Structured Concurrency
+* Green threads
 
 ## References
 1. https://kotlinlang.org/docs/reference
@@ -1214,3 +1215,4 @@ Thread.currentThread().name    // Get thread name
 15. https://www.youtube.com/watch?v=HtEzuAqWmoE
 16. https://www.sciencedirect.com/topics/computer-science/alphanumeric-character
 17. https://www.youtube.com/watch?v=6P20npkvcb8
+18. https://www.youtube.com/watch?v=JzTeAM8N1-o
