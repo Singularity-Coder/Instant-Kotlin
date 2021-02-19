@@ -25,6 +25,12 @@ A lot of Kotlin is about promoting immutability. Scope functions, conditional ex
 * Use Coroutines instead of Threads.
 * When you have context, you can use fewer words and be very expressive.
 * Have lambdas as the last parameter to increase fluency.
+* Lambdas can have a context object. You can either operate on the context object directly or pass it as a parameter.
+* Use infix modifier to write more fluent functions.
+* Use `.javaClass` to print the name of the class being used and learn more about it.
+```Kotlin
+println((3..18).javaClass)  // class kotlin.ranges.IntRange
+```
 
 ## Package definition and imports
 ```Kotlin
@@ -69,9 +75,17 @@ print("So i am next to the previous line.");
 ```
 
 ## Null Stuff
-* `?` means the variable can be nullable or null.  
-* `!!` means you are forcibly telling the compiler that this var is not null even if it actually is or can be null.  
-* `?.` means safe call operator. If the variable is not null then execute this code.  
+* **Nullable operator:** `?` means the variable is nullable (or) can be null.  
+* **Not Null operator:**`!!` means you are forcibly telling the compiler that this variable is not null even if it actually is or can be null.  
+* **If Not Null operator:**`?.` means safe call operator. If the variable is not null then execute this code.  
+```Kotlin
+value?.let {
+    val length = value.length
+}
+
+// or simply
+val length = value?.length
+```
 * **Elvis operator:** `?:` is Elvis operator. `str ?: "Empty"`. It means if the left side of the expression is `null` then evaluate the right side which is the string `"Empty"` as a default. The right hand side of the expression can even retrun something as well.
 ```Kotlin
 fun add(num1: Int?, num2: Int?): Int = (num1 ?: 0) + (num2 ?: 0)
@@ -82,14 +96,6 @@ var value: String?
 value = Nullable
 val message: String? = null
 log(message ?: "")
-```
-* **Verify if value is null**
-```Kotlin
-value?.let {
-    val length = value.length
-}
-// or simply
-val length = value?.length
 ```
 
 ## Data Types
@@ -197,13 +203,13 @@ val myAnyTypeBool: Any = true
 ```
 
 ## Strings
-* Concatenation of strings
+* **Concatenation**
 ```Kotlin
 val name: String = "Singularity Coder"
 var age: Int = 129
 print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7.") // Hello World, My name is Singularity Coder, and I am 129 years old. In 3 years, I will be 132. My bank balance is currently $7.
 ```
-* New line in string
+* **New Line**
 ```Kotlin
 val text = """
         |First Line
@@ -211,7 +217,7 @@ val text = """
         |Third Line
         """.trimMargin()
 ```
-* Substring
+* **Substring**
 ```Kotlin
 var str = "Kotlin Programming Language"
 var substr = ""
@@ -238,11 +244,27 @@ if (object is Car?) {
 ```
 
 ## Operators 
-#### Arithmetic Operators
-#### Assignment Operators
-#### Comparision Operators
-#### Logical Operators
-#### Bitwise Operators
+* **Arithmetic Operators**
+```Kotlin
+6 + 2   // 8 Addition operator (Used for string concatenation as well)
+6 - 2   // 4 Subtraction Operator
+6 * 2   // 12 Multiplication Operator
+6 / 2   // 3 Division Operator
+6 % 2   // 0 Modulus Operator (Gives remainder. Ex: 7 % 2 = 1)
+```
+* **Assignment Operators**
+```Kotlin
+
+```
+* **Comparision Operators**
+```Kotlin
+
+```
+* **Logical Operators**
+```Kotlin
+
+```
+* **Bitwise Operators**
 ```Kotlin
 val andResult  = a and b
 val orResult   = a or b
@@ -251,14 +273,22 @@ val rightShift = a shr 2
 val leftShift  = a shl 2
 val unsignedRightShift = a ushr 2
 ```
+* **in Operator**
+```Kotlin
 
-## Math
+```
+* **Index access Operator**
+```Kotlin
 
-## Booleans
+```
+* **Invoke Operator**
+```Kotlin
 
-## Flow Control
-#### Conditional Statements
-* Block Statement
+```
+
+## Conditionals (Flow Control)
+> Conditional Statements
+* **Block Statement**
 ```Kotlin
 val price: Int = 59
 if (price < 50) {
@@ -269,7 +299,7 @@ if (price < 50) {
     println("Expensive")
 } // Average
 ```
-* When Statement (Switch-Case)
+* **When Statement** (Switch-Case)
 ```Kotlin
 val price: Int = 59
 when(price) {
@@ -281,13 +311,13 @@ when(price) {
     }
 } // Too much! Expensive as hell!
 ```
-#### Conditional Expressions
-* Single Line Expression (Ternary Operations)
+> Conditional Expressions
+* **Single Line Expression** (Ternary Operations)
 ```Kotlin
 val price: Int = 59
 val priceReaction: String = if (price < 100) "Cheap" else "Expensive" // Cheap
 ```
-* Block Expression
+* **Block Expression**
 ```Kotlin
 val price: Int = 59
 val priceReaction2: String = if (price < 50) {
@@ -296,7 +326,7 @@ val priceReaction2: String = if (price < 50) {
     "Expensive"
 } // Expensive
 ```
-* When Expression (Switch-Case)
+* **When Expression** (Switch-Case)
 ```Kotlin
 val price: Int = 59
 val priceReaction3: String = when {
@@ -306,7 +336,9 @@ val priceReaction3: String = when {
     else -> "Too much"
 } // Expensive
 ```
-#### For Loop
+
+## Loops (Flow Control)
+* **For Loop**
 ```Kotlin
 for (i in 1..10) print("$i ")  // 1 2 3 4 5 6 7 8 9 10
 
@@ -330,7 +362,7 @@ for ((key, value) in map) println("Key: $key and Value: $value")
 // Key: 2 and Value: Bed
 // Key: 3 and Value: Breakfast
 ```
-#### ForEach Loop (Enhanced For loop)
+* **ForEach Loop** (Enhanced For loop)
 ```Kotlin
 val list: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 list.forEach { it: Int ->
@@ -349,7 +381,7 @@ list.parallelStream().filter { it > 5 }.forEach {
     print("$it ")   // 7 9 10 8 6
 }
 ```
-#### While Loop
+* **While Loop**
 ```Kotlin
 var x = 1
 while (x <= 10) {
@@ -357,7 +389,7 @@ while (x <= 10) {
     x++
 }
 ```
-#### Do-While Loop
+* **Do-While Loop**
 ```Kotlin
 var y = 1
 do {
@@ -365,14 +397,20 @@ do {
     y++
 } while (y <= 10)
 ```
-#### Break
+* **Repeat**
+```Kotlin
+repeat(times = 10) { it: Int ->
+    print("$it ")  // 0 1 2 3 4 5 6 7 8 9
+}
+```
+* **Break**
 ```Kotlin
 for (i in 1..10) {
     print("$i ")  // 1 2 3 4 5 6 
     if (i == 6) break
 }
 ```
-#### Continue
+* **Continue**
 ```Kotlin
 for (i in 1..10) {
     if (i == 2) continue
@@ -381,11 +419,15 @@ for (i in 1..10) {
     print("$i ")  // 1 3 4 6 7 9 10 
 }
 ```
-#### Repeat
+* **Label**
 ```Kotlin
-// Repeats the task 10 times
-repeat(10) { it: Int ->
-    print("$it ")  // 0 1 2 3 4 5 6 7 8 9
+outerLoop@ for (a in 1..3) {
+    innerLoop@ for (b in 6..8) {
+        if (a == 1) continue@innerLoop
+        if (b == 1) break@innerLoop
+        if (b == 2) continue@outerLoop
+        print("a = $a, b = $b | ")  // a = 2, b = 6 | a = 2, b = 7 | a = 2, b = 8 | a = 3, b = 6 | a = 3, b = 7 | a = 3, b = 8 |
+    }
 }
 ```
 
@@ -432,7 +474,7 @@ println(emptyArray.contentToString())   // []
 ```
 #### Lists
 ```Kotlin
-val immutableList: List<String> = listOf("Delta", "Theta", "Alpha", "Gamma", "Beta")    // [Delta, Theta, Alpha, Gamma, Beta] Cannot bed modified but can be accessed.
+val immutableList: List<String> = listOf("Delta", "Theta", "Alpha", "Gamma", "Beta")    // [Delta, Theta, Alpha, Gamma, Beta] Cannot be modified but can be accessed.
 val mutableList: MutableList<Int> = mutableListOf(1, 2, 3, 4, 5, 6)    // [1, 2, 3, 4, 5, 6]
 val emptyList = emptyList<Int>()    // []
 
@@ -472,6 +514,9 @@ val keyValue = mapOf(1 to "Air",
                      3 to "Breakfast")
 ```
 #### Set
+```Kotlin
+
+```
 
 ## Functions and Methods
 Functions in Kotlin are not methods when they do not belong to a class. However they look and behave the same way. Its just the way they are accessed is different. They are also called Top-Level Functions. Methods in Kotlin are functions that are called on objects. So they have to be inside a class.
@@ -491,7 +536,7 @@ fun evenNumber(num: Int): Int {
 ```Kotlin
 fun evenNumber(num: Int): Int = 2 * num
 ```
-* **Local Function:** Part of function scope.
+* **Local function:** Part of function scope.
 ```Kotlin
 fun myIntro(fullName: String): String {
     fun splitName(): List<String> = fullName.split(" ").map { it -> it.toUpperCase() }
@@ -499,6 +544,14 @@ fun myIntro(fullName: String): String {
 }
 
 myIntro("Hithesh Vurjana")  // My first name is HITHESH and my last name is VURJANA
+```
+* **Member function** Part of function scope. Function that is defined inside a class or object. They are called with dot notation.
+```Kotlin
+class Calculate {
+    fun add() { print("Addition Operation") }
+}
+
+Calculate().add() // Creates instance of class Calculate and calls add()
 ```
 * **Default Parameters/Arguments**
 ```Kotlin
@@ -523,26 +576,34 @@ fun printMyName(firstName: String, lastName: String) {
 printMyName("Hithesh")  // My name is Hithesh
 printMyName("Hithesh", "Vurjana")   // My name is Hithesh Vurjana
 ```
-* **Vararg Function:** Variable number of arguments
+* **Vararg function:** Variable number of arguments
 ```Kotlin
 fun exponentList(vararg numList: Int, exponent: Int): List<Int> = numList.map { Math.pow(it.toDouble(), exponent.toDouble()).toInt() }
 
 exponentList(1, 2, 3, 4, 5, exponent = 3)   // [1, 8, 27, 64, 125]
 exponentList(numList = intArrayOf(1, 2, 3, 4, 5), exponent = 3)    // [1, 8, 27, 64, 125]
 ```
-* **Infix Function Call:** Must be extension function, single parameter which cannot be a vararg and cannot have default value.
+* **Infix function Call:** Must be an extension function, have only a single parameter which cannot be a vararg and cannot have a default value.
 ```Kotlin
 infix fun Int.times(num: Int): Int = this * num
 
 3 times 5   // 15
 ```
+* **Generic function:**
+```Kotlin
 
-## Recursion
-## Tail Recursion
-## Inline Functions
+```
+* **Tail recursive function:**
+```Kotlin
+
+```
+* **Inline function:**
+```Kotlin
+
+```
 
 ## Scope Functions
-These allow us to write idiomatic, functional style code and allow us to operate on immutable fields. So they promote immutability. However use them only to promote immutability and not for writing less code as they introduce code nesting. 
+These allow us to write idiomatic, functional style code and allow us to operate on immutable fields. So they promote immutability. I have changed my mind on this. Less repetiton means less errors. So use it as much as possible.
 ```Kotlin
 data class Person(var name: String? = null, var age: Int? = null)
 
@@ -708,8 +769,8 @@ User(name = "Hithesh", age = 67).canWork(myUser.age)  // true
 "Singularity Coder".analyzeString()  // Definitely Neo! | String Length: 17 | String starts with the letter: S | String mid value: i
 ```
 
-## Classes and Objects
-#### Creating Instance
+## Classes & Objects
+* **Creating Classes**
 ```Kotlin
 class Address1 {
     private val CUSTOM_HASH_CODE = SecureRandom().nextInt()
@@ -732,7 +793,9 @@ class Address1 {
         return CUSTOM_HASH_CODE
     }
 }
-
+```
+* **Creating Instance or Object**
+```Kotlin
 val address1 = Address1()
 val address2 = Address1()
 address1.city = "Tesla"
@@ -743,8 +806,17 @@ println(address1.toString())	// Address(City: Tesla, Country: Mars Colony @#$%12
 println(address1.hashCode())	// 654287787
 println(address1.equals(address2))	// false
 ```
-#### Inheritance
-#### Constructors
+* **Initialization Block**
+```Kotlin
+class User {
+    
+    init {
+        println("Init block")
+    }
+}
+```
+
+## Constructors
 * **Primary Constructor**
 ```Kotlin
 class User0(val name: String = "", val age: Int = 0) 
@@ -805,30 +877,8 @@ class User3 private constructor() {
 val name: String = User3.NAME   // Singularity Coder
 val age: Int = User3.age15YearsFromNow(age = 15)    // 30
 ```
-#### Getters and Setters
-#### Defining uninitialized objects
-```Kotlin
-internal lateinit var person: Person
-```
-#### Initialization Block
-```Kotlin
-class User {
-	// Initialization block
-    init {
-        println("Init block")
-    }
-}
-```
-#### Companion Object
-#### Singleton
-#### Data Class
-```Kotlin
-data class User(var name: String, var age: Int)
-```
-#### Abstract Class
-#### Interface
-#### Sealed Classes
-#### Enum Class
+
+## Enum Class
 * **Create Enum class**
 ```Kotlin
 enum class Direction {
@@ -857,6 +907,21 @@ val myConstant: String = MathConstants.PI.name    // PI
 val myConstantPosition: Int = MathConstants.PI.ordinal    // 3
 ```
 
+## Inheritance
+#### Getters and Setters
+#### Defining uninitialized objects
+```Kotlin
+internal lateinit var person: Person
+```
+#### Companion Object
+#### Singleton
+#### Data Class
+```Kotlin
+data class User(var name: String, var age: Int)
+```
+#### Abstract Class
+#### Interface
+#### Sealed Classes
 #### Anonymous Class
 ```Kotlin
 val task = object : AsyncTask<Void, Void, Profile>() {
@@ -884,8 +949,7 @@ val user2 = user.copy(age = 25)
 ```
 
 ## Pair and Triple
-In my opinion these are highly unnecessary syntactical constructs that provide very little value. So I do not recommend using or remembering them.
-* Pair: Collection of 2 variables
+* **Pair:** Collection of 2 variables
 ```Kotlin
 val pair = Pair<String, Int>(first = "Singularity Coder", second = 179)
 pair.first 	// Singularity Coder
@@ -901,7 +965,7 @@ val pairList: List<Any> = pair.toList()
 pairList[0]	// Singularity Coder
 pairList[1]	// 179
 ```
-* Triple: Collection of 3 variables
+* **Triple:** Collection of 3 variables
 ```Kotlin
 val triple = Triple<String, String, String>(first = "Singularity", second = "Coder", third = "Android Developer")
 triple.first 	// Singularity
@@ -1051,13 +1115,43 @@ thread {    // Launch a thread in background
 
 Thread.currentThread().name    // Get thread name
 ```
-#### **AsyncTask**
+#### **AsyncTaskLoader**
+```Kotlin
+val task: AsyncTaskLoader<String> = object : AsyncTaskLoader<String>(this) {
+
+    override fun onStartLoading() {
+        forceLoad()
+    }
+
+    override fun loadInBackground(): String? {
+        return ""
+    }
+}
+
+val loader: LoaderManager.LoaderCallbacks<String> = object : LoaderManager.LoaderCallbacks<String> {
+
+    override fun onCreateLoader(id: Int, args: Bundle): Loader<String> {
+        return task
+    }
+
+    override fun onLoadFinished(loader: Loader<String>, data: String) {
+
+    }
+
+    override fun onLoaderReset(loader: Loader<String>) {
+
+    }
+}
+```
+
+## Math
+
+## Generics
+* Classes can have type parameters
 
 ## Lateinit and Lazy
 
 ## Exceptions
-
-## Generics
 
 ## Lambda
 
@@ -1175,7 +1269,7 @@ Thread.currentThread().name    // Get thread name
 * **Decoding:** Converting or Translating (coded or encoded info) into an understandable form.
 * **Cipher:** Secret or disguised way of writing; a code.
 * **Callback:** You tell it to do something and it will let you know when its done.
-* **DSL:** Domain Specific Language.
+* **DSL:** Domain-Specific Language.
 
 ## Next
 * List of Datastructues, their definitions and possible use cases.
@@ -1196,6 +1290,8 @@ Thread.currentThread().name    // Get thread name
 * Promise Library
 * Structured Concurrency
 * Green threads
+* Recursion
+* Boolean Logic
 
 ## References
 1. https://kotlinlang.org/docs/reference
