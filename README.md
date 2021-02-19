@@ -254,15 +254,31 @@ if (object is Car?) {
 ```
 * **Assignment Operators**
 ```Kotlin
-
+var a = 6
+a += 2  // a = a + 2
+a -= 2  // a = a - 2
+a *= 2  // a = a * 2
+a /= 2  // a = a / 2
+a %= 2  // a = a % 2
 ```
 * **Comparision Operators**
 ```Kotlin
-
+val a = 6; val b = 2
+a > b   // true (greater than)
+a < b   // false (less than)
+a >= b  // true (greater than or equals to)
+a <= b  // false (less than or equals to)
+a == b  // false (is equal to)
+a != b  // true (not equal to)
 ```
 * **Logical Operators**
 ```Kotlin
-
+val a = 6; val b = 2
+(a > b) || (b == 2) // true (Logical OR: true if either of the Boolean expression is true)
+(a > b) || (b == 4) // true
+(a < b) || (b == 4) // false
+(a > b) && (b == 2) // true (Logical AND: true if all Boolean expressions are true)
+(a > b) && (b == 4) // false
 ```
 * **Bitwise Operators**
 ```Kotlin
@@ -284,6 +300,15 @@ val unsignedRightShift = a ushr 2
 * **Invoke Operator**
 ```Kotlin
 
+```
+* **Unary Prefix Operator**
+```Kotlin
+var a = 6
++a  // Unary plus
+-a  // Unary minus (inverts sign)
+!(a is Int) // not (inverts value)
+++a // Increment: increases value by 1
+--a // Decrement: decreases value by 1
 ```
 
 ## Conditionals (Flow Control)
@@ -1195,8 +1220,8 @@ val loader: LoaderManager.LoaderCallbacks<String> = object : LoaderManager.Loade
 	2. Base-8 (Octal): Uses only 0, 1, 2, 3, 4, 5, 6, 7
 	3. Base-10 (Decimal): Uses only 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 	4. Base-16 (Hexadecimal): Uses only 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F
-* **Signed Integer:** Whole range of integers negative, zero and positive integers. Ex: ...-3, -2, -1, 0, 1, 2, 3...
-* **Unsigned Integer:** Non-negative integers including 0. Ex: 0, 1, 2, 3...
+* **Signed Integer:** Whole range of integers negative, zero and positive integers. Ex: -∞...-3, -2, -1, 0, 1, 2, 3...∞
+* **Unsigned Integer:** Non-negative integers including 0. Ex: 0, 1, 2, 3...∞
 * **ASCII:** American Standard Code for Information Interchange.
 * **ASCII Characters:** Start from 0 to 127. Consist of commonly used characters like upper and lower case english letters, numbers, etc. Each character is exactly 8 bits or 1 byte.
 * **Extended ASCII Characters:** Start from 128 to 256. Extended set of ASCII characters that include famous currency symbols, etc.
