@@ -1,4 +1,4 @@
-![alt text](https://github.com/Singularity-Coder/Code-Snippets-Kotlin/blob/master/assets/banner.png)
+![alt text](https://github.com/Singularity-Coder/Code-Snippets-Kotlin/blob/main/assets/banner.png)
 # Code-Snippets-Kotlin
 List of Kotlin topics and their code snippets! 
 
