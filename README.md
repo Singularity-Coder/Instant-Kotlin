@@ -251,6 +251,12 @@ if (object is Car?) {
 6 * 2   // 12 Multiplication Operator
 6 / 2   // 3 Division Operator
 6 % 2   // 0 Modulus Operator (Gives remainder. Ex: 7 % 2 = 1)
+
+a.plus(2)   // 8
+a.minus(2)  // 4
+a.times(2)  // 12
+a.div(2)    // 3
+a.rem(2)    // 0
 ```
 * **Assignment Operators**
 ```Kotlin
@@ -270,6 +276,13 @@ a >= b  // true (greater than or equals to)
 a <= b  // false (less than or equals to)
 a == b  // false (is equal to)
 a != b  // true (not equal to)
+
+a.compareTo(b) > 0   // true 
+a.compareTo(b) < 0   // false
+a.compareTo(b) >= 0  // true 
+a.compareTo(b) <= 0  // false
+a.equals(b)          // false
+!(a.equals(b))       // true 
 ```
 * **Logical Operators**
 ```Kotlin
@@ -282,33 +295,46 @@ val a = 6; val b = 2
 ```
 * **Bitwise Operators**
 ```Kotlin
-val andResult  = a and b
-val orResult   = a or b
-val xorResult  = a xor b
-val rightShift = a shr 2
-val leftShift  = a shl 2
-val unsignedRightShift = a ushr 2
+val a = 6; val b = 2
+a and b    // 2     (Bitwise and)
+a or b     // 6     (Bitwise or)
+a xor b    // 4     (Bitwise xor)
+a shr b    // 1     (Signed shift right)
+a shl b    // 24    (Signed shift left)
+a ushr b   // 1     (Unsigned shift right)
+a.inv()    // -7    (Bitwise inversion)
 ```
-* **in Operator**
+* **in Operator:** Used to check whether an object belongs to a collection.
 ```Kotlin
+val numbers = intArrayOf(-19, -3, 1, 3)
+3 in numbers    // true
+3 !in numbers   // false
 
+numbers.contains(3)     // true
+!numbers.contains(3)    // false
 ```
 * **Index access Operator**
 ```Kotlin
+val numbers = intArrayOf(-19, -3, 1, 3)
+numbers[1]          // -3
+numbers[1] = -1     // -1
 
-```
-* **Invoke Operator**
-```Kotlin
-
+numbers.get(index = 1)              // -3
+numbers.set(index = 2, value = 2)   // 2
 ```
 * **Unary Prefix Operator**
 ```Kotlin
 var a = 6
 +a  // Unary plus
 -a  // Unary minus (inverts sign)
-!(a is Int) // not (inverts value)
 ++a // Increment: increases value by 1
 --a // Decrement: decreases value by 1
+!(a is Int) // not (inverts value)
+
+a.unaryPlus()
+a.unaryMinus()
+a.inc()
+a.dec()
 ```
 
 ## Conditionals (Flow Control)
