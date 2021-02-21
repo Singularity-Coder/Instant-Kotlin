@@ -1,4 +1,4 @@
-![alt text](https://github.com/Singularity-Coder/Code-Snippets-Kotlin/blob/main/assets/banner2.png)
+![alt text](https://github.com/Singularity-Coder/Code-Snippets-Kotlin/blob/main/assets/banner3.png)
 # Code-Snippets-Kotlin
 List of Kotlin topics and their code snippets! 
 
@@ -1196,10 +1196,33 @@ val loader: LoaderManager.LoaderCallbacks<String> = object : LoaderManager.Loade
 }
 ```
 
+## Regular Expressions
+* Finding exact string
+* Finding exact string with conditions
+* Finding exact string and replacing it with another
+
 ## Math
 
 ## Generics
 * Classes can have type parameters
+```Kotlin
+class Person<T, E, K, V>(
+    type: T? = null,
+    element: E? = null,
+    key: K? = null,
+    value: V? = null
+) {
+    init {
+        println("$type")
+        println("$element")
+        println("$key")
+        println("$value")
+    }
+}
+
+Person<String, Int, Boolean, Any>()
+Person<Any, Boolean, Number, Char>(type = "Hithesh", element = false, key = 3, value = 'S')
+```
 
 ## Lateinit and Lazy
 
@@ -1212,12 +1235,6 @@ val loader: LoaderManager.LoaderCallbacks<String> = object : LoaderManager.Loade
 ## Visibility Modifiers
 
 ## Collections
-
-## Regular Expressions
-
-## Generate Morse Code
-
-## Meta-Programming
 
 ## Common Vocabulary
 * **Expression:** A function with return value or a variable. They are things that have values. You assign expressions to variables.
@@ -1344,6 +1361,8 @@ val loader: LoaderManager.LoaderCallbacks<String> = object : LoaderManager.Loade
 * Green threads
 * Recursion
 * Boolean Logic
+* Meta-Programming
+* Generate Morse Code
 
 ## References
 1. https://kotlinlang.org/docs/reference
