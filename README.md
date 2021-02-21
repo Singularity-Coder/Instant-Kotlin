@@ -294,16 +294,16 @@ val a = 6; val b = 2
 (a > b) && (b == 2) // true (Logical AND: true if all Boolean expressions are true)
 (a > b) && (b == 4) // false
 ```
-* **Bitwise Operators**
+* **Bitwise Operators:** Perfomed on Int and Long integral types through infix notation.
 ```Kotlin
 val a = 6; val b = 2
-a and b    // 2     (Bitwise and)
-a or b     // 6     (Bitwise or)
-a xor b    // 4     (Bitwise xor)
-a shr b    // 1     (Signed shift right)
-a shl b    // 24    (Signed shift left)
-a ushr b   // 1     (Unsigned shift right)
-a.inv()    // -7    (Bitwise inversion)
+a and b    // 2     (Bitwise AND. Performs a bitwise AND operation between "a" and "b". This is just like the AND condition where both have to true for the condition to execute. Here true means bit value "1" and false means bit value "0". So if both bits are "1" then it is counted as "1" else "0".)
+a or b     // 6     (Bitwise OR. Performs a bitwise OR operation between "a" and "b". This is just like the OR condition where if either one of the values must be true for the condition to execute. Here true means bit value "1" and false means bit value "0". So if either bits are "1" then it is counted as "1".)
+a xor b    // 4     (Bitwise XOR. Performs a bitwise XOR operation between "a" and "b".)
+a shr b    // 1     (Signed shift right. Shifts "a" value right by "b" value number of bits, filling the leftmost bits bits with copies of the sign bit.)
+a shl b    // 24    (Signed shift left. Shifts "a" value left by "b" value number of bits.)
+a ushr b   // 1     (Unsigned shift right. Shifts "a" value right by "b" value number of bits, filling the leftmost bits with zeros.)
+a.inv()    // -7    (Bitwise inversion also called as Bitwise complement. Inverts the bits in "a" value. It makes every 0 to 1, and every 1 to 0.)
 ```
 * **in Operator:** Used to check whether an object belongs to a collection.
 ```Kotlin
@@ -560,10 +560,44 @@ println(emptyList)  // []
 ```
 #### Maps
 ```Kotlin
-val listOfNumber = listOf(1, 2, 3, 4)
-val keyValue = mapOf(1 to "Air",
-                     2 to "Bed",
-                     3 to "Breakfast")
+val immutableMap = mapOf<Any, Char>("Subaru" to 'S', "Emilia" to 'E')   // {Subaru=S, Emilia=E} Cannot be modified but can be accessed.
+val mutableMap = mutableMapOf<String, Int>()    // {}
+val emptyMap = emptyMap<Char, Int>()    // {}
+
+// Create, Update
+mutableMap.put(key = "Subaru", value = 19)  // {Subaru=19}
+mutableMap.set(key = "Emilia", value = 18)  // {Subaru=19, Emilia=18}
+mutableMap["Subaru"] = 19                   // {Subaru=19, Emilia=18}
+
+// Read
+immutableMap["Subaru"]  // S
+immutableMap.get(key = "Subaru")    // S
+immutableMap.getOrDefault(key = "Subaru", defaultValue = 'S')   // S
+immutableMap.entries    // [Subaru=S, Emilia=E]
+immutableMap.keys       // [Subaru, Emilia]
+immutableMap.values     // [S, E]
+immutableMap.size       // 2
+immutableMap.count()    // 2
+
+// Check
+immutableMap.containsKey("Subaru")    // true
+immutableMap.containsValue('R')       // false
+immutableMap.isEmpty()                // false
+
+// Sort
+mutableMap.toSortedMap()    // {Emilia=18, Subaru=19}
+
+// Iterate
+mutableMap.forEach { it: Map.Entry<String, Int> -> println("${it.key} is ${it.value}") }    // Subaru is 19 | Emilia is 18
+
+// Print to console
+println(immutableMap)   // {Subaru=S, Emilia=E}
+println(mutableMap)     // {Subaru=19, Emilia=18}
+println(emptyMap)       // {}
+
+// Delete
+mutableMap.remove("Subaru") // {Emilia=18}
+mutableMap.clear()              //  {}
 ```
 #### Set
 ```Kotlin
@@ -1084,7 +1118,7 @@ val bigDec10: BigDecimal = BigDecimal.TEN // 10
 
 ## Random Numbers
 * **Generate Secure Random Number:** Cryptographically strong random values using a cryptographically strong pseudo-random number generator.
-```Kotling
+```Kotlin
 val secureRandom = SecureRandom().nextInt(100)  // 14
 ```
 * **Generate Pseudo Random Number**
@@ -1115,6 +1149,9 @@ val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 
 ## Multi-Tasking
 #### **Coroutines**
+```Kotlin
+implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+```
 ```Kotlin
 GlobalScope.launch {    // Launch a coroutine in background
     myDelay(2000L)  // Suspends "coroutine" execution for 2 sec but not the thread.  Its a suspend function.
@@ -1365,7 +1402,7 @@ Person<Any, Boolean, Number, Char>(type = "Hithesh", element = false, key = 3, v
 * Generate Morse Code
 
 ## References
-1. https://kotlinlang.org/docs/reference
+1. https://kotlinlang.org/docs/home.html
 2. https://github.com/MindorksOpenSource/from-java-to-kotlin
 3. https://www.youtube.com/playlist?list=PL6nth5sRD25iv8jZrQWD-5dXgu56ae5m8
 4. https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2
@@ -1383,3 +1420,4 @@ Person<Any, Boolean, Number, Char>(type = "Hithesh", element = false, key = 3, v
 16. https://www.sciencedirect.com/topics/computer-science/alphanumeric-character
 17. https://www.youtube.com/watch?v=6P20npkvcb8
 18. https://www.youtube.com/watch?v=JzTeAM8N1-o
+19. https://www.programiz.com/kotlin-programming
