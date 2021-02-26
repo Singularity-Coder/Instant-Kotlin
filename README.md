@@ -1005,29 +1005,28 @@ enum class MathConstants(val value: Double, val alsoKnownAs: CharSequence? = "")
             }
         }
 
-        fun closestConstants(name: CharSequence?): List<MathConstants>? {
-            name ?: return null
-            return values().filter { name.contains(it.alsoKnownAs!!) }
+        infix fun <T> MathConstants.isSubsetOf(value: T?): Boolean {
+            value ?: return false
+            if (value !is Number) return false
+            return values().firstOrNull { this.value < abs(value.toDouble()) } != null
         }
 
-        fun closestConstant(name: String?): MathConstants? {
-            name ?: return null
-            return values().firstOrNull {
-                name.contains(it.alsoKnownAs!!)
-            }
+        fun Number.nearestConstants(): List<MathConstants> {
+            if (abs(this.toDouble()) > PI.value) return emptyList()
+            return values().filter { this.toDouble() < it.value }
         }
     }
 }
 ```
 * **Access constants**
 ```Kotlin
-val direction: Direction = Direction.EAST                     // EAST
-    val myConstantValue: Double = MathConstants.PI.value      // 3.14
-    val myConstant: String = MathConstants.PI.name            // PI
-    val myConstantPosition: Int = MathConstants.PI.ordinal    // 3
-    val myPiWith3DecimalPlaces: Double = MathConstants.PI withDecimalPlacesOf 3                   // 3.142
-    val myClosestConstant: MathConstants? = MathConstants.closestConstant(name = "pi")            // ZERO
-    val myClosestConstants: List<MathConstants>? = MathConstants.closestConstants(name = "pi")    // [ZERO, ONE, IMAGINARY_UNIT, PI]
+val direction: Direction = Direction.EAST                 // EAST
+val myConstantValue: Double = MathConstants.PI.value      // 3.14
+val myConstant: String = MathConstants.PI.name            // PI
+val myConstantPosition: Int = MathConstants.PI.ordinal    // 3
+val myPiWith3DecimalPlaces: Double = MathConstants.PI withDecimalPlacesOf 3   // 3.142
+val isThisSubset: Boolean = MathConstants.PI isSubsetOf 4                     // true
+val myClosestConstants: List<MathConstants> = 2.3456789.nearestConstants()    // [PI, EULER_NUMBER]
 ```
 
 ## Inheritance
@@ -1432,6 +1431,14 @@ Classes, objects, interfaces, constructors, functions, properties and their sett
 * **Cipher:** Secret or disguised way of writing; a code.
 * **Callback:** You tell it to do something and it will let you know when its done.
 * **DSL:** Domain-Specific Language.
+* **Binary to Decimal Conversion:** Binary numeral system: 1 is ON and 0 is OFF. 0s don't matter. 1s only matter so add the 2^placeValue values. So 1001011 is 75 in binary.
+```
+Binary Number:             1     0     0     1     0     1     1
+Place Value:               6     5     4     3     2     1     0
+2 power Place Value:       2^6   2^5   2^4   2^3   2^2   2^1   2^0
+Solve the above:           64    32    16    8     4     2     1
+Add the 1 bit values:      64 + 8 + 2 + 1 = 75
+```
 
 ## Next
 * List of Datastructues, their definitions and possible use cases.
