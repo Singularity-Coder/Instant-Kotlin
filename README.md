@@ -223,25 +223,21 @@ val text = """
 var str = "Kotlin Programming Language"
 var substr = ""
 
-// print Kotlin
+// print "Kotlin"
 substr = str.substring(0..5)
 println("substring $substr")
 
-// print Language
+// print "Language"
 substr = str.substring(18..26)
 println("substring $substr")
 ```
 
 ## Type Casting or Type Conversion
 ```Kotlin
-if (object is Car) { 
-   var car = object as Car
-}
+if (object is Car) var car = object as Car
 
 // if object is null
-if (object is Car?) {
-   var car = object as Car?
-}
+if (object is Car?) var car = object as Car?
 ```
 
 ## Operators 
@@ -288,7 +284,7 @@ a.equals(b)          // false
 * **Logical Operators**
 ```Kotlin
 val a = 6; val b = 2
-(a > b) || (b == 2) // true (Logical OR: true if either of the Boolean expression is true)
+(a > b) || (b == 2) // true (Logical OR: true if either of the Boolean expressions is true)
 (a > b) || (b == 4) // true
 (a < b) || (b == 4) // false
 (a > b) && (b == 2) // true (Logical AND: true if all Boolean expressions are true)
@@ -297,8 +293,8 @@ val a = 6; val b = 2
 * **Bitwise Operators:** Perfomed on Int and Long integral types through infix notation.
 ```Kotlin
 val a = 6; val b = 2
-a and b    // 2     (Bitwise AND. Performs a bitwise AND operation between "a" and "b". This is just like the AND condition where both have to true for the condition to execute. Here true means bit value "1" and false means bit value "0". So if both bits are "1" then it is counted as "1" else "0".)
-a or b     // 6     (Bitwise OR. Performs a bitwise OR operation between "a" and "b". This is just like the OR condition where if either one of the values must be true for the condition to execute. Here true means bit value "1" and false means bit value "0". So if either bits are "1" then it is counted as "1".)
+a and b    // 2     (Bitwise AND. Performs a bitwise AND operation between "a" and "b". This is just like the AND condition where both have to be true for the condition to execute. Here true can be considered as bit value "1" and false can be considered as bit value "0". So if both bits are "1" then it is counted as "1" else "0".)
+a or b     // 6     (Bitwise OR. Performs a bitwise OR operation between "a" and "b". This is just like the OR condition where if either one of the values must be true for the condition to execute. So if either of the bits is "1" then it is counted as "1".)
 a xor b    // 4     (Bitwise XOR. Performs a bitwise XOR operation between "a" and "b".)
 a shr b    // 1     (Signed shift right. Shifts "a" value right by "b" value number of bits, filling the leftmost bits bits with copies of the sign bit.)
 a shl b    // 24    (Signed shift left. Shifts "a" value left by "b" value number of bits.)
@@ -483,7 +479,7 @@ outerLoop@ for (a in 1..3) {
 }
 ```
 
-## Data Structures
+## Collections
 #### Arrays
 ```Kotlin
 // Create
@@ -561,8 +557,8 @@ println(emptyList)  // []
 #### Maps
 ```Kotlin
 val immutableMap = mapOf<Any, Char>("Subaru" to 'S', "Emilia" to 'E')   // {Subaru=S, Emilia=E} Cannot be modified but can be accessed.
-val mutableMap = mutableMapOf<String, Int>()    // {}
-val emptyMap = emptyMap<Char, Int>()    // {}
+val mutableMap = mutableMapOf<String, Int>()                            // {}
+val emptyMap = emptyMap<Char, Int>()                                    // {}
 
 // Create, Update
 mutableMap.put(key = "Subaru", value = 19)  // {Subaru=19}
@@ -570,14 +566,14 @@ mutableMap.set(key = "Emilia", value = 18)  // {Subaru=19, Emilia=18}
 mutableMap["Subaru"] = 19                   // {Subaru=19, Emilia=18}
 
 // Read
-immutableMap["Subaru"]  // S
-immutableMap.get(key = "Subaru")    // S
+immutableMap["Subaru"]                                          // S
+immutableMap.get(key = "Subaru")                                // S
 immutableMap.getOrDefault(key = "Subaru", defaultValue = 'S')   // S
-immutableMap.entries    // [Subaru=S, Emilia=E]
-immutableMap.keys       // [Subaru, Emilia]
-immutableMap.values     // [S, E]
-immutableMap.size       // 2
-immutableMap.count()    // 2
+immutableMap.entries                                            // [Subaru=S, Emilia=E]
+immutableMap.keys                                               // [Subaru, Emilia]
+immutableMap.values                                             // [S, E]
+immutableMap.size                                               // 2
+immutableMap.count()                                            // 2
 
 // Check
 immutableMap.containsKey("Subaru")    // true
@@ -597,7 +593,7 @@ println(emptyMap)       // {}
 
 // Delete
 mutableMap.remove("Subaru") // {Emilia=18}
-mutableMap.clear()              //  {}
+mutableMap.clear()          // {}
 ```
 #### Set
 ```Kotlin
@@ -649,7 +645,7 @@ fun evenNumber(evenPrefix: Int = 2, num: Int) = evenPrefix * num
 
 evenNumber(num = 9)    // 18
 ```
-* **Function/Method Overloading**
+* **Function / Method Overloading**
 ```Kotlin
 fun printMyName(name: String) {
     println("My name is $name")
@@ -747,8 +743,10 @@ val myIntro = person?.run { ->
 ## Higher Order Functions
 * **Functions can be stored in a variable.**
 ```Kotlin
-val operation1 = highOrderFuncReturnValue(num1 = 8, num2 = 12) // 20
-val operation2 = highOrderFuncPrintComment() // Hello World!
+fun main() {
+    val operation1 = highOrderFuncReturnValue(num1 = 8, num2 = 12) // 20
+    val operation2 = highOrderFuncPrintComment() // Hello World!
+}
 
 fun highOrderFuncReturnValue(num1: Int, num2: Int): Int = num1 + num2
 fun highOrderFuncPrintComment(): Unit = print("Hello World!")
@@ -795,30 +793,32 @@ fun voidOrUnitFunc2() {
     println("Compressing Image!")
 }
 
-highOrderFuncNoParams(unitFunc = { voidOrUnitFunc1(num1 = 6, num2 = 9) })    // Void or Unit function result is 15
+fun main() {
+    highOrderFuncNoParams(unitFunc = { voidOrUnitFunc1(num1 = 6, num2 = 9) })    // Void or Unit function result is 15
 
-highOrderFuncWithParams(
-    unitFunc = {
-        println("Reducing Image Resolution!")
-        println("Compressing Image!")
-    },
-    imgSize = 4
-)   // Using image with default resolution! 
+    highOrderFuncWithParams(
+        unitFunc = {
+            println("Reducing Image Resolution!")
+            println("Compressing Image!")
+        },
+        imgSize = 4
+    )   // Using image with default resolution! 
 
-highOrderFuncWithParams(
-    unitFunc = { voidOrUnitFunc2() },
-    imgSize = 11
-)   // Reducing Image Resolution! Compressing Image!
+    highOrderFuncWithParams(
+        unitFunc = { voidOrUnitFunc2() },
+        imgSize = 11
+    )   // Reducing Image Resolution! Compressing Image!
 
-highOrderFuncWithParams2(dummyApiCallback = { dummyApiResponse: String ->
-    println(dummyApiResponse)
-})
-// Grave of the Fireflies
-// My Neighbor Totoro
-// Kiki's Delivery Service
-// Princess Mononoke
-// Spirited Away
-// Howl's Moving Castle
+    highOrderFuncWithParams2(dummyApiCallback = { dummyApiResponse: String ->
+        println(dummyApiResponse)
+    })
+    // Grave of the Fireflies
+    // My Neighbor Totoro
+    // Kiki's Delivery Service
+    // Princess Mononoke
+    // Spirited Away
+    // Howl's Moving Castle
+}
 ```
 
 ## Extension Functions
@@ -848,11 +848,13 @@ fun User.canWork(age: Int): Boolean = age > 18
 
 data class User(val name: String, val age: Int)
 
-55.factorial()   // 9540809681250034973565866501770328168700249765255186764678629884883775957860052585601806640625
-12.5.squared()  // 156.25
-'C'.asciiValue() // 67
-User(name = "Hithesh", age = 67).canWork(myUser.age)  // true
-"Singularity Coder".analyzeString()  // Definitely Neo! | String Length: 17 | String starts with the letter: S | String mid value: i
+fun main() {
+    55.factorial()   // 9540809681250034973565866501770328168700249765255186764678629884883775957860052585601806640625
+    12.5.squared()  // 156.25
+    'C'.asciiValue() // 67
+    User(name = "Hithesh", age = 67).canWork(myUser.age)  // true
+    "Singularity Coder".analyzeString()  // Definitely Neo! | String Length: 17 | String starts with the letter: S | String mid value: i
+}
 ```
 
 ## Classes & Objects
@@ -888,9 +890,9 @@ address1.city = "Tesla"
 address1.country = "Mars Colony @#$%123"
 address1.zip = 123456
 
-println(address1.toString())	// Address(City: Tesla, Country: Mars Colony @#$%123, Zip: 123456)
-println(address1.hashCode())	// 654287787
-println(address1.equals(address2))	// false
+println(address1.toString())    // Address(City: Tesla, Country: Mars Colony @#$%123, Zip: 123456)
+println(address1.hashCode())    // 654287787
+println(address1.equals(address2))  // false
 ```
 * **Initialization Block**
 ```Kotlin
@@ -907,9 +909,11 @@ class User {
 ```Kotlin
 class User0(val name: String = "", val age: Int = 0) 
 
-val user0: User0 = User0(name = "Hithesh", age = 199)
-println("Name: ${user0.name}")  // Name: Hithesh
-println("Age: ${user0.age}")    // Age: 199
+fun main() {
+    val user0: User0 = User0(name = "Hithesh", age = 199)
+    println("Name: ${user0.name}")  // Name: Hithesh
+    println("Age: ${user0.age}")    // Age: 199
+}
 ```
 * **Secondary Constructors**
 ```Kotlin
@@ -925,9 +929,11 @@ class User1 {
     constructor()
 }
 
-val user1: User1 = User1(name = "Singularity Coder", age = 6543)
-println("Name: ${user1.name}")  // Name: Singularity Coder
-println("Age: ${user1.age}")    // Age: 6543
+fun main() {
+    val user1: User1 = User1(name = "Singularity Coder", age = 6543)
+    println("Name: ${user1.name}")  // Name: Singularity Coder
+    println("Age: ${user1.age}")    // Age: 6543
+}
 ```
 * **Primary and Secondary Constructors**
 ```Kotlin
@@ -947,9 +953,11 @@ class User2(private val dob: String = "", private val profession: String = "") {
     fun printProfession() = println("Profession: $profession")
 }
 
-val user2: User2 = User2(dob = "12/07/0001", profession = "Magic Caster")
-user2.printDob()	// Date Of Birth: 12/07/0001
-user2.printProfession()	// Profession: Magic Caster
+fun main() {
+    val user2: User2 = User2(dob = "12/07/0001", profession = "Magic Caster")
+    user2.printDob()    // Date Of Birth: 12/07/0001
+    user2.printProfession() // Profession: Magic Caster
+}
 ```
 * **Private Constructor:** These classes cannot be instantiated or you cannot create objects with these classes.
 ```Kotlin
@@ -960,8 +968,10 @@ class User3 private constructor() {
     }
 }
 
-val name: String = User3.NAME   // Singularity Coder
-val age: Int = User3.age15YearsFromNow(age = 15)    // 30
+fun main() {
+    val name: String = User3.NAME   // Singularity Coder
+    val age: Int = User3.age15YearsFromNow(age = 15)    // 30
+}
 ```
 
 ## Enum Class
@@ -976,13 +986,37 @@ enum class Direction {
 ```
 * **Create Enum class with constructor**
 ```Kotlin
-enum class MathConstants(val value: Double) {
-    ZERO(0.0),
-    ONE(1.0),
-    IMAGINARY_UNIT(Math.sqrt(-1.0)),
-    PI(3.14),
-    EULER_NUMBER(2.71),
-    GOLDEN_RATIO(1.61)
+enum class MathConstants(val value: Double, val alsoKnownAs: CharSequence? = "") {
+    ZERO(value = 0.0),
+    ONE(value = 1.0),
+    IMAGINARY_UNIT(value = sqrt(-1.0), alsoKnownAs = "i"),
+    NATURAL_LOGARITHM_OF_2(value = 0.69314718055994530941, alsoKnownAs = "ln 2"),
+    PI(value = 3.14159265358979323846),
+    EULER_NUMBER(value = 2.71828182845904523536, alsoKnownAs = "e"),
+    GOLDEN_RATIO(value = 1.61803398874989484820, alsoKnownAs = "Phi");
+
+    companion object {
+        infix fun MathConstants.withDecimalPlacesOf(decimalPlaces: Int?): Double {
+            decimalPlaces ?: return this.value
+            return try {
+                BigDecimal(this.toString()).setScale(decimalPlaces, RoundingMode.UP).toDouble()
+            } catch (e: Exception) {
+                this.value
+            }
+        }
+
+        fun closestConstants(name: CharSequence?): List<MathConstants>? {
+            name ?: return null
+            return values().filter { name.contains(it.alsoKnownAs!!) }
+        }
+
+        fun closestConstant(name: String?): MathConstants? {
+            name ?: return null
+            return values().firstOrNull {
+                name.contains(it.alsoKnownAs!!)
+            }
+        }
+    }
 }
 ```
 * **Access constants**
@@ -991,6 +1025,9 @@ val direction: Direction = Direction.EAST   // EAST
 val myConstantValue: Double = MathConstants.PI.value    // 3.14
 val myConstant: String = MathConstants.PI.name    // PI
 val myConstantPosition: Int = MathConstants.PI.ordinal    // 3
+val myPiWith3DecimalPlaces: Double = MathConstants.PI withDecimalPlacesOf 3
+val myClosestConstant: MathConstants? = MathConstants.closestConstant(name = "pi")   // ZERO
+val myClosestConstants: List<MathConstants>? = MathConstants.closestConstants(name = "pi")    // [ZERO, ONE, IMAGINARY_UNIT, PI]
 ```
 
 ## Inheritance
@@ -1027,11 +1064,13 @@ val task = object : AsyncTask<Void, Void, Profile>() {
 ```Kotlin
 data class User(var name: String, var age: Int)
 
-// cloning or copying
-val user = User("Singularity Coder", 30)
-val user2 = user.copy()
-// in case you only want to copy selected properties
-val user2 = user.copy(age = 25)
+fun main() {
+    // cloning or copying
+    val user = User("Singularity Coder", 30)
+    val user2 = user.copy()
+    // in case you only want to copy selected properties
+    val user2 = user.copy(age = 25)
+}
 ```
 
 ## Pair and Triple
@@ -1233,13 +1272,6 @@ val loader: LoaderManager.LoaderCallbacks<String> = object : LoaderManager.Loade
 }
 ```
 
-## Regular Expressions
-* Finding exact string
-* Finding exact string with conditions
-* Finding exact string and replacing it with another
-
-## Math
-
 ## Generics
 * Classes can have type parameters
 ```Kotlin
@@ -1257,9 +1289,37 @@ class Person<T, E, K, V>(
     }
 }
 
-Person<String, Int, Boolean, Any>()
-Person<Any, Boolean, Number, Char>(type = "Hithesh", element = false, key = 3, value = 'S')
+fun main() {
+    Person<String, Int, Boolean, Any>()
+    Person<Any, Boolean, Number, Char>(type = "Hithesh", element = false, key = 3, value = 'S')
+}
 ```
+
+## Visibility Modifiers
+Classes, objects, interfaces, constructors, functions, properties and their setters can have visibility modifiers. Getters always have the same visibility as the property.
+* **private**
+```Kotlin
+
+```
+* **protected**
+```Kotlin
+
+```
+* **internal**
+```Kotlin
+
+```
+* **public** (default)
+```Kotlin
+
+```
+
+## Regular Expressions
+* Finding exact string
+* Finding exact string with conditions
+* Finding exact string and replacing it with another
+
+## Math
 
 ## Lateinit and Lazy
 
@@ -1269,16 +1329,12 @@ Person<Any, Boolean, Number, Char>(type = "Hithesh", element = false, key = 3, v
 
 ## JvmStatic, JvmOverloads, and JvmField
 
-## Visibility Modifiers
-
-## Collections
-
 ## Common Vocabulary
 * **Expression:** A function with return value or a variable. They are things that have values. You assign expressions to variables.
 * **Statement:** Code with an assignment operator. They are things that have effects. You write statements to assign things to other things.
 * **Pascal Case:** KotlinCodeSnippets  
 * **Camel Case:** kotlinCodeSnippets  
-* **Snake Case:** KOTLIN_CODE_SNIPPETS  
+* **Snake Case:** kotlin_code_snippets 
 * **Main Function:** Entry point in our app.  
 * **Compiler:** Translates high level language to low level language that machine can understand. Also checks for syntax errors.  
 * **Run Kotlin Program:** Converts Kotlin code to Java byte code to run it on JVM. JVM further converts the Java byte code into machine code that <a href=""></a> platform like Mac or Windows can understand.  
