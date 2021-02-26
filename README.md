@@ -999,7 +999,7 @@ enum class MathConstants(val value: Double, val alsoKnownAs: CharSequence? = "")
         infix fun MathConstants.withDecimalPlacesOf(decimalPlaces: Int?): Double {
             decimalPlaces ?: return this.value
             return try {
-                BigDecimal(this.toString()).setScale(decimalPlaces, RoundingMode.UP).toDouble()
+                BigDecimal(this.value.toString()).setScale(decimalPlaces, RoundingMode.CEILING).toDouble()
             } catch (e: Exception) {
                 this.value
             }
@@ -1021,13 +1021,13 @@ enum class MathConstants(val value: Double, val alsoKnownAs: CharSequence? = "")
 ```
 * **Access constants**
 ```Kotlin
-val direction: Direction = Direction.EAST   // EAST
-val myConstantValue: Double = MathConstants.PI.value    // 3.14
-val myConstant: String = MathConstants.PI.name    // PI
-val myConstantPosition: Int = MathConstants.PI.ordinal    // 3
-val myPiWith3DecimalPlaces: Double = MathConstants.PI withDecimalPlacesOf 3
-val myClosestConstant: MathConstants? = MathConstants.closestConstant(name = "pi")   // ZERO
-val myClosestConstants: List<MathConstants>? = MathConstants.closestConstants(name = "pi")    // [ZERO, ONE, IMAGINARY_UNIT, PI]
+val direction: Direction = Direction.EAST                     // EAST
+    val myConstantValue: Double = MathConstants.PI.value      // 3.14
+    val myConstant: String = MathConstants.PI.name            // PI
+    val myConstantPosition: Int = MathConstants.PI.ordinal    // 3
+    val myPiWith3DecimalPlaces: Double = MathConstants.PI withDecimalPlacesOf 3                   // 3.142
+    val myClosestConstant: MathConstants? = MathConstants.closestConstant(name = "pi")            // ZERO
+    val myClosestConstants: List<MathConstants>? = MathConstants.closestConstants(name = "pi")    // [ZERO, ONE, IMAGINARY_UNIT, PI]
 ```
 
 ## Inheritance
