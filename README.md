@@ -1328,7 +1328,13 @@ Classes, objects, interfaces, constructors, functions, properties and their sett
 
 ## JvmStatic, JvmOverloads, and JvmField
 
+## Annotations
+```Kotlin
+annotation class StringMagic
+```
+
 ## Common Vocabulary
+* **Data:** The quantities, characters or symbols on which operations are performed by a computer, which may be stored and transmitted in the form of electrical signals and recorded on magnetic, optical or mechanical recording media.
 * **Expression:** A function with return value or a variable. They are things that have values. You assign expressions to variables.
 * **Statement:** Code with an assignment operator. They are things that have effects. You write statements to assign things to other things.
 * **Pascal Case:** KotlinCodeSnippets  
@@ -1408,7 +1414,7 @@ Classes, objects, interfaces, constructors, functions, properties and their sett
 * **Armstrong Number:** A number that is equal to the sum of cubes of its digits. Ex: 0, 1, 153, 370, 371, 407, etc. If we take 153 -> 1^3 = 1, 5^3 = 125, 3^3 = 27. So 1 + 125 + 27 = 153. 
 * **Natural Numbers (N):** Also called as Positive Integers, Counting Numbers. 1, 2, 3...∞
 * **Whole Numbers (W) or Non-Negative Integers (Z Star):** Set of Natural Numbers, plus Zero. 0, 1, 2, 3...∞
-* **Integers (Z):** Set of Negative numbers and Whole Numbers or a fraction. -∞...-3, -2, -1, 0, 1, 2, 3...∞   
+* **Integers (Z):** Set of Negative numbers and Whole Numbers. -∞...-3, -2, -1, 0, 1, 2, 3...∞   
 * **Rational Numbers (Q):** Can be expressed as ratio of two integers. All the fractions where the top and bottom numbers are integers. The denominator cannot be 0, but the numerator can be. 1/2, 3/4, 7/2, ⁻4/3, 4/1.
 * **Unit Fractions:** If numerator of a fraction is one. 1/2, 1/3, 1/4, 1/5.
 * **Decimal Fractions:** Decimal numbers (such as 0.3,  0.32, -2.7) can be called decimal fractions, because they can be written in a fractional form (e.g., 3/10, 32/100, -27/10).
@@ -1440,6 +1446,8 @@ Solve the above:           64    32    16    8     4     2     1
 
 Add the 1 bit values:      64 + 8 + 2 + 1 = 75
 ```
+* **Hexadecimal to Decimal Conversion:**
+* **Octal to Decimal Conversion:**
 
 ## Next
 * List of Datastructues, their definitions and possible use cases.
@@ -1485,3 +1493,4 @@ Add the 1 bit values:      64 + 8 + 2 + 1 = 75
 17. https://www.youtube.com/watch?v=6P20npkvcb8
 18. https://www.youtube.com/watch?v=JzTeAM8N1-o
 19. https://www.programiz.com/kotlin-programming
+20. https://www.youtube.com/watch?v=xXLj5MbrI44&list=PLWKjhJtqVAbmfoj2Th9fvxhHIeqFO7wOy&index=4
