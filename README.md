@@ -75,7 +75,7 @@ print("Just printing this! ");
 print("So i am next to the previous line.");
 ```
 
-## Null Stuff
+## Null Safety
 * **Nullable operator:** `?` means the variable is nullable (or) can be null.  
 * **Not Null operator:**`!!` means you are forcibly telling the compiler that this variable is not null even if it actually is or can be null.  
 * **If Not Null operator:**`?.` means safe call operator. If the variable is not null then execute this code.  
@@ -625,7 +625,7 @@ fun myIntro(fullName: String): String {
     return "My first name is ${splitName()[0]} and my last name is ${splitName()[1]}"
 }
 
-myIntro("Hithesh Vurjana")  // My first name is HITHESH and my last name is VURJANA
+fun main() = myIntro("Hithesh Vurjana")  // My first name is HITHESH and my last name is VURJANA
 ```
 * **Member function** Part of function scope. Function that is defined inside a class or object. They are called with dot notation.
 ```Kotlin
@@ -633,7 +633,7 @@ class Calculate {
     fun add() { print("Addition Operation") }
 }
 
-Calculate().add() // Creates instance of class Calculate and calls add()
+fun main() = Calculate().add() // Creates instance of class Calculate and calls add()
 ```
 * **Default Parameters/Arguments**
 ```Kotlin
@@ -643,7 +643,7 @@ fun evenNumber(evenPrefix: Int = 2, num: Int) = evenPrefix * num
 ```Kotlin
 fun evenNumber(evenPrefix: Int = 2, num: Int) = evenPrefix * num
 
-evenNumber(num = 9)    // 18
+fun main() = evenNumber(num = 9)    // 18
 ```
 * **Function / Method Overloading**
 ```Kotlin
@@ -655,21 +655,50 @@ fun printMyName(firstName: String, lastName: String) {
     println("My name is $firstName $lastName")
 }
 
-printMyName("Hithesh")  // My name is Hithesh
-printMyName("Hithesh", "Vurjana")   // My name is Hithesh Vurjana
+fun main() {
+    printMyName("Hithesh")  // My name is Hithesh
+    printMyName("Hithesh", "Vurjana")   // My name is Hithesh Vurjana
+}
 ```
 * **Vararg function:** Variable number of arguments
 ```Kotlin
 fun exponentList(vararg numList: Int, exponent: Int): List<Int> = numList.map { Math.pow(it.toDouble(), exponent.toDouble()).toInt() }
 
-exponentList(1, 2, 3, 4, 5, exponent = 3)   // [1, 8, 27, 64, 125]
-exponentList(numList = intArrayOf(1, 2, 3, 4, 5), exponent = 3)    // [1, 8, 27, 64, 125]
+fun main() {
+    exponentList(1, 2, 3, 4, 5, exponent = 3)   // [1, 8, 27, 64, 125]
+    exponentList(numList = intArrayOf(1, 2, 3, 4, 5), exponent = 3)    // [1, 8, 27, 64, 125]
+}
 ```
 * **Infix function Call:** Must be an extension function, have only a single parameter which cannot be a vararg and cannot have a default value.
 ```Kotlin
 infix fun Int.times(num: Int): Int = this * num
 
-3 times 5   // 15
+class Person(val name: String) {
+    private val likedPeople = mutableListOf<Person>()
+    infix fun likes(other: Person) = likedPeople.add(other)
+}
+
+fun main() {
+    3 times 5   // 15
+
+    // Infix notation also works on members functions (methods). The containing class becomes the first parameter.
+    val mark = Person("Mark")
+    val sophia = Person("Sophia")
+    mark likes sophia
+} 
+```
+* **Operator function:**
+```Kotlin
+operator fun Int.times(str: String) = str.repeat(this)
+
+operator fun String.get(range: IntRange) = substring(range)
+
+fun main() {
+    2 * "Bye "  // Bye Bye
+
+    val str = "Always forgive your enemies; nothing annoys them so much."
+    str[0..14]  // Always forgive
+}
 ```
 * **Generic function:**
 ```Kotlin
@@ -1075,6 +1104,7 @@ fun main() {
 ## Pair and Triple
 * **Pair:** Collection of 2 variables
 ```Kotlin
+val myPair = "Dark Blue" to "Golden"    // (Dark Blue, Golden)
 val pair = Pair<String, Int>(first = "Singularity Coder", second = 179)
 pair.first 	// Singularity Coder
 pair.second 	// 179
@@ -1437,6 +1467,12 @@ annotation class StringMagic
 * **Cipher:** Secret or disguised way of writing; a code.
 * **Callback:** You tell it to do something and it will let you know when its done.
 * **DSL:** Domain-Specific Language.
+* **Main Memory:** Random Access Memory (RAM). 
+* **Data Structure:** A way to arrange data in main memory (RAM) for efficient usage. Ex: Arrays, LinkedLists, Stacks, etc.
+* **Algorithm:** Sequence of steps that solves a problem.
+* **Database:** Collections of data stored in permanent storage that can be added, fetched, updated and deleted.
+* **Data Warehousing:** 
+* **Big Data:** 
 * **Binary to Decimal Conversion:** Binary numeral system: 1 is ON and 0 is OFF. 0s don't matter. 1s only matter so add the 2^placeValue values. So 1001011 is 75 in binary. Read from right to left.
 ```
 Binary Number:             1     0     0     1     0     1     1
