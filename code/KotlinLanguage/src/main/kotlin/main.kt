@@ -61,6 +61,7 @@ fun kotlinStrings() {
 //    "qwertyuiop".htmlEncode()
 
     "qwertyuiop".endsWith(suffix = "cao", ignoreCase = true)
+    "qwertyuiop".endsWith(char = 'q', ignoreCase = true)
 
     "qwertyuiop".filter { it: Char -> it == 'o' }
     "qwertyuiop".filterIndexed { i: Int, c: Char -> false }

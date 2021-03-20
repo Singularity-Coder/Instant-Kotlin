@@ -224,68 +224,15 @@ val stringBuffer: String = StringBuffer().append(a).append(" ").append(b).append
 // String Templates : This is just the Kotlin version of StringBuilder. Recommended way to concatenate.
 val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. I am 11 characters long!
 ```
-* **New Line**
+* **String Transformations**
 ```Kotlin
-val text = """
-        |First Line
-        |Second Line
-        |Third Line
-        """.trimMargin()
-```
-* **Substring**
-```Kotlin
-var str = "Kotlin Programming Language"
-var substr = ""
-
-// print "Kotlin"
-substr = str.substring(0..5)
-println("substring $substr")
-
-// print "Language"
-substr = str.substring(18..26)
-println("substring $substr")
-```
-* **All String Methods**
-```Kotlin
-val a = "Hello";
-val b = "World."
-
-// plus() method : Since Strings are immutable in Java which Kotlin first compiles to, new String objects are created all the time. Inefficient for large number of strings. Use String templates or StringBuilder.
-val c = a.plus(" ").plus(b).plus(" I am ").plus(a.length + b.length).plus(" characters long!")  // Hello World. I am 11 characters long!
-
-// + Operator : Suppose we have 10 strings a + b + c + d + e + f + g + h + i + j, then each use of the + operator generates a new string object. So here just for just one string we generated 10 string objects. a + b is one, then a + b + c is another string object, etc.
-val d = a + " " + b + " I am " + (a.length + b.length) + " characters long!"    // Hello World. I am 11 characters long!
-
-// StringBuilder : Efficient when concatenating large number of strings
-val stringBuilder: String = StringBuilder().append(a).append(" ").append(b).append(" I am ").append(a.length + b.length).append(" characters long!").toString() // Hello World. I am 11 characters long!
-
-// Use StringBuffer for thread-safe concatenation instead of StringBuilder.
-val stringBuffer: String = StringBuffer().append(a).append(" ").append(b).append(" I am ").append(a.length + b.length).append(" characters long!").toString()   // Hello World. I am 11 characters long!
-
-// String Templates : This is just the Kotlin version of StringBuilder. Recommended way to concatenate.
-val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. I am 11 characters long!
-
-val myPair: Pair<String, String> = "Dark Bluish Black" to "Golden"
-val splitString: Array<String> = "172.16.154.1".split(".").toTypedArray()
-val areTheyEqual: Boolean = "qwerty".equals(other = "qwertyy")
-val areTheyEqual2: Boolean = "qwerty" == "qwertyy"
-
 "edoc".reversed()
 
 "Singularity Coder".capitalize(Locale.ROOT)
 "Singularity Coder".decapitalize(Locale.ROOT)
 
-"qwerty".compareTo("qwerty")
-
-"qwerty".get(index = 8)
-
-"qwerty".length
-
-"qwerty".chars()
-
-"qwerty".codePoints()
-
-"qwerty".hashCode()
+"qwertyuiop".toLowerCase(Locale.ROOT)
+"qwertyuiop".toUpperCase(Locale.ROOT)
 
 "qwerty".byteInputStream(Charsets.ISO_8859_1)
 "qwerty".byteInputStream(Charsets.US_ASCII)
@@ -298,69 +245,36 @@ val areTheyEqual2: Boolean = "qwerty" == "qwertyy"
 "qwerty".byteInputStream(Charsets.UTF_8)
 "qwerty".byteInputStream(Charset.defaultCharset())
 
-12.toString()
+"qwertyuiop".toPattern(Pattern.UNIX_LINES)
+"qwertyuiop".toPattern(Pattern.CANON_EQ)
+"qwertyuiop".toPattern(Pattern.CASE_INSENSITIVE)
+"qwertyuiop".toPattern(Pattern.COMMENTS)
+"qwertyuiop".toPattern(Pattern.DOTALL)
+"qwertyuiop".toPattern(Pattern.LITERAL)
+"qwertyuiop".toPattern(Pattern.MULTILINE)
+"qwertyuiop".toPattern(Pattern.UNICODE_CASE)
+"qwertyuiop".toPattern(Pattern.UNICODE_CHARACTER_CLASS)
+```
+* **String Comparisions**
+```Kotlin
+val areTheyEqual: Boolean = "qwerty".equals(other = "qwertyy")
+val areTheyEqual2: Boolean = "qwerty" == "qwertyy"
 
-"qwertyuiop".codePointAt(index = 7)
-"qwertyuiop".codePointBefore(index = 7)
-"qwertyuiop".codePointCount(beginIndex = 2, endIndex = 7)
+"qwerty".compareTo("qwerty")
 
 "qwertyuiop".contentEquals(charSequence = "qwertyuiop")
 
-"qwertyuiop".drop(n = 3)
-"qwertyuiop".dropLast(n = 3)
-"qwertyuiop".dropLastWhile { it: Char -> it == 'u' }
-"qwertyuiop".dropWhile { it: Char -> it == 'u' }
-
-"qwertyuiop".encodeToByteArray()
-"qwertyuiop".encodeToByteArray(startIndex = 1, endIndex = 2, throwOnInvalidSequence = true)
-"qwertyuiop".htmlEncode()
-
 "qwertyuiop".endsWith(suffix = "cao", ignoreCase = true)
+"qwertyuiop".endsWith(char = 'q', ignoreCase = true)
 
-"qwertyuiop".filter { it: Char -> it == 'o' }
-"qwertyuiop".filterIndexed { i: Int, c: Char -> false }
-"qwertyuiop".filterNot { it: Char -> it == 'u' }
-
-"qwertyuiop".format(locale = Locale.ROOT, 2, 3, 4, "t")
-
-"qwertyuiop".intern()
-
-"qwertyuiop".toLowerCase(Locale.ROOT)
-"qwertyuiop".toUpperCase(Locale.ROOT)
-
-"qwertyuiop".offsetByCodePoints(index = 3, codePointOffset = 5)
-
-"qwertyuiop".padEnd(length = 4, padChar = '-')
-"qwertyuiop".padStart(length = 4, padChar = '-')
-
-"qwertyuiop".partition { it: Char -> false }
-"qwertyuiop".prependIndent(indent = "asdfghjk")
-"qwertyuiop".reader()
-"qwertyuiop".regionMatches(thisOffset = 2, other = "rwtw", otherOffset = 7, length = 3, ignoreCase = true)
-
-"qwertyuiop".removePrefix(prefix = "qwe")
-"qwertyuiop".removeSurrounding(delimiter = "p")
-"qwertyuiop".removeSurrounding(prefix = "qw", "ty")
-"qwertyuiop".removeRange(range = 1..3)
-"qwertyuiop".removeRange(startIndex = 2, endIndex = 6)
-"qwertyuiop".removeSuffix(suffix = "ty")
-
-"wiki pedia.com".replace(oldValue = " ", newValue = "", ignoreCase = true)
-"qwertyuiop".replace(oldValue = "q", newValue = "a", ignoreCase = true)
-"qwertyuiop".replaceAfter(delimiter = 'q', replacement = "ss", missingDelimiterValue = "uu")
-"qwertyuiop".replaceAfterLast(delimiter = 'q', replacement = "ss", missingDelimiterValue = "uu")
-"qwertyuiop".replaceBefore(delimiter = 'q', replacement = "ss", missingDelimiterValue = "uu")
-"qwertyuiop".replaceBeforeLast(delimiter = 'q', replacement = "ss", missingDelimiterValue = "uu")
-"qwertyuiop".replace(regex = Regex(pattern = "qwe"), replacement = "asd")
-"qwertyuiop".replaceFirst(oldChar = 'q', newChar = 'z', ignoreCase = true)
-"qwertyuiop".replaceIndent(newIndent = "qwer")
-"qwertyuiop".replaceIndentByMargin(newIndent = "qwer", marginPrefix = "|")
-"qwertyuiop".replaceRange(range = 1..4, replacement = "ghjk")
-"qwertyuiop".replaceRange(startIndex = 1, endIndex = 4, replacement = "hjk")
-
-"qwertyuiop".slice(indices = 1..4)
 "qwertyuiop".startsWith(prefix = "qw", ignoreCase = true)
 "qwertyuiop".startsWith(prefix = "qw", startIndex = 3, ignoreCase = true)
+
+"qwertyuiop".regionMatches(thisOffset = 2, other = "rwtw", otherOffset = 7, length = 3, ignoreCase = true)
+```
+* **Find & Extract String**
+```Kotlin
+"qwertyuiop".slice(indices = 1..4)
 
 "qwertyuiop".substring(range = 1..4)
 "qwertyuiop".substring(startIndex = 2)
@@ -383,6 +297,69 @@ val areTheyEqual2: Boolean = "qwerty" == "qwertyy"
 "qwertyuiop".takeWhile { it: Char -> false }
 "qwertyuiop".takeIf { it: String -> false }
 "qwertyuiop".takeUnless { it: String -> false }
+
+var str = "Kotlin Programming Language"
+var substr = ""
+
+// print "Kotlin"
+substr = str.substring(0..5)
+println("substring $substr")
+
+// print "Language"
+substr = str.substring(18..26)
+println("substring $substr")
+```
+* **Modify/Update/Edit String**
+```Kotlin
+"wiki pedia.com".replace(oldValue = " ", newValue = "", ignoreCase = true)
+"qwertyuiop".replace(oldValue = "q", newValue = "a", ignoreCase = true)
+"qwertyuiop".replaceAfter(delimiter = 'q', replacement = "ss", missingDelimiterValue = "uu")
+"qwertyuiop".replaceAfterLast(delimiter = 'q', replacement = "ss", missingDelimiterValue = "uu")
+"qwertyuiop".replaceBefore(delimiter = 'q', replacement = "ss", missingDelimiterValue = "uu")
+"qwertyuiop".replaceBeforeLast(delimiter = 'q', replacement = "ss", missingDelimiterValue = "uu")
+"qwertyuiop".replace(regex = Regex(pattern = "qwe"), replacement = "asd")
+"qwertyuiop".replaceFirst(oldChar = 'q', newChar = 'z', ignoreCase = true)
+"qwertyuiop".replaceIndent(newIndent = "qwer")
+"qwertyuiop".replaceIndentByMargin(newIndent = "qwer", marginPrefix = "|")
+"qwertyuiop".replaceRange(range = 1..4, replacement = "ghjk")
+"qwertyuiop".replaceRange(startIndex = 1, endIndex = 4, replacement = "hjk")
+
+"qwertyuiop".drop(n = 3)
+"qwertyuiop".dropLast(n = 3)
+"qwertyuiop".dropLastWhile { it: Char -> it == 'u' }
+"qwertyuiop".dropWhile { it: Char -> it == 'u' }
+
+"qwertyuiop".removePrefix(prefix = "qwe")
+"qwertyuiop".removeSurrounding(delimiter = "p")
+"qwertyuiop".removeSurrounding(prefix = "qw", "ty")
+"qwertyuiop".removeRange(range = 1..3)
+"qwertyuiop".removeRange(startIndex = 2, endIndex = 6)
+"qwertyuiop".removeSuffix(suffix = "ty")
+
+"qwertyuiop".trim()
+"qwertyuiop".trim('w', 'r')
+"qwertyuiop".trim { it: Char -> false }
+"qwertyuiop".trimStart()
+"qwertyuiop".trimStart('w', 'r')
+"qwertyuiop".trimStart { it: Char -> false }
+"qwertyuiop".trimEnd()
+"qwertyuiop".trimEnd('w', 'r')
+"qwertyuiop".trimEnd { it: Char -> false }
+"qwertyuiop".trimIndent()
+"qwertyuiop".trimMargin(marginPrefix = "qwe")
+
+"qwertyuiop".padEnd(length = 4, padChar = '-')
+"qwertyuiop".padStart(length = 4, padChar = '-')
+
+"qwertyuiop".prependIndent(indent = "asdfghjk")
+```
+* **String Conversions**
+```Kotlin
+12.toString()
+
+"qwertyuiop".encodeToByteArray()
+"qwertyuiop".encodeToByteArray(startIndex = 1, endIndex = 2, throwOnInvalidSequence = true)
+"qwertyuiop".htmlEncode()
 
 "123456789".toBigInteger()
 "12345678".toBigInteger(radix = 2)
@@ -444,31 +421,51 @@ val areTheyEqual2: Boolean = "qwerty" == "qwertyy"
 "qwertyuiop".toCharArray(startIndex = 2, endIndex = 5)
 "qwertyuiop".toCharArray(destination = charArrayOf('w', 'e'), destinationOffset = 2, startIndex = 4, endIndex = 6)
 
-"qwertyuiop".toPattern(Pattern.UNIX_LINES)
-"qwertyuiop".toPattern(Pattern.CANON_EQ)
-"qwertyuiop".toPattern(Pattern.CASE_INSENSITIVE)
-"qwertyuiop".toPattern(Pattern.COMMENTS)
-"qwertyuiop".toPattern(Pattern.DOTALL)
-"qwertyuiop".toPattern(Pattern.LITERAL)
-"qwertyuiop".toPattern(Pattern.MULTILINE)
-"qwertyuiop".toPattern(Pattern.UNICODE_CASE)
-"qwertyuiop".toPattern(Pattern.UNICODE_CHARACTER_CLASS)
-
 "qwertyuiop".toRegex()
 "qwertyuiop".toRegex(option = RegexOption.COMMENTS)
 "qwertyuiop".toRegex(setOf<RegexOption>(RegexOption.COMMENTS, RegexOption.CANON_EQ))
+```
+* **New Line**
+```Kotlin
+val text = """
+        |First Line
+        |Second Line
+        |Third Line
+        """.trimMargin()
+```
+* **Other String Operations**
+```Kotlin
+val a = "Hello";
+val b = "World."
+val myPair: Pair<String, String> = "Dark Bluish Black" to "Golden"
+val splitString: Array<String> = "172.16.154.1".split(".").toTypedArray()
 
-"qwertyuiop".trim()
-"qwertyuiop".trim('w', 'r')
-"qwertyuiop".trim { it: Char -> false }
-"qwertyuiop".trimStart()
-"qwertyuiop".trimStart('w', 'r')
-"qwertyuiop".trimStart { it: Char -> false }
-"qwertyuiop".trimEnd()
-"qwertyuiop".trimEnd('w', 'r')
-"qwertyuiop".trimEnd { it: Char -> false }
-"qwertyuiop".trimIndent()
-"qwertyuiop".trimMargin(marginPrefix = "qwe")
+"qwerty".get(index = 8)
+
+"qwerty".length
+
+"qwerty".chars()
+
+"qwerty".codePoints()
+
+"qwerty".hashCode()
+
+"qwertyuiop".codePointAt(index = 7)
+"qwertyuiop".codePointBefore(index = 7)
+"qwertyuiop".codePointCount(beginIndex = 2, endIndex = 7)
+
+"qwertyuiop".filter { it: Char -> it == 'o' }
+"qwertyuiop".filterIndexed { i: Int, c: Char -> false }
+"qwertyuiop".filterNot { it: Char -> it == 'u' }
+
+"qwertyuiop".format(locale = Locale.ROOT, 2, 3, 4, "t")
+
+"qwertyuiop".intern()
+
+"qwertyuiop".offsetByCodePoints(index = 3, codePointOffset = 5)
+
+"qwertyuiop".partition { it: Char -> false }
+"qwertyuiop".reader()
 
 "qwertyuiop".indices
 "qwertyuiop".lastIndex
