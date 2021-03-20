@@ -226,7 +226,28 @@ val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. 
 ```
 * **String Transformations**
 ```Kotlin
+"qwerty".get(index = 8)
+
+"qwerty".length
+
+"qwerty".chars()
+
+"qwerty".codePoints()
+
+"qwerty".hashCode()
+
+"qwertyuiop".codePointAt(index = 7)
+"qwertyuiop".codePointBefore(index = 7)
+"qwertyuiop".codePointCount(beginIndex = 2, endIndex = 7)
+
+"qwertyuiop".indices
+"qwertyuiop".lastIndex
+```
+* **String Transformations**
+```Kotlin
 "edoc".reversed()
+
+"qwertyuiop".format(locale = Locale.ROOT, 2, 3, 4, "t")
 
 "Singularity Coder".capitalize(Locale.ROOT)
 "Singularity Coder".decapitalize(Locale.ROOT)
@@ -272,7 +293,7 @@ val areTheyEqual2: Boolean = "qwerty" == "qwertyy"
 
 "qwertyuiop".regionMatches(thisOffset = 2, other = "rwtw", otherOffset = 7, length = 3, ignoreCase = true)
 ```
-* **Find & Extract String**
+* **Extract String**
 ```Kotlin
 "qwertyuiop".slice(indices = 1..4)
 
@@ -352,6 +373,10 @@ println("substring $substr")
 "qwertyuiop".padStart(length = 4, padChar = '-')
 
 "qwertyuiop".prependIndent(indent = "asdfghjk")
+
+"qwertyuiop".filter { it: Char -> it == 'o' }
+"qwertyuiop".filterIndexed { i: Int, c: Char -> false }
+"qwertyuiop".filterNot { it: Char -> it == 'u' }
 ```
 * **String Conversions**
 ```Kotlin
@@ -424,6 +449,9 @@ println("substring $substr")
 "qwertyuiop".toRegex()
 "qwertyuiop".toRegex(option = RegexOption.COMMENTS)
 "qwertyuiop".toRegex(setOf<RegexOption>(RegexOption.COMMENTS, RegexOption.CANON_EQ))
+
+val myPair: Pair<String, String> = "Dark Bluish Black" to "Golden"
+val splitString: Array<String> = "172.16.154.1".split(".").toTypedArray()
 ```
 * **New Line**
 ```Kotlin
@@ -435,40 +463,12 @@ val text = """
 ```
 * **Other String Operations**
 ```Kotlin
-val a = "Hello";
-val b = "World."
-val myPair: Pair<String, String> = "Dark Bluish Black" to "Golden"
-val splitString: Array<String> = "172.16.154.1".split(".").toTypedArray()
-
-"qwerty".get(index = 8)
-
-"qwerty".length
-
-"qwerty".chars()
-
-"qwerty".codePoints()
-
-"qwerty".hashCode()
-
-"qwertyuiop".codePointAt(index = 7)
-"qwertyuiop".codePointBefore(index = 7)
-"qwertyuiop".codePointCount(beginIndex = 2, endIndex = 7)
-
-"qwertyuiop".filter { it: Char -> it == 'o' }
-"qwertyuiop".filterIndexed { i: Int, c: Char -> false }
-"qwertyuiop".filterNot { it: Char -> it == 'u' }
-
-"qwertyuiop".format(locale = Locale.ROOT, 2, 3, 4, "t")
-
 "qwertyuiop".intern()
 
 "qwertyuiop".offsetByCodePoints(index = 3, codePointOffset = 5)
 
 "qwertyuiop".partition { it: Char -> false }
 "qwertyuiop".reader()
-
-"qwertyuiop".indices
-"qwertyuiop".lastIndex
 
 //        "qwertyuiop".filterNotTo {}
 //        "qwertyuiop".filterTo { }
