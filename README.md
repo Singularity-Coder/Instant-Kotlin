@@ -251,7 +251,6 @@ val stringBuffer: String = StringBuffer().append(a).append(" ").append(b).append
 // String Templates : This is just the Kotlin version of StringBuilder. Recommended way to concatenate.
 val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. I am 11 characters long!
 
-
 val myPair: Pair<String, String> = "Dark Bluish Black" to "Golden"
 val splitString: Array<String> = "172.16.154.1".split(".").toTypedArray()
 val areTheyEqual: Boolean = "qwerty".equals(other = "qwertyy")
@@ -465,7 +464,6 @@ val areTheyEqual2: Boolean = "qwerty" == "qwertyy"
 //        "qwertyuiop".filterIndexedTo { }
 //        val strBuff = StringBuffer().append("qwertyuiop")
 //        stringBuilder.contentEquals(stringBuffer = strBuff)
-
 ```
 
 ## Type Casting or Type Conversion
@@ -832,8 +830,46 @@ mutableMap.remove("Subaru") // {Emilia=18}
 mutableMap.clear()          // {}
 ```
 #### Set
+Collection of unique values
 ```Kotlin
+// Create
+val immutableSet = setOf<String>("Emilia", "Subaru", "Emilia", "Subaru")    // [Emilia, Subaru]
+val mutableSet = mutableSetOf<String>("Emilia", "Puck", "Emilia", "Subaru") // [Emilia, Puck, Subaru]
+val emptySet = emptySet<String>()                                           // []
 
+// Update
+mutableSet.add("Echidna")   // [Emilia, Puck, Subaru, Echidna]
+
+// Read
+immutableSet.count()                        // 2
+immutableSet.size                           // 2
+immutableSet.first()                        // Emilia
+immutableSet.last()                         // Subaru
+immutableSet.elementAt(index = 1)           // Subaru
+immutableSet.indexOf("Echidna")             // -1
+immutableSet.lastIndexOf("Emilia")          // 0
+
+// Check
+immutableSet.isEmpty()                                      // false
+immutableSet.contains("Echidna")                            // false
+immutableSet.containsAll(setOf<String>("Emilia", "Subaru")) // true
+immutableSet == mutableSet                                  // false
+
+// Iterate
+immutableSet.forEach { it: String -> print("$it ")} // Emilia Subaru
+
+// Print to console
+println(immutableSet)   // [Emilia, Subaru]
+println(mutableSet)     // [Emilia, Puck, Subaru, Echidna]
+println(emptySet)       // []
+
+// Merge 2 sets
+immutableSet union mutableSet     // returns unique values of both sets - [Emilia, Subaru, Puck, Echidna]
+immutableSet intersect mutableSet // returns common values btw both sets - [Emilia, Subaru]
+
+// Delete
+mutableSet.remove("Echidna")    // [Emilia, Puck, Subaru]
+mutableSet.clear()              // []
 ```
 
 ## Functions and Methods
