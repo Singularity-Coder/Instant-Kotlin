@@ -206,9 +206,23 @@ val myAnyTypeBool: Any = true
 ## Strings
 * **Concatenation**
 ```Kotlin
-val name: String = "Singularity Coder"
-var age: Int = 129
-print("Hello World, My name is $name, and I am $age years old. In 3 years, I will be ${age + 3}. My bank balance is currently \$7.") // Hello World, My name is Singularity Coder, and I am 129 years old. In 3 years, I will be 132. My bank balance is currently $7.
+val a = "Hello";
+val b = "World."
+
+// plus() method : Since Strings are immutable in Java which Kotlin first compiles to, new String objects are created all the time. Inefficient for large number of strings. Use String templates or StringBuilder.
+val c = a.plus(" ").plus(b).plus(" I am ").plus(a.length + b.length).plus(" characters long!")  // Hello World. I am 11 characters long!
+
+// + Operator : Suppose we have 10 strings a + b + c + d + e + f + g + h + i + j, then each use of the + operator generates a new string object. So here just for just one string we generated 10 string objects. a + b is one, then a + b + c is another string object, etc.
+val d = a + " " + b + " I am " + (a.length + b.length) + " characters long!"    // Hello World. I am 11 characters long!
+
+// StringBuilder : Efficient when concatenating large number of strings
+val stringBuilder: String = StringBuilder().append(a).append(" ").append(b).append(" I am ").append(a.length + b.length).append(" characters long!").toString() // Hello World. I am 11 characters long!
+
+// Use StringBuffer for thread-safe concatenation instead of StringBuilder.
+val stringBuffer: String = StringBuffer().append(a).append(" ").append(b).append(" I am ").append(a.length + b.length).append(" characters long!").toString()   // Hello World. I am 11 characters long!
+
+// String Templates : This is just the Kotlin version of StringBuilder. Recommended way to concatenate.
+val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. I am 11 characters long!
 ```
 * **New Line**
 ```Kotlin
@@ -829,7 +843,7 @@ println(emptyMap)       // {}
 mutableMap.remove("Subaru") // {Emilia=18}
 mutableMap.clear()          // {}
 ```
-#### Set
+#### Sets
 Collection of unique values
 ```Kotlin
 // Create
