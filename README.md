@@ -224,7 +224,7 @@ val stringBuffer: String = StringBuffer().append(a).append(" ").append(b).append
 // String Templates : This is just the Kotlin version of StringBuilder. Recommended way to concatenate.
 val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. I am 11 characters long!
 ```
-* **String Transformations**
+* **Find/Read Strings**
 ```Kotlin
 "qwerty".get(index = 8)
 
