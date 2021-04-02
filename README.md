@@ -1673,21 +1673,10 @@ annotation class StringMagic
 ## References
 1. https://kotlinlang.org/docs/home.html
 2. https://github.com/MindorksOpenSource/from-java-to-kotlin
-3. https://www.youtube.com/playlist?list=PL6nth5sRD25iv8jZrQWD-5dXgu56ae5m8
-4. https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2
-5. https://android.jlelse.eu/magic-lies-here-statically-typed-vs-dynamically-typed-languages-d151c7f95e2b
-6. https://byjus.com/maths/number-system
-7. https://www.geeksforgeeks.org/biginteger-class-in-java
-8. https://stackoverflow.com/questions/12693273/is-there-an-upper-bound-to-biginteger
-9. https://www.baeldung.com/kotlin/kotlin-random-number
-10. http://www.asciitable.com
-11. https://www.youtube.com/watch?v=MHxGv4K6BsM
-12. https://kb.iu.edu/d/ackw
-13. https://www.eso.org/~ndelmott/ascii.html
-14. https://www.youtube.com/watch?v=es4DYTFdqlg
-15. https://www.youtube.com/watch?v=HtEzuAqWmoE
-16. https://www.sciencedirect.com/topics/computer-science/alphanumeric-character
-17. https://www.youtube.com/watch?v=6P20npkvcb8
-18. https://www.youtube.com/watch?v=JzTeAM8N1-o
-19. https://www.programiz.com/kotlin-programming
-20. https://www.youtube.com/watch?v=xXLj5MbrI44&list=PLWKjhJtqVAbmfoj2Th9fvxhHIeqFO7wOy&index=4
+3. https://www.baeldung.com/kotlin/kotlin-random-number
+4. https://www.programiz.com/kotlin-programming
+5. https://www.geeksforgeeks.org/biginteger-class-in-java
+6. https://stackoverflow.com/questions/12693273/is-there-an-upper-bound-to-biginteger
+7. [Mindorks Youtube](https://www.youtube.com/playlist?list=PL6nth5sRD25iv8jZrQWD-5dXgu56ae5m8)
+8. [Coding In Flow Youtube](https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2)
+9. [Smartherd Youtube](https://www.youtube.com/watch?v=VEqhzCFmEQI&list=PLlxmoA0rQ-LwgK1JsnMsakYNACYGa1cjR)
