@@ -1,5 +1,5 @@
 ![alt text](https://github.com/Singularity-Coder/Code-Snippets-Kotlin/blob/main/assets/banner3.png)
-# Code-Snippets-Kotlin
+# Code Snippets Kotlin
 List of Kotlin topics and their code snippets! 
 
 ## Why Kotlin
