@@ -1498,11 +1498,146 @@ val randomInteger2 = ThreadLocalRandom.current().nextInt(1, 10)         // 2
 val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 ```
 
-## Multi-Tasking
+## Multi-Tasking & Background Operations
+#### Asynchronous Programming Techniques
+1. Threading
+2. Callbacks - With callbacks, the idea is to pass one function as a parameter to another function, and have this one invoked once the process has completed.
+3. Reactive Extensions (RxJava)
+4. Coroutines
+#### Asynchronous Programming Vocabulary
+* **Asynchronous**
+* **Synchronous**
+* **Suspendable function**
+* **Blocking code**
+* **Non-blocking code**
+* **Concurrency**
+* **Parallelism**
+* **Long-Running operation - code with time to execute**
+* **Difference btw Thread n Coroutine** What can Thread achieve that Coroutine cant n vice versa - Coroutines provide concurrency but not parallelism
+* **State Machine**
+* **Mutual Recursion**
+* **Tail Calls**
+* **Tail Call Eliminiation**
+* **State**
+* **Subroutine**
+* **Coroutine**
+* **Routine**
+* **Yield**
+* **Return**
+* **Resume**
+* **Closure**
+* **Daemon Threads** Daemon Threds do not keep the process alive. Global coroutines in Android have similar behaviour.
+* **Process**
+* **How to keep process alive**
 #### **Coroutines**
+* Dependencies
 ```Kotlin
 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
 ```
+* Sample heavy tasks
+```Kotlin
+fun heavyTask(taskName: String, taskLength: Int) {
+    for (i in 0..taskLength) if (i == taskLength) println("$taskName $i")
+}
+
+suspend fun heavyTask2(taskLength: Long) = delay(4000L)
+```
+* Create a basic background (Asynchronous) operation
+```Kotlin
+GlobalScope.launch { // launch a new coroutine in background and continue. GlobalScope means this coroutine's lifecycle == app's lifecycle
+    heavyTask2(taskLength = 4000L)
+    println("Task 4 done")
+}
+println("Task 1 done")    // This wont finish completely as JVM doesnt seem to execute a line of code for more than few millis. So we must block the main or whatever thread this code is running on at this line of code until it finishes execution
+```
+* Do work in background and post results in UI thread
+```Kotlin
+GlobalScope.launch(Dispatchers.IO) {
+    val task = launch { heavyTask(taskName = "a", taskLength = 10000) }
+    task.join()
+    launch(Dispatchers.Main) {
+        println("Done with Task")
+    }
+}
+```
+* Do work in background sequentially and then post results in UI thread (Structured Concurrency)
+```Kotlin
+// How to execute async operations sequentially while blocking thread its running on?
+// If we forget to keep a reference to the newly launched coroutine, it still runs.
+// The coroutines launched first finish first. Runblocking maintains order of coroutine execution
+runBlocking<Unit> {
+    val job2 = launch { // launch a new coroutine in the scope of runBlocking
+        heavyTask2(taskLength = 4000L)
+        println("Task 4 done")
+    }
+    println("Task 1 done")
+    launch {
+        heavyTask2(taskLength = 2000L)
+        println("Task 5 done")
+    }
+    println("Task 2 done")
+    launch {
+        heavyTask2(taskLength = 100L)
+        println("Task 6 done")
+    }
+    println("Task 3 done")
+    job2.join() // wait till job2 is done n then execute the below code. This is non-blocking. How?
+    println("Task 7 done")
+}
+```
+* Do work in background parallelly and then post results in UI thread
+```Kotlin
+// How to execute async operations sequentially without blocking thread its running on?
+runBlocking<Unit> {
+    val job2 = launch { // launch a new coroutine in the scope of runBlocking
+        heavyTask2(taskLength = 4000L)  // Blocking
+        println("Task 2 done")
+    }
+    println("Task 1 done")
+    job2.join() // wait till job2 is done n then execute the below code. This is non-blocking. How?
+    println("Task 3 done")
+
+    // This scope is blocking as it is inside runBlocking
+    coroutineScope {
+        // Non-Blocking. Whatever finishes first is shown
+        launch {
+            heavyTask2(taskLength = 2000L)
+            println("Task 5 done")
+        }
+        heavyTask2(taskLength = 4000L)
+        println("Task 4 done")
+        heavyTask2(taskLength = 6000L)
+        println("Task 6 done")
+    }
+    println("Task 7 done")
+}
+println("Task 8 done")
+```
+* Do work in background and return result
+```Kotlin
+// Since async are in runBlocking all the coroutine operations happen sequentially
+// If all operations have to happen sequentially then use join()
+runBlocking {
+    println("Task 1 done")
+    val value1 = GlobalScope.async {
+        heavyTask2(taskLength = 6000L)
+        println("--------------------------------running on thread [${Thread.currentThread().name}]")
+        10
+    }
+    println("Task 2 done")
+    val value2 = GlobalScope.async {
+        heavyTask2(taskLength = 1000L)
+        println("--------------------------------running on thread [${Thread.currentThread().name}]")
+        20
+    }
+    println("Task 3 done")
+    println("Task 4 done with value 1 = ${value1.await()} running on thread [${Thread.currentThread().name}]")
+    println("Task 5 done value 2 = ${value2.await()} running on thread [${Thread.currentThread().name}]")
+    println("Task 6 done")
+}
+```
+* More
 ```Kotlin
 GlobalScope.launch {    // Launch a coroutine in background
     myDelay(2000L)  // Suspends "coroutine" execution for 2 sec but not the thread.  Its a suspend function.
@@ -1554,34 +1689,6 @@ thread {    // Launch a thread in background
 }  
 
 Thread.currentThread().name    // Get thread name
-```
-#### **AsyncTaskLoader**
-```Kotlin
-val task: AsyncTaskLoader<String> = object : AsyncTaskLoader<String>(this) {
-
-    override fun onStartLoading() {
-        forceLoad()
-    }
-
-    override fun loadInBackground(): String? {
-        return ""
-    }
-}
-
-val loader: LoaderManager.LoaderCallbacks<String> = object : LoaderManager.LoaderCallbacks<String> {
-
-    override fun onCreateLoader(id: Int, args: Bundle): Loader<String> {
-        return task
-    }
-
-    override fun onLoadFinished(loader: Loader<String>, data: String) {
-
-    }
-
-    override fun onLoaderReset(loader: Loader<String>) {
-
-    }
-}
 ```
 
 ## Generics
@@ -1680,3 +1787,4 @@ annotation class StringMagic
 7. [Mindorks Youtube](https://www.youtube.com/playlist?list=PL6nth5sRD25iv8jZrQWD-5dXgu56ae5m8)
 8. [Coding In Flow Youtube](https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2)
 9. [Smartherd Youtube](https://www.youtube.com/watch?v=VEqhzCFmEQI&list=PLlxmoA0rQ-LwgK1JsnMsakYNACYGa1cjR)
+10. https://en.wikipedia.org/wiki/Coroutine
