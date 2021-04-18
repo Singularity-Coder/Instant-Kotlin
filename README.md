@@ -1551,7 +1551,7 @@ GlobalScope.launch { // launch a new coroutine in background and continue. Globa
 }
 println("Task 1 done")    // This wont finish completely as JVM doesnt seem to execute a line of code for more than few millis. So we must block the main or whatever thread this code is running on at this line of code until it finishes execution
 ```
-* Do work in background and post results in UI thread
+* Do work in background and post results on UI thread
 ```Kotlin
 GlobalScope.launch(Dispatchers.IO) {
     val task = launch { heavyTask(taskName = "a", taskLength = 10000) }
@@ -1586,7 +1586,7 @@ runBlocking<Unit> {
     println("Task 7 done")
 }
 ```
-* Do work in background parallelly and then post results in UI thread
+* Do work in background parallelly and then post results on UI thread
 ```Kotlin
 // How to execute async operations sequentially without blocking thread its running on?
 runBlocking<Unit> {
