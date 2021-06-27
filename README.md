@@ -723,6 +723,22 @@ outerLoop@ for (a in 1..3) {
     }
 }
 ```
+* **Iterator**
+```Kotlin
+val arr = mutableListOf(1, 2, 3, 4, 5)
+val iterator = arr.iterator()	// Get iterator for the above list. Iterator obj is used to loop through collections. Seems pretty useless.
+while (iterator.hasNext()) {
+    val i = iterator.next()		// 1 2 3 4 5. If you add "n" number of "val i = iterator.next()" then it will act as n+ increment in the iteration.
+    if (i == 2) {
+        iterator.remove()	// remove() doesnt work
+        continue 			// continue keyword doesn't work
+    }
+    if (i == 3) {
+        arr.remove(3)	// The only way to not make it crash and remove stuff.
+        break
+    }
+}
+```
 
 ## Collections
 #### Arrays
