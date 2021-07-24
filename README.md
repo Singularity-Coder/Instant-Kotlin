@@ -726,15 +726,15 @@ outerLoop@ for (a in 1..3) {
 * **Iterator**
 ```Kotlin
 val arr = mutableListOf(1, 2, 3, 4, 5)
-val iterator = arr.iterator()	// Get iterator for the above list. Iterator obj is used to loop through collections. Seems pretty useless.
+val iterator = arr.iterator()	// Get iterator for the above list. Iterator obj is used to loop through collections.
 while (iterator.hasNext()) {
     val i = iterator.next()		// 1 2 3 4 5. If you add "n" number of "val i = iterator.next()" then it will act as n+ increment in the iteration.
     if (i == 2) {
-        iterator.remove()	// remove() doesnt work
+        iterator.remove()	// remove() doesn't work
         continue 			// continue keyword doesn't work
     }
     if (i == 3) {
-        arr.remove(3)	// The only way to not make it crash and remove stuff.
+        arr.remove(3)	// The only way to not make it crash and remove stuff. Seems pretty useless.
         break
     }
 }
@@ -897,6 +897,92 @@ immutableSet intersect mutableSet // returns common values btw both sets - [Emil
 // Delete
 mutableSet.remove("Echidna")    // [Emilia, Puck, Subaru]
 mutableSet.clear()              // []
+```
+#### Collection Methods
+```Kotlin
+open class Vehicle(val name: String) {
+    override fun toString(): String = name
+}
+
+class Bike(name: String) : Vehicle(name)
+class Car(name: String) : Vehicle(name)
+
+val list1 = mutableListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+val list2 = mutableListOf<List<Int>>(listOf(1, 2, 3, 4), listOf(5, 6, 7, 8))
+val list3 = listOf("123", "45")     // Strings are char lists
+val list4 = listOf<Int?>(null, 2, null, 4, 5, null, 7, 8, null, 10)
+val list5 = mutableListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+val list6 = listOf<String>("abcd", "efgh", "ijkl", "mnop")
+val list7 = listOf<Any>("abcd", 1, 'a', false, true, false, 3, 4, 'c', 'd')
+val list8 = listOf<Vehicle>(Bike("Bang"), Car("Vroom"), Bike("Toomaha"))
+val list9 = listOf<Int>(1, 1, 3, 4, 5, 5, 5, 5, 9, 10)
+val map1 = mapOf("122222" to 2, "3455" to 3)
+
+println(list1.filter { it: Int -> it % 2 == 0 }) // [2, 4, 6, 8, 10]
+
+println(list1.filter { it: Int -> it % 2 == 0 }.map { it: Int -> it - 1 })   // [1, 3, 5, 7, 9]
+
+println(list2.flatMap { it: List<Int> -> it })          // [1, 2, 3, 4, 5, 6, 7, 8]
+println(list2.flatten())                                // [1, 2, 3, 4, 5, 6, 7, 8]
+println(list3.flatMap { it: String -> it.toList() })    // [1, 2, 3, 4, 5]
+println(map1.flatMap { (key, value) -> key.take(value).toList() }) // [1, 2, 3, 4, 5]
+
+println(3 in list1)          // true
+println(list1.contains(3))   // true
+
+println(list4.filterNotNull().toMutableList())   // [2, 4, 5, 7, 8, 10]
+
+println(list4.first())  // null -> doesn't crash
+println(list4.firstOrNull())  // null
+println(list4.firstOrNull { it == 2 })  // 2
+println(list4.firstOrNull { it == 3 })  // null
+println(list4.firstOrNull { it == 3 } == null)  // true
+
+println(list4.last())   // 10
+println(list4.lastOrNull()) // 10
+println(list4.lastOrNull { it == 2 }) // 2
+println(list4.lastOrNull { it == 3 })  // null
+println(list4.lastOrNull { it == 3 } == null)  // true
+
+println(list5.removeAll { it: Int -> it % 2 == 0 }) // returns true and transforms list5 into [1, 3, 5, 7, 9]
+println(list1.remove(10)) // returns true and transforms list5 into [1, 2, 3, 4, 5, 6, 7, 8, 9]
+println(list1.removeAt(list1.lastIndex))    // returns 9 and transforms list 1 into [1, 2, 3, 4, 5, 6, 7, 8]
+
+// 0 or "" is the initial/default value in case the list is empty and sum is the summation of all elements in the list
+println(list5.fold(0) { initialValue, sum -> initialValue + sum })    // 25 = sum of all elements [1, 3, 5, 7, 9]
+println(list6.fold("") { initialValue, sum -> initialValue + sum })    // abcdefghijklmnop = sum of all elements ["abcd", "efgh", "ijkl", "mnop"]
+
+// If empty list reduce throws UnsupportedOperationException while hold handles with initial/default value
+println(list5.reduce { initialValue, sum -> initialValue + sum })    // 25 = sum of all elements [1, 3, 5, 7, 9]
+println(list6.reduce { initialValue, sum -> initialValue + sum })    // abcdefghijklmnop = sum of all elements ["abcd", "efgh", "ijkl", "mnop"]
+
+println(list1.isEmpty())    // false
+println(list1.isNotEmpty()) // true
+println(list1.isNullOrEmpty())  // false
+
+println(list4.filterNotNull())  // [2, 4, 5, 7, 8, 10]
+
+println(list7.filterIsInstance<String>())   // [abcd]
+println(list7.filterIsInstance<Char>()) // [a, c, d]
+println(list7.filterIsInstance<Int>())  // [1, 3, 4]
+println(list7.filterIsInstance<Boolean>())  // [false, true, false]
+println(list8.filterIsInstance<Car>())  // [Vroom]
+println(list8.filterIsInstance(Bike::class.java))   // [Bang, Toomaha]
+
+println(list1.subList(fromIndex = 1, toIndex = 4))  // [2, 3, 4]
+
+println(list9.toMutableList())  // [1, 1, 3, 4, 5, 5, 5, 5, 9, 10]
+println(list9.toMutableSet())   // [1, 3, 4, 5, 9, 10] => Unique items only
+
+println(map1.toList())  // [(122222, 2), (3455, 3)] => List of Pairs
+val pair: Pair<String, Int> = map1.toList()[0]
+
+list1.forEachIndexed { index, item ->
+    print("$item at $index | ") // 1 at 0 | 2 at 1 | 3 at 2 | 4 at 3 | 5 at 4 | 6 at 5 | 7 at 6 | 8 at 7 |
+}
+map1.forEach { it: Map.Entry<String, Int> ->
+    print("${it.key} to ${it.value} | ")    // 122222 to 2 | 3455 to 3 |
+}
 ```
 
 ## Functions and Methods
