@@ -190,7 +190,7 @@ val myBoolean: Boolean = false
 ```Kotlin
 val myString: String = "I am a string!"
 ```
-* **Any** This Type can hold any of the above mentioned data types. It cannot hold BigInteger and BigDecimal Types.
+* **Any**
 ```Kotlin
 val myAnyTypeByte: Any = 72
 val myAnyTypeShort: Any = 32425
@@ -276,22 +276,29 @@ val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. 
 "qwertyuiop".toPattern(Pattern.UNICODE_CASE)
 "qwertyuiop".toPattern(Pattern.UNICODE_CHARACTER_CLASS)
 ```
-* **String Comparisions**
+* **String Comparisons**
 ```Kotlin
-val areTheyEqual: Boolean = "qwerty".equals(other = "qwertyy")
-val areTheyEqual2: Boolean = "qwerty" == "qwertyy"
+"Hello".isEmpty()    // false
+"      ".isEmpty()    // false
+"Hello".isBlank()    // false
+"      ".isBlank()    // true (isBlank trims and checks if it isEmpty)
 
-"qwerty".compareTo("qwerty")
+"Hello".equals(other = "Hello") // true (This works on any object. Not specific to String)
+"Hello" == "hello"  // false (== or equals is case sensitive)
+"Hello" == "Hello"  // true
+"Hello".contentEquals(charSequence = "Hello") // true (seems similar to ==)
 
-"qwertyuiop".contentEquals(charSequence = "qwertyuiop")
+"1234".compareTo("1234") // 0 (This means both have same number of chars)
+"1234".compareTo("1234567") // -3 (This means the left side has 3 chars less than the right)
+"1234567".compareTo("1234") // 3 (This means the left side has 3 chars more than the right)
 
-"qwertyuiop".endsWith(suffix = "cao", ignoreCase = true)
-"qwertyuiop".endsWith(char = 'q', ignoreCase = true)
+"Hello".endsWith(suffix = "llo", ignoreCase = true) // true
+"Hello".endsWith(char = 'o', ignoreCase = true) // true
 
-"qwertyuiop".startsWith(prefix = "qw", ignoreCase = true)
-"qwertyuiop".startsWith(prefix = "qw", startIndex = 3, ignoreCase = true)
+"Hello".startsWith(prefix = "He", ignoreCase = true)    // true
+"Hello World!".startsWith(prefix = "W", startIndex = 6, ignoreCase = true)  // true (We can define the starting point with startIndex)
 
-"qwertyuiop".regionMatches(thisOffset = 2, other = "rwtw", otherOffset = 7, length = 3, ignoreCase = true)
+"What A Wonderful World".regionMatches(thisOffset = 5, other = "A Wonderful", otherOffset = 0, length = 3, ignoreCase = true) // true (define start index for both strings we want to compare along with the length of the string)
 ```
 * **Extract String**
 ```Kotlin
@@ -538,8 +545,8 @@ val a = 6; val b = 2
 * **Bitwise Operators:** Perfomed on Int and Long integral types through infix notation.
 ```Kotlin
 val a = 6; val b = 2
-a and b    // 2     (Bitwise AND. Performs a bitwise AND operation between "a" and "b". This is just like the AND condition where both have to be true for the condition to execute. Here true can be considered as bit value "1" and false can be considered as bit value "0". So if both bits are "1" then it is counted as "1" else "0".)
-a or b     // 6     (Bitwise OR. Performs a bitwise OR operation between "a" and "b". This is just like the OR condition where if either one of the values must be true for the condition to execute. So if either of the bits is "1" then it is counted as "1".)
+a and b    // 2     (Bitwise AND. Performs a bitwise AND operation between "a" and "b". If both bits are "1" then it is counted as "1" else "0".)
+a or b     // 6     (Bitwise OR. Performs a bitwise OR operation between "a" and "b". If either of the bits is "1" then it is counted as "1".)
 a xor b    // 4     (Bitwise XOR. Performs a bitwise XOR operation between "a" and "b".)
 a shr b    // 1     (Signed shift right. Shifts "a" value right by "b" value number of bits, filling the leftmost bits bits with copies of the sign bit.)
 a shl b    // 24    (Signed shift left. Shifts "a" value left by "b" value number of bits.)
@@ -728,13 +735,13 @@ outerLoop@ for (a in 1..3) {
 val arr = mutableListOf(1, 2, 3, 4, 5)
 val iterator = arr.iterator()	// Get iterator for the above list. Iterator obj is used to loop through collections.
 while (iterator.hasNext()) {
-    val i = iterator.next()		// 1 2 3 4 5. If you add "n" number of "val i = iterator.next()" then it will act as n+ increment in the iteration.
+    val i = iterator.next()	// 1 2 3 4 5. If you add "n" number of "val i = iterator.next()" then it will act as n+ increment in the iteration.
     if (i == 2) {
         iterator.remove()	// remove() doesn't work
         continue 			// continue keyword doesn't work
     }
     if (i == 3) {
-        arr.remove(3)	// The only way to not make it crash and remove stuff. Seems pretty useless.
+        arr.remove(3)	// The only way to not make it crash and remove stuff.
         break
     }
 }
@@ -1310,11 +1317,56 @@ println(address1.equals(address2))  // false
 ```
 * **Initialization Block**
 ```Kotlin
-class User {
-    
+class User(name: String) {
+
+    val userName = name
+
     init {
-        println("Init block")
+        println("init block is like a function that's called before any other function or callback in this class. Means its called first on accessing the class")
+        println("But if you are using any variables like \"userName\", then you should declare them before init block or it wont be able to access it. Ex: User's name is $userName")
     }
+}
+
+fun main() {
+    val user = User("Hithesh")
+    // init block is like a function that's called before any other function or callback in this class. Means its called first on class access
+    // But if you are using any variables like "userName", then you should declare them before init block or it wont be able to access it. Ex: User's name is Hithesh
+}
+```
+#### Getters and Setters
+```Kotlin
+
+```
+#### Defining uninitialized objects
+```Kotlin
+class Person(var name: String)
+
+internal lateinit var person1: Person
+private var person2: Person? = null
+val person3: Person by lazy {
+    println("Lazy variables can't be var and can't be private.")
+    Person("Hithesh")
+}
+```
+#### Companion Object (Static stuff)
+```Kotlin
+class Person {
+    companion object {
+        private const val PERSON_PREFIX = "My name is "
+        val AGE_GROUPS = intArrayOf(18, 30, 35, 40, 45, 50)
+        
+        fun isMinor(age: Int): Boolean = age < 18
+        
+        enum class PersonType {
+            YOUTH, MIDDLE_AGED, OLD
+        }
+    }
+}
+
+fun main() {
+    println(Person.isMinor(17))					// true
+    println(Person.AGE_GROUPS[3])				// 40
+    println(Person.Companion.PersonType.OLD)	// OLD
 }
 ```
 
@@ -1388,6 +1440,39 @@ fun main() {
 }
 ```
 
+## Nested Class
+* **"inner" keyword**
+```Kotlin
+class Person(private val name: String) {
+
+    // Can access parent class variables with "inner" keyword
+    inner class Intro {
+        fun myIntro(): String = "This person's name is $name"
+    }
+
+    // Cannot access parent class variables without "inner" keyword
+    class Hobby(private val myName: String) {
+        fun myHobby(): String = "$myName's hobby is to watch anime"
+    }
+}
+```
+* **Access Inner Class**
+```Kotlin
+fun introducePerson(name: String): String {
+    // Nested classes without inner keyword cannot be accessed from an instance of the parent class
+    val myHobby = Person.Hobby(name).myHobby()
+    
+    // Nested classes with inner keyword can be accessed from an instance of the parent class
+    val myIntro = Person(name).Intro().myIntro()
+    
+    return "$myIntro & $myHobby"
+}
+
+fun main() {
+    introducePerson("Hithesh")  // This person's name is Hithesh & Hithesh's hobby is to watch anime
+}
+```
+
 ## Enum Class
 * **Create Enum class**
 ```Kotlin
@@ -1444,21 +1529,15 @@ val myNearestConstants: List<MathConstants> = 2.3456789.nearestConstants()    //
 ```
 
 ## Inheritance
-#### Getters and Setters
-#### Defining uninitialized objects
-```Kotlin
-internal lateinit var person: Person
-```
-#### Companion Object
-#### Singleton
-#### Data Class
+## Singleton
+## Data Class
 ```Kotlin
 data class User(var name: String, var age: Int)
 ```
-#### Abstract Class
-#### Interface
-#### Sealed Classes
-#### Anonymous Class
+## Abstract Class
+## Interface
+## Sealed Classes
+## Anonymous Class
 ```Kotlin
 val task = object : AsyncTask<Void, Void, Profile>() {
     override fun doInBackground(vararg voids: Void): Profile? {
