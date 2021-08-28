@@ -98,6 +98,67 @@ value = Nullable
 val message: String? = null
 log(message ?: "")
 ```
+* **Nullable types and non-null types﻿**
+```Kotlin
+
+```
+* **Checking for null in conditions﻿**
+```Kotlin
+
+```
+* **Safe calls﻿**
+```Kotlin
+
+```
+* **Elvis operator﻿﻿**
+```Kotlin
+
+```
+* **The !! operator﻿**
+```Kotlin
+
+```
+* **Safe casts**
+```Kotlin
+
+```
+* **Collections of a nullable type﻿**
+```Kotlin
+
+```
+
+## Equality﻿
+* **Structural equality:** 
+```Kotlin
+
+```
+* **Referential equality﻿:** 
+```Kotlin
+
+```
+
+* **Floating-point numbers equality﻿:** 
+```Kotlin
+
+```
+
+## This expressions
+* **Qualified this﻿** 
+```Kotlin
+
+```
+## This expressions
+* **Qualified this﻿** 
+```Kotlin
+
+```
+## This expressions
+* **Qualified this﻿** 
+```Kotlin
+
+```
+
+
 
 ## Data Types
 Unlike Java, there are no primitive types in Kotlin. All of them are reference or Object types. So by-default they are null and do not contain any defaults like primitives. There are total 9 types.  
@@ -226,22 +287,25 @@ val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. 
 ```
 * **Find / Read Strings**
 ```Kotlin
-"qwerty".get(index = 8)
+"Hello World".getOrNull(index = 8) // r (char)
 
-"qwerty".length
+"Hello World".length   // 11
+"Hello World".indices  // 0..10
+"Hello World".lastIndex    // 10
 
-"qwerty".chars()
+// Need further study on chars()
+"Hello World".chars().count()  // 11 (chars() emits IntStream)
+"Hello World".chars().average()  // OptionalDouble[95.63636363636364] (This is probably the average of all teh ASCII char values of Hello World)
 
-"qwerty".codePoints()
+// Need further study on codePoints()
+"Hello World".codePoints().count() // 11
 
-"qwerty".hashCode()
+"Hello World".hashCode()   // -862545276 (Unique int value that will always be the same for a particular combination of chars. In this case Hello World has unique int value -862545276. Its case sensitive.)
 
-"qwertyuiop".codePointAt(index = 7)
-"qwertyuiop".codePointBefore(index = 7)
-"qwertyuiop".codePointCount(beginIndex = 2, endIndex = 7)
-
-"qwertyuiop".indices
-"qwertyuiop".lastIndex
+// Need further study on Unicode points
+"Hello World".codePointAt(index = 7)   // 111
+"Hello World".codePointBefore(index = 7)   // 87
+"Hello World".codePointCount(beginIndex = 2, endIndex = 7) // 5
 ```
 * **String Transformations**
 ```Kotlin
@@ -279,9 +343,9 @@ val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. 
 * **String Comparisons**
 ```Kotlin
 "Hello".isEmpty()    // false
-"      ".isEmpty()    // false
+"     ".isEmpty()    // false
 "Hello".isBlank()    // false
-"      ".isBlank()    // true (isBlank trims and checks if it isEmpty)
+"     ".isBlank()    // true (isBlank trims and checks if it isEmpty)
 
 "Hello".equals(other = "Hello") // true (This works on any object. Not specific to String)
 "Hello" == "hello"  // false (== or equals is case sensitive)
@@ -302,40 +366,45 @@ val e = "$a $b I am ${a.length + b.length} characters long!"    // Hello World. 
 ```
 * **Extract String**
 ```Kotlin
-"qwertyuiop".slice(indices = 1..4)
+"What A Wonderful World".slice(indices = 5..15)    // A Wonderful
 
-"qwertyuiop".substring(range = 1..4)
-"qwertyuiop".substring(startIndex = 2)
-"qwertyuiop".substring(startIndex = 2, endIndex = 5)
-"qwertyuiop".substringAfter(delimiter = 'w', missingDelimiterValue = "sdm")
-"qwertyuiop".substringAfter(delimiter = "we", missingDelimiterValue = "sdm")
-"qwertyuiop".substringAfterLast(delimiter = 'w', missingDelimiterValue = "sdm")
-"qwertyuiop".substringAfterLast(delimiter = "we", missingDelimiterValue = "sdm")
-"qwertyuiop".substringBefore(delimiter = 'w', missingDelimiterValue = "sdm")
-"qwertyuiop".substringBefore(delimiter = "we", missingDelimiterValue = "sdm")
-"qwertyuiop".substringBeforeLast(delimiter = 'w', missingDelimiterValue = "sdm")
-"qwertyuiop".substringBeforeLast(delimiter = "we", missingDelimiterValue = "sdm")
+"Hello World".substring(range = 6..10)  // World
+"Hello World".substring(startIndex = 2) // llo World
+"Hello World".substring(startIndex = 0, endIndex = 4)   // Hell
 
-"qwertyuiop".subSequence(startIndex = 1, endIndex = 4)
-"qwertyuiop".subSequence(range = 1..4)
+"Hello World".substringAfter(delimiter = 'o', missingDelimiterValue = "NA")    // orld (Returns the right part of string at the first occurrence of "o" char in the whole string)
+"Hello World".substringAfter(delimiter = 'x', missingDelimiterValue = "NA")    // NA (Since the char 'x' is missing from the string)
+"Hello World".substringAfter(delimiter = "llo ", missingDelimiterValue = "NA") // World
 
-"qwertyuiop".take(n = 5)
-"qwertyuiop".takeLast(n = 6)
-"qwertyuiop".takeLastWhile { it: Char -> false }
-"qwertyuiop".takeWhile { it: Char -> false }
-"qwertyuiop".takeIf { it: String -> false }
-"qwertyuiop".takeUnless { it: String -> false }
+"Hello World".substringAfterLast(delimiter = 'o', missingDelimiterValue = "NA")    // rld (Returns the last occurrence of "o" char in the whole string)
+"Hello Hello".substringAfterLast(delimiter = "el", missingDelimiterValue = "NA")   // lo (Returns the last occurrence of "lo" string in the whole string)
 
-var str = "Kotlin Programming Language"
-var substr = ""
+"Hello World".substringBefore(delimiter = 'o', missingDelimiterValue = "NA")   // Hell (Returns the left part of string at the first occurrence of "o" char in the whole string)
+"Hello World".substringBefore(delimiter = "rl", missingDelimiterValue = "NA")  // Hello Wo
 
-// print "Kotlin"
-substr = str.substring(0..5)
-println("substring $substr")
+"Hello World".substringBeforeLast(delimiter = 'o', missingDelimiterValue = "NA")   // Hello W (Returns the left part of string at the last occurrence of "o" char in the whole string)
+"Hello Hello".substringBeforeLast(delimiter = "ll", missingDelimiterValue = "NA")  // Hello He
 
-// print "Language"
-substr = str.substring(18..26)
-println("substring $substr")
+"Hello World".subSequence(startIndex = 0, endIndex = 4)    // Hell
+"Hello World".subSequence(range = 1..4)    // ello
+
+"Hello World".take(n = 8)  // Hello Wo (index starts from 1)
+"Hell".take(n = 8) // Hell  (Returns entire string if string is shorter)
+"Hello World".takeLast(n = 4)  // orld (Returns last 4 chars)
+
+// Char comparisons are ASCII value comparisons. So these only seem reliable when u work with lowercase or uppercase chars exclusively. Uppercase chars have lower ASCII value than lowercase chars. Like char 'B' has ASCII value 66 while 'b' has 98.
+('a'..'z').takeWhile { it: Char -> /* predicate */ it <= 'd' }   // [a, b, c, d]
+('A'..'Z').takeWhile { it: Char -> it <= 'G' }   // [A, B, C, D, E, F, G]
+('A'..'z').takeWhile { it: Char -> it <= 'd' }   // [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, [, \, ], ^, _, `, a, b, c, d]
+('A'..'z').toList().takeLastWhile { it: Char -> it > 'o' } // [p, q, r, s, t, u, v, w, x, y, z]
+
+// Not clear about its use.
+"Hello World".takeIf { it: String -> it.length == it.length}   // Hello World
+"Hello World".takeIf { it: String -> it.length == 3 }  // null (If predicate unsatisfied)
+
+// Not clear. This is the opposite of takeIf. If predicate is satisfied it returns null else the entire string
+"Hello World".takeUnless { it: String -> it.length == 3 }  // Hello World
+"Hello World".takeUnless { it: String -> it.length == it.length }  // null
 ```
 * **Modify / Update / Edit String**
 ```Kotlin
@@ -460,14 +529,6 @@ println("substring $substr")
 val myPair: Pair<String, String> = "Dark Bluish Black" to "Golden"
 val splitString: Array<String> = "172.16.154.1".split(".").toTypedArray()
 ```
-* **New Line**
-```Kotlin
-val text = """
-        |First Line
-        |Second Line
-        |Third Line
-        """.trimMargin()
-```
 * **Other String Operations**
 ```Kotlin
 "qwertyuiop".intern()
@@ -482,6 +543,14 @@ val text = """
 //        "qwertyuiop".filterIndexedTo { }
 //        val strBuff = StringBuffer().append("qwertyuiop")
 //        stringBuilder.contentEquals(stringBuffer = strBuff)
+```
+* **New Line**
+```Kotlin
+val text = """
+        |First Line
+        |Second Line
+        |Third Line
+        """.trimMargin()
 ```
 
 ## Type Casting or Type Conversion
@@ -749,6 +818,7 @@ while (iterator.hasNext()) {
 
 ## Collections
 #### Arrays
+Not part of Collections.
 ```Kotlin
 // Create
 val anyArray: Array<Any> = arrayOf(1, true, 3.0, 'c', "Hithesh") // [1, true, 3.0, c, Hithesh]
@@ -925,63 +995,63 @@ val list8 = listOf<Vehicle>(Bike("Bang"), Car("Vroom"), Bike("Toomaha"))
 val list9 = listOf<Int>(1, 1, 3, 4, 5, 5, 5, 5, 9, 10)
 val map1 = mapOf("122222" to 2, "3455" to 3)
 
-println(list1.filter { it: Int -> it % 2 == 0 }) // [2, 4, 6, 8, 10]
+list1.filter { it: Int -> it % 2 == 0 } // [2, 4, 6, 8, 10]
 
-println(list1.filter { it: Int -> it % 2 == 0 }.map { it: Int -> it - 1 })   // [1, 3, 5, 7, 9]
+list1.filter { it: Int -> it % 2 == 0 }.map { it: Int -> it - 1 }   // [1, 3, 5, 7, 9]
 
-println(list2.flatMap { it: List<Int> -> it })          // [1, 2, 3, 4, 5, 6, 7, 8]
-println(list2.flatten())                                // [1, 2, 3, 4, 5, 6, 7, 8]
-println(list3.flatMap { it: String -> it.toList() })    // [1, 2, 3, 4, 5]
-println(map1.flatMap { (key, value) -> key.take(value).toList() }) // [1, 2, 3, 4, 5]
+list2.flatMap { it: List<Int> -> it }          // [1, 2, 3, 4, 5, 6, 7, 8]
+list2.flatten()                                // [1, 2, 3, 4, 5, 6, 7, 8]
+list3.flatMap { it: String -> it.toList() }    // [1, 2, 3, 4, 5]
+map1.flatMap { (key, value) -> key.take(value).toList() } // [1, 2, 3, 4, 5]
 
-println(3 in list1)          // true
-println(list1.contains(3))   // true
+3 in list1          // true
+list1.contains(3)   // true
 
-println(list4.filterNotNull().toMutableList())   // [2, 4, 5, 7, 8, 10]
+list4.filterNotNull().toMutableList()   // [2, 4, 5, 7, 8, 10]
 
-println(list4.first())  // null -> doesn't crash
-println(list4.firstOrNull())  // null
-println(list4.firstOrNull { it == 2 })  // 2
-println(list4.firstOrNull { it == 3 })  // null
-println(list4.firstOrNull { it == 3 } == null)  // true
+list4.first()  // null -> doesn't crash
+list4.firstOrNull()  // null
+list4.firstOrNull { it == 2 }  // 2
+list4.firstOrNull { it == 3 }  // null
+list4.firstOrNull { it == 3 } == null  // true
 
-println(list4.last())   // 10
-println(list4.lastOrNull()) // 10
-println(list4.lastOrNull { it == 2 }) // 2
-println(list4.lastOrNull { it == 3 })  // null
-println(list4.lastOrNull { it == 3 } == null)  // true
+list4.last()   // 10
+list4.lastOrNull() // 10
+list4.lastOrNull { it == 2 } // 2
+list4.lastOrNull { it == 3 }  // null
+list4.lastOrNull { it == 3 } == null  // true
 
-println(list5.removeAll { it: Int -> it % 2 == 0 }) // returns true and transforms list5 into [1, 3, 5, 7, 9]
-println(list1.remove(10)) // returns true and transforms list5 into [1, 2, 3, 4, 5, 6, 7, 8, 9]
-println(list1.removeAt(list1.lastIndex))    // returns 9 and transforms list 1 into [1, 2, 3, 4, 5, 6, 7, 8]
+list5.removeAll { it: Int -> it % 2 == 0 } // returns true and transforms list5 into [1, 3, 5, 7, 9]
+list1.remove(10) // returns true and transforms list5 into [1, 2, 3, 4, 5, 6, 7, 8, 9]
+list1.removeAt(list1.lastIndex)    // returns 9 and transforms list 1 into [1, 2, 3, 4, 5, 6, 7, 8]
 
 // 0 or "" is the initial/default value in case the list is empty and sum is the summation of all elements in the list
-println(list5.fold(0) { initialValue, sum -> initialValue + sum })    // 25 = sum of all elements [1, 3, 5, 7, 9]
-println(list6.fold("") { initialValue, sum -> initialValue + sum })    // abcdefghijklmnop = sum of all elements ["abcd", "efgh", "ijkl", "mnop"]
+list5.fold(0) { initialValue, sum -> initialValue + sum }    // 25 = sum of all elements [1, 3, 5, 7, 9]
+list6.fold("") { initialValue, sum -> initialValue + sum }    // abcdefghijklmnop = sum of all elements ["abcd", "efgh", "ijkl", "mnop"]
 
 // If empty list reduce throws UnsupportedOperationException while hold handles with initial/default value
-println(list5.reduce { initialValue, sum -> initialValue + sum })    // 25 = sum of all elements [1, 3, 5, 7, 9]
-println(list6.reduce { initialValue, sum -> initialValue + sum })    // abcdefghijklmnop = sum of all elements ["abcd", "efgh", "ijkl", "mnop"]
+list5.reduce { initialValue, sum -> initialValue + sum }    // 25 = sum of all elements [1, 3, 5, 7, 9]
+list6.reduce { initialValue, sum -> initialValue + sum }    // abcdefghijklmnop = sum of all elements ["abcd", "efgh", "ijkl", "mnop"]
 
-println(list1.isEmpty())    // false
-println(list1.isNotEmpty()) // true
-println(list1.isNullOrEmpty())  // false
+list1.isEmpty()    // false
+list1.isNotEmpty() // true
+list1.isNullOrEmpty()  // false
 
-println(list4.filterNotNull())  // [2, 4, 5, 7, 8, 10]
+list4.filterNotNull()  // [2, 4, 5, 7, 8, 10]
 
-println(list7.filterIsInstance<String>())   // [abcd]
-println(list7.filterIsInstance<Char>()) // [a, c, d]
-println(list7.filterIsInstance<Int>())  // [1, 3, 4]
-println(list7.filterIsInstance<Boolean>())  // [false, true, false]
-println(list8.filterIsInstance<Car>())  // [Vroom]
-println(list8.filterIsInstance(Bike::class.java))   // [Bang, Toomaha]
+list7.filterIsInstance<String>()   // [abcd]
+list7.filterIsInstance<Char>() // [a, c, d]
+list7.filterIsInstance<Int>()  // [1, 3, 4]
+list7.filterIsInstance<Boolean>()  // [false, true, false]
+list8.filterIsInstance<Car>()  // [Vroom]
+list8.filterIsInstance(Bike::class.java)   // [Bang, Toomaha]
 
-println(list1.subList(fromIndex = 1, toIndex = 4))  // [2, 3, 4]
+list1.subList(fromIndex = 1, toIndex = 4)  // [2, 3, 4]
 
-println(list9.toMutableList())  // [1, 1, 3, 4, 5, 5, 5, 5, 9, 10]
-println(list9.toMutableSet())   // [1, 3, 4, 5, 9, 10] => Unique items only
+list9.toMutableList()  // [1, 1, 3, 4, 5, 5, 5, 5, 9, 10]
+list9.toMutableSet()   // [1, 3, 4, 5, 9, 10] => Unique items only
 
-println(map1.toList())  // [(122222, 2), (3455, 3)] => List of Pairs
+map1.toList()  // [(122222, 2), (3455, 3)] => List of Pairs
 val pair: Pair<String, Int> = map1.toList()[0]
 
 list1.forEachIndexed { index, item ->
@@ -990,6 +1060,19 @@ list1.forEachIndexed { index, item ->
 map1.forEach { it: Map.Entry<String, Int> ->
     print("${it.key} to ${it.value} | ")    // 122222 to 2 | 3455 to 3 |
 }
+
+list1.listIterator().hasNext() // true
+list1.listIterator().hasPrevious() // false
+val iterator = list1.listIterator()
+while (iterator.hasNext()) {
+    val value = iterator.next()
+    if (value == 2) continue
+    if (value == 7) break
+    print("$value | ")  // 1 | 3 | 4 | 5 | 6 |
+}
+
+list9.distinct()   // [null, 2, 4, 5, 7, 8, 10] => Like Set. Only Uniques.
+list4.distinct()   // [1, 3, 4, 5, 9, 10] => Like Set. Only Uniques.
 ```
 
 ## Functions and Methods
@@ -1100,7 +1183,74 @@ fun main() {
 ```Kotlin
 
 ```
-* **Inline function:**
+
+## Operator overloading
+#### Unary operations
+* **Unary prefix operators:**
+```Kotlin
+
+```
+* **Increments and decrements:**
+```Kotlin
+
+```
+#### Binary operations﻿
+* **Arithmetic operators:**
+```Kotlin
+
+```
+* **in operator﻿:**
+```Kotlin
+
+```
+* **Indexed access operator:**
+```Kotlin
+
+```
+* **invoke operator:**
+```Kotlin
+
+```
+* **Augmented assignments﻿:**
+```Kotlin
+
+```
+* **Equality and inequality operators﻿:**
+```Kotlin
+
+```
+* **Comparison operators:**
+```Kotlin
+
+```
+* **Property delegation operators﻿:**
+```Kotlin
+
+```
+* **Augmented assignments﻿:**
+```Kotlin
+
+```
+
+
+## Inline Functions
+* **inline:**
+```Kotlin
+
+```
+* **noinline:**
+```Kotlin
+
+```
+* **Non-local returns:**
+```Kotlin
+
+```
+* **Reified type parameters﻿:**
+```Kotlin
+
+```
+* **Inline properties:**
 ```Kotlin
 
 ```
@@ -1278,8 +1428,102 @@ fun main() {
 }
 ```
 
-## Classes & Objects
-* **Creating Classes**
+## Lambdas
+* **Higher-order functions﻿**
+```Kotlin
+
+```
+* **Function types﻿**
+```Kotlin
+
+```
+* **Anonymous functions**
+```Kotlin
+
+```
+* **Closures﻿**
+```Kotlin
+
+```
+* **Function literals with receiver﻿**
+```Kotlin
+
+```
+
+## Properties
+* **Declaring Properties**
+```Kotlin
+var name: String = "Hithesh"
+
+val city: String = "India"
+
+internal lateinit var person1: Person
+
+private var person2: Person? = null
+
+val person3: Person by lazy {
+    println("Lazy variables can't be var and can't be private.")
+    Person("Hithesh")
+}
+
+class Person(var name: String)
+```
+* **Compile-Time Constants**
+```Kotlin
+
+```
+* **Late-Initialized Properties and Variables**
+```Kotlin
+
+```
+* **Overriding Properties**
+```Kotlin
+
+```
+* **Delegated Properties**
+```Kotlin
+
+```
+
+## Getters and Setters
+* **Default Getter & Setter**
+```Kotlin
+var myName1 = "Hithesh"
+var myName2: String = "Hithesh"	// Same as myName1
+    get() = field
+    set(value) {
+        field = value
+    }
+```
+* **Custom Getter**
+```Kotlin
+val list = listOf(1, 2, 3, 4, 5)
+val isEmpty: Boolean
+    get() = list.isEmpty()
+```
+* **Custom Setter**
+```Kotlin
+var myName: String = ""
+    set(value) {
+        field = value
+        println("myName is $value")
+    }
+```
+* **Private Setter, Public Getter**
+```Kotlin
+var myName = "Hithesh"
+    private set
+```
+* **Backing Fields**
+```Kotlin
+
+```
+* **Backing Properties**
+```Kotlin
+
+```
+
+## Creating Classes
 ```Kotlin
 class Address1 {
     private val CUSTOM_HASH_CODE = SecureRandom().nextInt()
@@ -1303,7 +1547,8 @@ class Address1 {
     }
 }
 ```
-* **Creating Instance or Object**
+
+## Creating Instance or Object
 ```Kotlin
 val address1 = Address1()
 val address2 = Address1()
@@ -1315,7 +1560,8 @@ println(address1.toString())    // Address(City: Tesla, Country: Mars Colony @#$
 println(address1.hashCode())    // 654287787
 println(address1.equals(address2))  // false
 ```
-* **Initialization Block**
+
+## Initialization Block
 ```Kotlin
 class User(name: String) {
 
@@ -1325,30 +1571,19 @@ class User(name: String) {
         println("init block is like a function that's called before any other function or callback in this class. Means its called first on accessing the class")
         println("But if you are using any variables like \"userName\", then you should declare them before init block or it wont be able to access it. Ex: User's name is $userName")
     }
+
+    fun printMe() = println("Hello World")
 }
 
 fun main() {
-    val user = User("Hithesh")
+    val user = User("Hithesh").printMe()
     // init block is like a function that's called before any other function or callback in this class. Means its called first on class access
     // But if you are using any variables like "userName", then you should declare them before init block or it wont be able to access it. Ex: User's name is Hithesh
+    // Hello World
 }
 ```
-#### Getters and Setters
-```Kotlin
 
-```
-#### Defining uninitialized objects
-```Kotlin
-class Person(var name: String)
-
-internal lateinit var person1: Person
-private var person2: Person? = null
-val person3: Person by lazy {
-    println("Lazy variables can't be var and can't be private.")
-    Person("Hithesh")
-}
-```
-#### Companion Object (Static stuff)
+## Companion Object (Static stuff)
 ```Kotlin
 class Person {
     companion object {
@@ -1440,7 +1675,7 @@ fun main() {
 }
 ```
 
-## Nested Class
+## Nested and inner classes
 * **"inner" keyword**
 ```Kotlin
 class Person(private val name: String) {
@@ -1470,6 +1705,20 @@ fun introducePerson(name: String): String {
 
 fun main() {
     introducePerson("Hithesh")  // This person's name is Hithesh & Hithesh's hobby is to watch anime
+}
+```
+* **Anonymous inner classes﻿**
+```Kotlin
+val task = object : AsyncTask<Void, Void, Profile>() {
+    override fun doInBackground(vararg voids: Void): Profile? {
+        // fetch profile from API or DB
+        return null
+    }
+
+    override fun onPreExecute() {
+        super.onPreExecute()
+        // do something
+    }
 }
 ```
 
@@ -1527,29 +1776,123 @@ val myPiWith3DecimalPlaces: Double = MathConstants.PI withDecimalPlacesOf 3   //
 val isThisSubset: Boolean = MathConstants.PI isSubsetOf 4                     // true
 val myNearestConstants: List<MathConstants> = 2.3456789.nearestConstants()    // [PI, EULER_NUMBER]
 ```
+* **Anonymous classes﻿**
+```Kotlin
+
+```
+* **Implementing interfaces in enum classes﻿**
+```Kotlin
+
+```
+* **Anonymous classes﻿**
+```Kotlin
+
+```
+
+## Inline classes
 
 ## Inheritance
+* **Overriding Methods**
+```Kotlin
+
+```
+* **Overriding Properties**
+```Kotlin
+
+```
+* **Derived Class Initialization Order**
+```Kotlin
+
+```
+* **Calling the Superclass Implementation﻿**
+```Kotlin
+
+```
+* **Overriding rules**
+```Kotlin
+
+```
+
 ## Singleton
 ## Data Class
 ```Kotlin
 data class User(var name: String, var age: Int)
 ```
 ## Abstract Class
-## Interface
-## Sealed Classes
-## Anonymous Class
-```Kotlin
-val task = object : AsyncTask<Void, Void, Profile>() {
-    override fun doInBackground(vararg voids: Void): Profile? {
-        // fetch profile from API or DB
-        return null
-    }
 
-    override fun onPreExecute() {
-        super.onPreExecute()
-        // do something
-    }
-}
+## Interface
+* **Implementing Interfaces﻿**
+```Kotlin
+
+```
+* **Properties in interfaces﻿**
+```Kotlin
+
+```
+* **Interfaces Inheritance﻿**
+```Kotlin
+
+```
+* **Resolving Overriding Conflicts﻿**
+```Kotlin
+
+```
+
+## Functional (SAM) interfaces﻿
+* **SAM conversions**
+```Kotlin
+
+```
+
+## Sealed Classes
+
+## Extensions﻿
+* **Extension functions**
+```Kotlin
+
+```
+* **Extensions are resolved statically**
+```Kotlin
+
+```
+* **Nullable receiver**
+```Kotlin
+
+```
+* **Extension properties**
+```Kotlin
+
+```
+* **Companion object extensions**
+```Kotlin
+
+```
+* **Scope of extensions**
+```Kotlin
+
+```
+* **Declaring extensions as members﻿**
+```Kotlin
+
+```
+
+## Visibility Modifiers
+Classes, objects, interfaces, constructors, functions, properties and their setters can have visibility modifiers. Getters always have the same visibility as the property.
+* **private**
+```Kotlin
+
+```
+* **protected**
+```Kotlin
+
+```
+* **internal**
+```Kotlin
+
+```
+* **public** (default)
+```Kotlin
+
 ```
 
 ## Cloning or Copying
@@ -1564,6 +1907,12 @@ fun main() {
     val user2 = user.copy(age = 25)
 }
 ```
+
+## Delegation﻿
+
+## Delegated properties﻿
+
+## Type aliases﻿
 
 ## Pair and Triple
 * **Pair:** Collection of 2 variables
@@ -1679,44 +2028,96 @@ val randomInteger2 = ThreadLocalRandom.current().nextInt(1, 10)         // 2
 val randomLong2 = ThreadLocalRandom.current().nextLong(1, 10)           // 8
 ```
 
-## Multi-Tasking & Background Operations
-#### Asynchronous Programming Techniques
-1. Threading
-2. Callbacks - With callbacks, the idea is to pass one function as a parameter to another function, and have this one invoked once the process has completed.
-3. Reactive Extensions (RxJava)
-4. Coroutines
-#### Asynchronous Programming Vocabulary
-* **Asynchronous**
-* **Synchronous**
-* **Suspendable function**
-* **Blocking code**
-* **Non-blocking code**
-* **Concurrency**
-* **Parallelism**
-* **Long-Running operation - code with time to execute**
-* **Difference btw Thread n Coroutine** What can Thread achieve that Coroutine cant n vice versa - Coroutines provide concurrency but not parallelism
-* **State Machine**
-* **Mutual Recursion**
-* **Tail Calls**
-* **Tail Call Eliminiation**
-* **State**
-* **Subroutine**
-* **Coroutine**
-* **Routine**
-* **Yield**
-* **Return**
-* **Resume**
-* **Closure**
-* **Daemon Threads** Daemon Threds do not keep the process alive. Global coroutines in Android have similar behaviour.
-* **Process**
-* **How to keep process alive**
-#### **Coroutines**
-* Dependencies
+## Generics: in, out, where﻿
+* **Variance﻿**
+```Kotlin
+
+```
+* **Declaration-site variance﻿**
+```Kotlin
+
+```
+* **Type projections﻿**
+```Kotlin
+
+```
+* **Star-projections**
+```Kotlin
+
+```
+* **Generic functions**
+```Kotlin
+
+```
+* **Generic constraints - Upper bounds**
+```Kotlin
+
+```
+* **Type erasure﻿**
+```Kotlin
+
+```
+* Classes can have type parameters
+```Kotlin
+class Person<T, E, K, V>(
+    type: T? = null,
+    element: E? = null,
+    key: K? = null,
+    value: V? = null
+) {
+    init {
+        println("$type")
+        println("$element")
+        println("$key")
+        println("$value")
+    }
+}
+
+fun main() {
+    Person<String, Int, Boolean, Any>()
+    Person<Any, Boolean, Number, Char>(type = "Hithesh", element = false, key = 3, value = 'S')
+}
+```
+
+## Regular Expressions
+* Finding exact string
+* Finding exact string with conditions
+* Finding exact string and replacing it with another
+
+## Math
+
+## Lateinit and Lazy
+
+## Exceptions
+
+## Lambda
+
+## JvmStatic, JvmOverloads, and JvmField
+
+## Destructuring declarations
+
+## Annotations
+```Kotlin
+annotation class StringMagic
+```
+
+## Reflection
+* **Class references﻿**
+```Kotlin
+
+```
+* **Callable references**
+```Kotlin
+
+```
+
+## Coroutines
+* **Dependencies**
 ```Kotlin
 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
 ```
-* Sample heavy tasks
+* **Sample heavy tasks**
 ```Kotlin
 fun heavyTask(taskName: String, taskLength: Int) {
     for (i in 0..taskLength) if (i == taskLength) println("$taskName $i")
@@ -1724,7 +2125,7 @@ fun heavyTask(taskName: String, taskLength: Int) {
 
 suspend fun heavyTask2(taskLength: Long) = delay(4000L)
 ```
-* Create a basic background (Asynchronous) operation
+* **Create a basic background (Asynchronous) operation**
 ```Kotlin
 GlobalScope.launch { // launch a new coroutine in background and continue. GlobalScope means this coroutine's lifecycle == app's lifecycle
     heavyTask2(taskLength = 4000L)
@@ -1742,7 +2143,8 @@ GlobalScope.launch(Dispatchers.IO) {
     }
 }
 ```
-* Do work in background sequentially and then post results in UI thread (Structured Concurrency)
+* **Structured Concurrency**  
+Do work in background sequentially and then post results in UI thread
 ```Kotlin
 // How to execute async operations sequentially while blocking thread its running on?
 // If we forget to keep a reference to the newly launched coroutine, it still runs.
@@ -1767,7 +2169,7 @@ runBlocking<Unit> {
     println("Task 7 done")
 }
 ```
-* Do work in background parallelly and then post results on UI thread
+* **Do work in background parallelly and then post results on UI thread**
 ```Kotlin
 // How to execute async operations sequentially without blocking thread its running on?
 runBlocking<Unit> {
@@ -1795,7 +2197,7 @@ runBlocking<Unit> {
 }
 println("Task 8 done")
 ```
-* Do work in background and return result
+* **Do work in background and return result**
 ```Kotlin
 // Since async are in runBlocking all the coroutine operations happen sequentially
 // If all operations have to happen sequentially then use join()
@@ -1818,7 +2220,7 @@ runBlocking {
     println("Task 6 done")
 }
 ```
-* More
+* **More**
 ```Kotlin
 GlobalScope.launch {    // Launch a coroutine in background
     myDelay(2000L)  // Suspends "coroutine" execution for 2 sec but not the thread.  Its a suspend function.
@@ -1849,7 +2251,202 @@ suspend fun myDelay(duration: Long) {
     delay(duration)
 }
 ```
+* **Scope builder﻿**
+```Kotlin
+
+```
+* **Scope builder and concurrency**
+```Kotlin
+
+```
+* **An explicit job**
+```Kotlin
+
+```
+* **Cancelling coroutine execution**
+```Kotlin
+
+```
+* **Making computation code cancellable**
+```Kotlin
+
+```
+* **Closing resources with finally**
+```Kotlin
+
+```
+* **Run non-cancellable block**
+```Kotlin
+
+```
+* **Sequential by default﻿**
+```Kotlin
+
+```
+* **Concurrent using async﻿**
+```Kotlin
+
+```
+* **Lazily started async﻿**
+```Kotlin
+
+```
+* **Async-style functions**
+```Kotlin
+
+```
+* **Structured concurrency with async﻿**
+```Kotlin
+
+```
+* **Coroutine context**
+```Kotlin
+
+```
+
+## Coroutine Asynchronous Flow
+* **Sequences﻿**
+```Kotlin
+
+```
+* **Suspending functions**
+```Kotlin
+
+```
+* **Flows﻿**
+```Kotlin
+
+```
+* **Flows are cold**
+```Kotlin
+
+```
+* **Flow cancellation basics﻿**
+```Kotlin
+
+```
+* **Flow builders﻿**
+```Kotlin
+
+```
+* **Transform flow operators**
+```Kotlin
+
+```
+* **Size-limiting flow operators**
+```Kotlin
+
+```
+* **Terminal flow operators**
+```Kotlin
+
+```
+* **Flows are sequential**
+```Kotlin
+
+```
+* **Flow context﻿ - flowOn operator**
+```Kotlin
+
+```
+* **Buffering﻿**
+```Kotlin
+
+```
+* **Composing multiple flows﻿**
+```Kotlin
+
+```
+* **Flattening flows**
+```Kotlin
+
+```
+* **Flow exceptions﻿**
+```Kotlin
+
+```
+* **Exception transparency﻿**
+```Kotlin
+
+```
+* **Flow completion**
+```Kotlin
+
+```
+* **Launching flow﻿**
+```Kotlin
+
+```
+* **Sequences﻿**
+```Kotlin
+
+```
+
+
+## Coroutine Channels
+* **Closing and iteration over channels**
+```Kotlin
+
+```
+* **Building channel producers**
+```Kotlin
+
+```
+* **Pipelines﻿**
+```Kotlin
+
+```
+* **Prime numbers with pipeline**
+```Kotlin
+
+```
+* **Fan-out**
+```Kotlin
+
+```
+* **Fan-in﻿**
+```Kotlin
+
+```
+* **Buffered channels﻿**
+```Kotlin
+
+```
+* **Ticker channels﻿**
+```Kotlin
+
+```
+
+## Coroutine exceptions handling﻿
+* **CoroutineExceptionHandler**
+```Kotlin
+
+```
+* **Cancellation and exceptions﻿**
+```Kotlin
+
+```
+* **Exceptions aggregation﻿**
+```Kotlin
+
+```
+* **Supervision﻿**
+```Kotlin
+
+```
+
+
+## Multi-Tasking & Background Operations
 #### **RxJava**
+```Kotlin
+Single.fromCallable {
+    // Heavy operation
+}.subscribeOn(Schedulers.io())                  // Set thread to run heavy operation on
+    .observeOn(AndroidSchedulers.mainThread())  // Set thread to show heavy operation results
+    .subscribe(Consumer<Any?> { it: Any? ->
+        // Update UI
+    })
+```
 #### **Executors and Handlers**
 ```Kotlin
 val executor = Executors.newSingleThreadExecutor()
@@ -1872,67 +2469,39 @@ thread {    // Launch a thread in background
 Thread.currentThread().name    // Get thread name
 ```
 
-## Generics
-* Classes can have type parameters
-```Kotlin
-class Person<T, E, K, V>(
-    type: T? = null,
-    element: E? = null,
-    key: K? = null,
-    value: V? = null
-) {
-    init {
-        println("$type")
-        println("$element")
-        println("$key")
-        println("$value")
-    }
-}
+## JVM Platform
 
-fun main() {
-    Person<String, Int, Boolean, Any>()
-    Person<Any, Boolean, Number, Char>(type = "Hithesh", element = false, key = 3, value = 'S')
-}
-```
-
-## Visibility Modifiers
-Classes, objects, interfaces, constructors, functions, properties and their setters can have visibility modifiers. Getters always have the same visibility as the property.
-* **private**
-```Kotlin
-
-```
-* **protected**
-```Kotlin
-
-```
-* **internal**
-```Kotlin
-
-```
-* **public** (default)
-```Kotlin
-
-```
-
-## Regular Expressions
-* Finding exact string
-* Finding exact string with conditions
-* Finding exact string and replacing it with another
-
-## Math
-
-## Lateinit and Lazy
-
-## Exceptions
-
-## Lambda
-
-## JvmStatic, JvmOverloads, and JvmField
-
-## Annotations
-```Kotlin
-annotation class StringMagic
-```
+## Terminology
+#### Asynchronous Programming Techniques
+1. Threading
+2. Callbacks - With callbacks, the idea is to pass one function as a parameter to another function, and have this one invoked once the process has completed.
+3. Reactive Extensions (RxJava)
+4. Coroutines
+#### Asynchronous Programming Vocabulary
+* **Asynchronous**
+* **Synchronous**
+* **Suspendable function**
+* **Blocking code**
+* **Non-blocking code**
+* **Concurrency**
+* **Parallelism**
+* **Long-Running operation - code with time to execute**
+* **Difference btw Thread n Coroutine** What can Thread achieve that Coroutine cant n vice versa - Coroutines provide concurrency but not parallelism
+* **State Machine**
+* **Mutual Recursion**
+* **Tail Calls**
+* **Tail Call Eliminiation**
+* **State**
+* **Subroutine**
+* **Coroutine**
+* **Routine**
+* **Yield**
+* **Return**
+* **Resume**
+* **Closure**
+* **Daemon Threads** Daemon Threds do not keep the process alive. Global coroutines in Android have similar behaviour.
+* **Process**
+* **How to keep process alive**
 
 ## Next
 * List of Datastructues, their definitions and possible use cases.
@@ -1969,3 +2538,5 @@ annotation class StringMagic
 8. [Coding In Flow Youtube](https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2)
 9. [Smartherd Youtube](https://www.youtube.com/watch?v=VEqhzCFmEQI&list=PLlxmoA0rQ-LwgK1JsnMsakYNACYGa1cjR)
 10. https://en.wikipedia.org/wiki/Coroutine
+11. [KotlinConf 2019: Error Handling Strategies for Kotlin Programs by Nat Pryce & Duncan McGregor](ttps://www.youtube.com/watch?v=pvYAQNT4o0I)
+12. [How to Kotlin - from the lead Kotlin language designer (Google I/O '18)](https://youtu.be/6P20npkvcb8)
