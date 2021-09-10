@@ -2471,6 +2471,108 @@ Thread.currentThread().name    // Get thread name
 
 ## JVM Platform
 
+## Stack Trace
+* **Get map of stack traces for all threads that are alive**
+```Kotlin
+Thread.getAllStackTraces()	// {Thread[main,5,main]=[Ljava.lang.StackTraceElement;@e580929, Thread[Monitor Ctrl-Break,5,main]=[Ljava.lang.StackTraceElement;@1cd072a9, Thread[Finalizer,8,system]=[Ljava.lang.StackTraceElement;@7c75222b, Thread[Reference Handler,10,system]=[Ljava.lang.StackTraceElement;@4c203ea1, Thread[Signal Dispatcher,9,system]=[Ljava.lang.StackTraceElement;@27f674d, Thread[Common-Cleaner,8,InnocuousThreadGroup]=[Ljava.lang.StackTraceElement;@1d251891}
+```
+* **Print stack trace of current thread**
+```Kotlin
+fun main() { f1() }
+fun f1(): String = "My ${f2()}"
+fun f2() = "name ${f3()}"
+fun f3() = "is ${f4()}"
+fun f4(): String {
+    Exception("Stack Trace")
+        .printStackTrace(System.out)
+    return "Hithesh"
+}
+
+// java.lang.Exception: Stack Trace
+//	at MainKt.f4(main.kt:123)
+//	at MainKt.f3(main.kt:121)
+//	at MainKt.f2(main.kt:120)
+//	at MainKt.f1(main.kt:119)
+//	at MainKt.main(main.kt:118)
+//	at MainKt.main(main.kt)
+```
+```Kotlin
+fun main() {
+	Thread.dumpStack()
+}
+
+// java.lang.Exception: Stack trace
+//	at java.base/java.lang.Thread.dumpStack(Thread.java:1383)
+//	at MainKt.main(main.kt:40)
+//	at MainKt.main(main.kt)
+```
+```Kotlin
+fun main() {
+	Arrays.toString(Thread.currentThread().stackTrace).replace(',', '\n')
+}
+
+// [java.base/java.lang.Thread.getStackTrace(Thread.java:1602)
+// MainKt.main(main.kt:40)
+// MainKt.main(main.kt)]
+```
+```Kotlin
+Thread.currentThread().stackTrace[0].classLoaderName        // null
+Thread.currentThread().stackTrace[0].className              // java.lang.Thread
+Thread.currentThread().stackTrace[0].fileName               // Thread.java
+Thread.currentThread().stackTrace[0].isNativeMethod         // false
+Thread.currentThread().stackTrace[0].lineNumber             // 1602
+Thread.currentThread().stackTrace[0].methodName             // getStackTrace
+Thread.currentThread().stackTrace[0].moduleName             // java.base
+Thread.currentThread().stackTrace[0].moduleVersion          // 11.0.12
+```
+* **Get stack trace from Throwable**
+```Kotlin
+fun main() {
+	StringWriter().apply {
+	    Throwable("Stack Trace").printStackTrace(PrintWriter(this))
+	    println(this.toString())
+	}
+}
+
+// java.lang.Throwable: Stack Trace
+//	at MainKt.main(main.kt:40)
+//	at MainKt.main(main.kt)
+```
+```Kotlin
+fun main() {
+	Throwable().printStackTrace()
+	
+	// OR
+	
+	Throwable().stackTrace
+	
+	// OR
+	
+	Throwable().printStackTrace(System.out)
+}
+
+// java.lang.Throwable
+//	at MainKt.main(main.kt:40)
+//	at MainKt.main(main.kt)
+```
+* **Find the caller method name**
+```Kotlin
+fun main() {
+	getCallingMethodName()
+	printHelloWorld()
+}
+
+fun getCallingMethodName(): String {
+    val callingFrame: StackTraceElement = Thread.currentThread().stackTrace[3]
+    return callingFrame.methodName 	// main
+}
+
+fun printHelloWorld() {
+    println("Hello World")
+    println(getCallingMethodName()) // main
+}
+```
+
 ## Terminology
 #### Asynchronous Programming Techniques
 1. Threading
@@ -2540,3 +2642,4 @@ Thread.currentThread().name    // Get thread name
 10. https://en.wikipedia.org/wiki/Coroutine
 11. [KotlinConf 2019: Error Handling Strategies for Kotlin Programs by Nat Pryce & Duncan McGregor](ttps://www.youtube.com/watch?v=pvYAQNT4o0I)
 12. [How to Kotlin - from the lead Kotlin language designer (Google I/O '18)](https://youtu.be/6P20npkvcb8)
+13. https://stackoverflow.com/questions/944991/is-there-a-way-to-dump-a-stack-trace-without-throwing-an-exception-in-java
