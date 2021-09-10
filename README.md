@@ -2498,7 +2498,7 @@ fun f4(): String {
 ```
 ```Kotlin
 fun main() {
-	Thread.dumpStack()
+    Thread.dumpStack()
 }
 
 // java.lang.Exception: Stack trace
@@ -2508,7 +2508,7 @@ fun main() {
 ```
 ```Kotlin
 fun main() {
-	Arrays.toString(Thread.currentThread().stackTrace).replace(',', '\n')
+    Arrays.toString(Thread.currentThread().stackTrace).replace(',', '\n')
 }
 
 // [java.base/java.lang.Thread.getStackTrace(Thread.java:1602)
@@ -2528,10 +2528,10 @@ Thread.currentThread().stackTrace[0].moduleVersion          // 11.0.12
 * **Get stack trace from Throwable**
 ```Kotlin
 fun main() {
-	StringWriter().apply {
-	    Throwable("Stack Trace").printStackTrace(PrintWriter(this))
-	    println(this.toString())
-	}
+    StringWriter().apply {
+	Throwable("Stack Trace").printStackTrace(PrintWriter(this))
+	println(this.toString())
+    }
 }
 
 // java.lang.Throwable: Stack Trace
@@ -2540,15 +2540,15 @@ fun main() {
 ```
 ```Kotlin
 fun main() {
-	Throwable().printStackTrace()
+    Throwable().printStackTrace()
 	
-	// OR
+    // OR
 	
-	Throwable().stackTrace
+    Throwable().stackTrace
 	
-	// OR
+    // OR
 	
-	Throwable().printStackTrace(System.out)
+    Throwable().printStackTrace(System.out)
 }
 
 // java.lang.Throwable
@@ -2558,8 +2558,8 @@ fun main() {
 * **Find the caller method name**
 ```Kotlin
 fun main() {
-	getCallingMethodName()
-	printHelloWorld()
+    getCallingMethodName()
+    printHelloWorld()
 }
 
 fun getCallingMethodName(): String {
