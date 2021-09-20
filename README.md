@@ -798,6 +798,21 @@ outerLoop@ for (a in 1..3) {
         print("a = $a, b = $b | ")  // a = 2, b = 6 | a = 2, b = 7 | a = 2, b = 8 | a = 3, b = 6 | a = 3, b = 7 | a = 3, b = 8 |
     }
 }
+
+// return@label acts like continue keyword
+(1..4).forEach IntLoop@{ myInt: Int ->
+    ('a'..'d').forEach CharLoop@{ myChar: Char ->
+        if (myInt == 3) return@IntLoop
+        if (myInt == 4 && myChar == 'c') return@CharLoop
+        print("$myInt$myChar")  // 1a1b1c1d2a2b2c2d4a4b4d
+    }
+}
+
+// return@forEach acts like break keyword
+(1..5).forEach { myInt: Int ->
+    if (myInt == 3) return@forEach
+    print("$myInt") // 1245
+}
 ```
 * **Iterator**
 ```Kotlin
@@ -2089,6 +2104,107 @@ fun main() {
 ## Lateinit and Lazy
 
 ## Exceptions
+#### Built-in Exceptions
+* **ArithmeticException**
+```Kotlin
+val result = try {
+    0 / 10
+} catch (e: ArithmeticException) {
+    0
+}
+```
+* **ArrayIndexOutOfBoundsException**  
+Abnormal condition. Code compiles and executes code. During execution if something interrupts the normal flow of execution thne its an exception. Its like u want to go to office but there is tyre puncture. Any runtime error is an exception.
+
+```Kotlin
+listOf("Hithesh", "Iithesh")[3]
+
+try {
+    println(10 / 0)
+    println("print 1")
+    println("print 2")
+} catch (e: ArithmeticException) {
+    println("Inside catch block. Catch block executes only when there is ")
+    println(e.message)
+} finally {
+    println("I dont care abt try and catch. I will execute anyway")
+}
+```
+* **ClassNotFoundException**
+```Kotlin
+
+```
+* **FileNotFoundException**
+```Kotlin
+
+```
+* **IOException**
+```Kotlin
+
+```
+* **InterruptedException**
+```Kotlin
+
+```
+* **NoSuchFieldException**
+```Kotlin
+
+```
+* **NoSuchMethodException**
+```Kotlin
+
+```
+* **NullPointerException**
+```Kotlin
+
+```
+* **NumberFormatException**
+```Kotlin
+
+```
+* **RuntimeException**
+```Kotlin
+
+```
+* **StringIndexOutOfBoundsException**
+```Kotlin
+
+```
+#### Create Custom Exception
+```Kotlin
+// if u create ur own exception then u still have to add try catch
+class CustomIllegalWorkException(message: String) : Exception(message)
+
+// Throw exception
+fun canWork(name: String, age: Int) {
+    if (age < 18) throw CustomIllegalWorkException("Younger than 18 cannot vote")
+    println("$name voted")
+}
+```
+#### Multiple catch blocks, Finally
+```Kotlin
+try {
+    canWork("Hitehsh", 17)
+} catch (e: CustomIllegalWorkException) {
+    e.printStackTrace()
+} catch (e: Exception) {
+    e.printStackTrace()
+} finally {
+    println("Finally done")
+}
+```
+#### Other Exceptins
+```Kotlin
+// IllegalArgumentException
+
+// U can create ur own custom exception class
+// To handle exceptions u write try catch blocks
+
+// Throwable class
+// Exceotion class
+// All othr predefined classes
+```
+
 
 ## Lambda
 
@@ -2249,6 +2365,33 @@ GlobalScope.launch(Dispatchers.IO) {
 
 suspend fun myDelay(duration: Long) {
     delay(duration)
+}
+
+CoroutineScope(IO).launch {
+    withTimeout(2000L) {
+        withContext(Dispatchers.Default) {	// Cancellable coroutine
+            println("print 1")	// print 1
+            delay(5000)
+        }
+    }
+    withTimeout(2000L) {
+        withContext(Dispatchers.Default) {
+            println("print 2")
+            delay(5000)
+        }
+    }
+    withTimeout(2000L) {
+        withContext(Dispatchers.Default) {
+            println("print 3")
+            delay(5000)
+        }
+    }
+    withTimeout(2000L) {
+        withContext(Dispatchers.Default) {
+            println("print 4")
+            delay(5000)
+        }
+    }
 }
 ```
 * **Scope builder﻿**
@@ -2498,7 +2641,7 @@ fun f4(): String {
 ```
 ```Kotlin
 fun main() {
-    Thread.dumpStack()
+	Thread.dumpStack()
 }
 
 // java.lang.Exception: Stack trace
@@ -2508,7 +2651,7 @@ fun main() {
 ```
 ```Kotlin
 fun main() {
-    Arrays.toString(Thread.currentThread().stackTrace).replace(',', '\n')
+	Arrays.toString(Thread.currentThread().stackTrace).replace(',', '\n')
 }
 
 // [java.base/java.lang.Thread.getStackTrace(Thread.java:1602)
@@ -2528,10 +2671,10 @@ Thread.currentThread().stackTrace[0].moduleVersion          // 11.0.12
 * **Get stack trace from Throwable**
 ```Kotlin
 fun main() {
-    StringWriter().apply {
-	Throwable("Stack Trace").printStackTrace(PrintWriter(this))
-	println(this.toString())
-    }
+	StringWriter().apply {
+	    Throwable("Stack Trace").printStackTrace(PrintWriter(this))
+	    println(this.toString())
+	}
 }
 
 // java.lang.Throwable: Stack Trace
@@ -2540,15 +2683,15 @@ fun main() {
 ```
 ```Kotlin
 fun main() {
-    Throwable().printStackTrace()
+	Throwable().printStackTrace()
 	
-    // OR
+	// OR
 	
-    Throwable().stackTrace
+	Throwable().stackTrace
 	
-    // OR
+	// OR
 	
-    Throwable().printStackTrace(System.out)
+	Throwable().printStackTrace(System.out)
 }
 
 // java.lang.Throwable
@@ -2558,8 +2701,8 @@ fun main() {
 * **Find the caller method name**
 ```Kotlin
 fun main() {
-    getCallingMethodName()
-    printHelloWorld()
+	getCallingMethodName()
+	printHelloWorld()
 }
 
 fun getCallingMethodName(): String {
@@ -2640,6 +2783,14 @@ fun printHelloWorld() {
 8. [Coding In Flow Youtube](https://www.youtube.com/playlist?list=PLrnPJCHvNZuAIbejjZA1kGfLeA8ZpICB2)
 9. [Smartherd Youtube](https://www.youtube.com/watch?v=VEqhzCFmEQI&list=PLlxmoA0rQ-LwgK1JsnMsakYNACYGa1cjR)
 10. https://en.wikipedia.org/wiki/Coroutine
-11. [KotlinConf 2019: Error Handling Strategies for Kotlin Programs by Nat Pryce & Duncan McGregor](ttps://www.youtube.com/watch?v=pvYAQNT4o0I)
+11. [KotlinConf 2019: Error Handling Strategies for Kotlin Programs by Nat Pryce & Duncan McGregor](https://www.youtube.com/watch?v=pvYAQNT4o0I)
 12. [How to Kotlin - from the lead Kotlin language designer (Google I/O '18)](https://youtu.be/6P20npkvcb8)
 13. https://stackoverflow.com/questions/944991/is-there-a-way-to-dump-a-stack-trace-without-throwing-an-exception-in-java
+14. https://www.tutorialspoint.com/java/java_regular_expressions.htm
+15. https://www.w3schools.com/java/java_regex.asp
+16. https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
+17. https://www.javatpoint.com/java-regex
+18. https://www.javatpoint.com/exception-handling-in-java
+19. https://www.geeksforgeeks.org/types-of-exception-in-java-with-examples/
+20. https://newbedev.com/python-regular-express-cheat-sheet
+21. https://newbedev.com/comprehensive-python-cheatsheet
